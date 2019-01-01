@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.empty.mapper.BaseVideoMapper">
+
+	<select id="findVideoById" parameterType="int"
+		resultType="videoEntity">
+		select video_id,
+		video_name,
+		video_src,
+		video_date,
+		user_id,
+		video_desc,
+		video_tag,
+		video_view_num
+
+		from video
+		where
+		video_id =
+		#{videoId}
+		order by video_date asc
+	</select>
+
+	<select id="findVideosByName" parameterType="string"
+		resultType="videoEntity">
+		select video_id,
+		video_name,
+		video_src,
+		video_date,
+		user_id,
+		video_desc,
+		video_tag,
+		video_view_num
+
+		from
+		video
+		where
+		video_name like
+		"%"#{videoName}"%"
+	</select>
+
+
+	<insert id="saveNewVideo" parameterType="videoEntity">
+
+		insert into video
+		(
+		video_name,
+		video_src,
+		user_id,
+		video_desc,
+		video_tag
+		)
+		values
+		(
+		#{videoName},
+		#{videoSrc},
+		#{userId},
+		#{videoDesc},
+		#{videoTag}
+		)
+
+	</insert>
+
+	<delete id="deleteVideoById" parameterType="int">
+
+		delete from video
+		where
+		video_id = #{videoId}
+
+	</delete>
+
+	<update id="updateVideo" parameterType="videoEntity">
+
+		update video
+		<set>
+			<if test="videoName != null and videoName != ''">video_name = #{videoName} ,</if>
+
+			<if test="userId != null">user_id = #{userId} ,</if>
+
+			<if test="videoDesc != null and videoDesc != ''">video_desc = #{videoDesc} ,</if>
+
+			<if test="videoTag != null and videoTag != ''">video_tag = #{videoTag},</if>
+
+			<if test="videoViewNum != null">video_view_num = #{videoViewNum}</if>
+
+		</set>
+
+		where
+		video_id = #{videoId}
+
+
+	</update>
+
+
+
+</mapper>

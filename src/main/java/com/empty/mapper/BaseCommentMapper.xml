@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.empty.mapper.BaseCommentMapper">
+
+	<select id="selectCommentById" parameterType="int"
+		resultType="commentEntity">
+
+		select
+		comment_id,
+		comment_parent_id,
+		comment_content,
+		comment_date,
+		video_id,
+		user_id
+
+		from
+		comment
+		where
+		comment_id =
+		#{commentId}
+
+	</select>
+
+
+	<select id="selectCommentsByVideoId" parameterType="int"
+		resultType="commentEntity">
+
+		select
+		comment_id,
+		comment_parent_id,
+		comment_content,
+		comment_date,
+		video_id,
+		user_id
+
+		from
+		comment
+		where
+		video_id =
+		#{videoId}
+
+	</select>
+
+	<insert id="saveNewComment" parameterType="commentEntity">
+
+		insert into comment
+		(
+		<if test="commentParentId !=null">comment_parent_id,</if>
+		comment_content,
+		video_id,
+		user_id
+		)
+		values
+		(
+		<if test="commentParentId !=null">#{commentParentId},</if>
+		#{commentContent},
+		#{videoId},
+		#{userId}
+		)
+
+	</insert>
+
+	<delete id="deleteCommentById" parameterType="int">
+
+		delete from comment
+		where
+		comment_id = #{commentId}
+
+	</delete>
+
+
+	<!-- 对评论点赞后期添加 <update id="updateComment" parameterType="commentEntity"></update> -->
+
+
+</mapper>
