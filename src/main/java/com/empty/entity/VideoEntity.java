@@ -16,6 +16,7 @@ public class VideoEntity {
 	private String videoDesc;
 	private String videoTag;
 	private String videoViewNum;
+	private String videoThumbnailImg;
 	
 	
 
@@ -81,6 +82,14 @@ public class VideoEntity {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String getVideoThumbnailImg() {
+		return videoThumbnailImg;
+	}
+
+	public void setVideoThumbnailImg(String videoThumbnailImg) {
+		this.videoThumbnailImg = videoThumbnailImg;
 	}
 
 }

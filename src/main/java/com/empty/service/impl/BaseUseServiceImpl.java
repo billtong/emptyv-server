@@ -1,5 +1,9 @@
 package com.empty.service.impl;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +12,7 @@ import com.empty.mapper.BaseUserMapper;
 import com.empty.service.BaseUserService;
 import com.empty.util.DataTools;
 import com.empty.util.MailUtil;
+import com.empty.util.MySessionContext;
 
 @Service("userService")
 public class BaseUseServiceImpl implements BaseUserService {
@@ -29,7 +34,7 @@ public class BaseUseServiceImpl implements BaseUserService {
 	}
 
 	@Override
-	public boolean registerNewUser(UserEntity userEntity) {
+	public boolean registerNewUser(UserEntity userEntity, HashMap<String, String> message) {
 
 		// 检查是否有重复用户名或邮箱名
 		if (userMapper.findUserByName(userEntity.getUserName()) == null
@@ -46,8 +51,20 @@ public class BaseUseServiceImpl implements BaseUserService {
 
 			// 如果邮件发送成功的话，填表然后返回R true
 			userMapper.saveNewUser(userEntity);
+			message.put("message", "success. activating email sent.");
 			return true;
 		}
+		
+		if(userMapper.findUserByName(userEntity.getUserName()) != null) {
+			message.put("message", "the username is used already.");
+			return false;
+		}
+		
+		if(userMapper.findUserByEmail(userEntity.getUserEmail()) != null) {
+			message.put("message", "the email is used already.");
+			return false;
+		}
+		
 
 		return false;
 	}
@@ -107,5 +124,21 @@ public class BaseUseServiceImpl implements BaseUserService {
 		userMapper.updateUser(newUserEntity);
 		return true;
 	}
+
+	@Override
+	public boolean checkUserToken(Integer userId, String token, String sessionId) {
+		
+		UserEntity user = userMapper.selectUserById(userId);
+		HttpSession session = MySessionContext.getInstance().getSession(sessionId);
+		String tokenCorrect = (String) session.getAttribute(user.getUserName());
+
+		if (token.equals(tokenCorrect)) {
+			return true;
+		} else {
+			System.out.println("token wrong拦截成功了！！！");	
+			return false;
+		}
+	}
+
 
 }

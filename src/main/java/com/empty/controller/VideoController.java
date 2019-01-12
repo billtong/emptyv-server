@@ -24,6 +24,11 @@ public class VideoController {
 	public @ResponseBody List<VideoEntity> searchVideo(@RequestParam String words) {
 		return videoService.searchVideoByName(words);
 	}
+	
+	@RequestMapping(value = "/random", method = RequestMethod.GET)
+	public @ResponseBody List<VideoEntity> getRandomVideos(@RequestParam Integer offset) {
+		return videoService.getRamdomVideos(offset);
+	}
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public @ResponseBody VideoEntity getVideoById(@RequestParam Integer videoId) {

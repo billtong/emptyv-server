@@ -1,6 +1,5 @@
 package com.empty.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 	@Override
 	public List<CommentEntity> searchCommentByVideoId(Integer videoId) {
 		List<CommentEntity> rawList = baseCommentMapper.selectCommentsByVideoId(videoId);
-		return getRsltList(rawList);
+		return rawList;
 	}
 
 	@Override
@@ -53,7 +52,11 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 
 	@Override
 	public void deleteComment(Integer commentId) {
+		
+		/*
 		CommentEntity comment = baseCommentMapper.selectCommentById(commentId);
+		
+		
 		
 		//判断这条评论有没有回复，不然要递归删除
 		if (comment.getCommentParentId() == 0) {
@@ -71,9 +74,11 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 		}
 
 		//没有回复的，直接用Mapper删除
+		 */
 		baseCommentMapper.deleteCommentById(commentId);
 	}
 
+	/*
 	private List<CommentEntity> getRsltList(List<CommentEntity> rawList) {
 		List<CommentEntity> rsltList = new ArrayList<>();
 		List<Boolean> checkIsAdded = new ArrayList<>();
@@ -112,5 +117,5 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 		}
 		return rsltList;
 	}
-
+*/
 }

@@ -40,6 +40,12 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	public void deleteVideoById(Integer videoId) {
 		videoMapper.deleteVideoById(videoId);
 	}
+
+	@Override
+	public List<VideoEntity> getRamdomVideos(Integer offset) {
+		return videoMapper.selectLatestLimitVideos(offset);
+	}
+
 	
 	
 

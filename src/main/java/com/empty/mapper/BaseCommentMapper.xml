@@ -43,6 +43,7 @@
 		where
 		video_id =
 		#{videoId}
+		order by comment_date desc
 
 	</select>
 

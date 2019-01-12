@@ -15,6 +15,9 @@ public interface BaseVideoMapper {
 	
 	List<VideoEntity> findVideosByName(String videoName);
 	
+	//pageSize = 20
+	List<VideoEntity> selectLatestLimitVideos(Integer offset);
+	
 	void saveNewVideo(VideoEntity video);
 	
 	void deleteVideoById(Integer videoId);

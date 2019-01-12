@@ -6,40 +6,33 @@
 
 <mapper namespace="com.empty.mapper.BaseVideoMapper">
 
-	<select id="findVideoById" parameterType="int"
+	<select id="selectLatestLimitVideos" parameterType="int"
 		resultType="videoEntity">
-		select video_id,
-		video_name,
-		video_src,
-		video_date,
-		user_id,
-		video_desc,
-		video_tag,
-		video_view_num
+		select * from video 
+		order by video_date desc
+		limit #{offset}, 20
+	</select>
 
+
+	<select id="findVideoById" parameterType="int" 
+		resultType="videoEntity">
+		select *
 		from video
 		where
 		video_id =
 		#{videoId}
-		order by video_date asc
 	</select>
 
 	<select id="findVideosByName" parameterType="string"
 		resultType="videoEntity">
-		select video_id,
-		video_name,
-		video_src,
-		video_date,
-		user_id,
-		video_desc,
-		video_tag,
-		video_view_num
-
+		select *
 		from
 		video
+
 		where
-		video_name like
-		"%"#{videoName}"%"
+		video_name
+		like "%"#{videoName}"%"
+		order by video_date desc
 	</select>
 
 
@@ -84,7 +77,9 @@
 
 			<if test="videoTag != null and videoTag != ''">video_tag = #{videoTag},</if>
 
-			<if test="videoViewNum != null">video_view_num = #{videoViewNum}</if>
+			<if test="videoViewNum != null">video_view_num = #{videoViewNum},</if>
+
+			<if test="videoThumbnailImg != null">video_thumbnail_img = #{videoThumbnailImg}</if>
 
 		</set>
 

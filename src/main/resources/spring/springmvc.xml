@@ -47,16 +47,15 @@
 	<mvc:default-servlet-handler />
 
 	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/api/comment/write"/>
-			<mvc:mapping path="/api/comment/delete"/>
-			<mvc:mapping path="/api/user/getUser"/>
-			<bean class="com.empty.controller.interceptor.CheckUserTokneInterceptor"></bean>
-		</mvc:interceptor>
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<bean class="com.empty.controller.interceptor.CorsInterceptor"></bean>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/api/comment/write"/>
+			<bean class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
 		</mvc:interceptor>
 		
 	</mvc:interceptors>

@@ -1,5 +1,7 @@
 package com.empty.service;
 
+import java.util.HashMap;
+
 import com.empty.entity.UserEntity;
 
 public interface BaseUserService {
@@ -10,7 +12,7 @@ public interface BaseUserService {
 	 * 用于注册账户
 	 * return ture表示成功
 	 */
-	boolean registerNewUser(UserEntity userEntity);
+	boolean registerNewUser(UserEntity userEntity, HashMap<String, String> message);
 	
 	/*
 	 * 用于激活账户
@@ -29,4 +31,8 @@ public interface BaseUserService {
 	 * return ture表示成功
 	 */
 	boolean updateUserInfo(UserEntity newUserEntity);
+	
+	
+	boolean checkUserToken(Integer userId, String token, String sessionId);
+	
 }

@@ -12,7 +12,7 @@ public class MailUtil {
 
 	// 网站官方邮箱
 	public static final String myEmailAccount = "emptyvideo@outlook.com";
-	public static final String myEmailPassword = "$$tzy$$990226";
+	public static final String myEmailPassword = "Bill$$990226";
 	public static final String myEmailSMTPHost = "smtp.office365.com";
 	public static final int myEmailConectionMaxTimeout =  1000*60*1; 
 	public static final int myEmailSMTPPort = 587; 

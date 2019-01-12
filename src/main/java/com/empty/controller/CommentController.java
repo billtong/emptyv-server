@@ -3,6 +3,9 @@ package com.empty.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.empty.entity.CommentEntity;
 import com.empty.service.BaseCommentService;
+import com.empty.service.impl.BaseUseServiceImpl;
 
 @Controller
 @RequestMapping(value = "/api/comment", produces = "application/json;charset=UTF-8")
@@ -21,6 +25,8 @@ public class CommentController {
 	@Resource(name = "commentService")
 	BaseCommentService commentService;
 
+	@Resource(name = "userService")
+	BaseUseServiceImpl userService;
 	
 	/**
 	 * 加载一个视频的所有评论
@@ -42,8 +48,9 @@ public class CommentController {
 	 * @param comment
 	 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public void writeComment(@RequestBody CommentEntity comment) {
+	public @ResponseBody String writeComment(@RequestBody CommentEntity comment) {
 		commentService.saveNewComment(comment);
+		return "write success";
 	}
 	
 	/**

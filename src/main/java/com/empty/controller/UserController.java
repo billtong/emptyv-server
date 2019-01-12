@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -40,12 +41,7 @@ public class UserController {
 		newUser.setUserPassword(signMap.get("userPassword"));
 		newUser.setUserEmail(signMap.get("userEmail"));
 		
-		if(userService.registerNewUser(newUser)) {
-			message.put("message", "success");
-		} else {
-			res.setStatus(400);
-			message.put("message", "error");
-		}
+		userService.registerNewUser(newUser, message);
 
 		return message;
 	}
@@ -68,19 +64,21 @@ public class UserController {
 	/**
 	 * 登陆
 	 * 1.Body里要有 userName，userPassword，userEmail
+	 * 返回session id，用来匹配到相应的sessionid
 	 * @param session
 	 * @param loginMap
 	 * @return
 	 */
 	@RequestMapping(value = "/login",  method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, String> userLogin(HttpServletResponse res, HttpSession session, @RequestBody HashMap<String, String> loginMap) {
+	public @ResponseBody HashMap<String, String> userLogin(HttpSession session, HttpServletRequest req, HttpServletResponse res, @RequestBody HashMap<String, String> loginMap) {
 		HashMap<String, String> message = new HashMap<>();
 		
 		//将token按照用户名字储存到服务器的session中，再将该token返回
 		if(userService.checkUserPassword(loginMap.get("userName"), loginMap.get("userPassword"))) {
 			String token = UUID.randomUUID().toString().replace("-", "");
-			session.setAttribute("userName-"+loginMap.get("userName"), token);
+			session.setAttribute(loginMap.get("userName"), token);
 			message.put("token", token);
+			message.put("sessionId", session.getId());
 			return message;
 		}
 		

@@ -9,6 +9,10 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
+	<listener>
+		<listener-class>com.empty.util.MySessionListener</listener-class>
+	</listener>
+
 
 	<!-- Spring模块初始化 -->
 	<listener>

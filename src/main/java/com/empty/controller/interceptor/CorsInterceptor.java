@@ -11,7 +11,7 @@ public class CorsInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		 String origin = request.getHeader("Origin");
+		 	String origin = request.getHeader("Origin");
 	        response.setHeader("Access-Control-Allow-Origin", origin);
 	        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 	        response.setHeader("Access-Control-Max-Age", "3600");
@@ -28,7 +28,6 @@ public class CorsInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
