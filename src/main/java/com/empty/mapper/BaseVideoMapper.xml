@@ -8,13 +8,13 @@
 
 	<select id="selectLatestLimitVideos" parameterType="int"
 		resultType="videoEntity">
-		select * from video 
+		select * from video
 		order by video_date desc
 		limit #{offset}, 20
 	</select>
 
 
-	<select id="findVideoById" parameterType="int" 
+	<select id="findVideoById" parameterType="int"
 		resultType="videoEntity">
 		select *
 		from video
@@ -35,6 +35,9 @@
 		order by video_date desc
 	</select>
 
+	<select id="findVideoNum" resultType="int">
+		SELECT COUNT(*) FROM video
+	</select>
 
 	<insert id="saveNewVideo" parameterType="videoEntity">
 

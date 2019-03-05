@@ -35,4 +35,6 @@ public interface BaseUserService {
 	
 	boolean checkUserToken(Integer userId, String token, String sessionId);
 	
+	UserEntity getUserByName(String userName);
+	
 }

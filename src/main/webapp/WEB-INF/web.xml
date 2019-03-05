@@ -9,6 +9,8 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
+
+<!-- 监听session -->
 	<listener>
 		<listener-class>com.empty.util.MySessionListener</listener-class>
 	</listener>

@@ -1,6 +1,8 @@
 package com.empty.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,11 +44,18 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	}
 
 	@Override
-	public List<VideoEntity> getRamdomVideos(Integer offset) {
-		return videoMapper.selectLatestLimitVideos(offset);
+	public Map<String, Object> getVideos(Integer currPage) {
+		Map<String, Object> videoMap = new HashMap<>();
+		int offset = (currPage-1) * VIDEOS_PAGE_SIZE; 
+		int totalVideos = videoMapper.findVideoNum();
+		if(offset >= 0 && offset < totalVideos) {
+			int totalPages = totalVideos % VIDEOS_PAGE_SIZE == 0 ? totalVideos/VIDEOS_PAGE_SIZE : totalVideos/VIDEOS_PAGE_SIZE + 1; 
+			videoMap.put("totalPages", totalPages);
+			videoMap.put("videoList", videoMapper.selectLatestLimitVideos(offset));
+			videoMap.put("message", "success");	
+		} else {
+			videoMap.put("message", "page number error");
+		}
+		return videoMap;
 	}
-
-	
-	
-
 }

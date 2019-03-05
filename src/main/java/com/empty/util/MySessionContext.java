@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 public class MySessionContext {
 	
 	private static MySessionContext instance;
-	private Map<String, HttpSession> sessionMap;
+	public Map<String, HttpSession> sessionMap;
 	
 	private MySessionContext() {
 		sessionMap = new HashMap<String, HttpSession>();

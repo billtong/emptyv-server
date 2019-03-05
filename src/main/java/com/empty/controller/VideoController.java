@@ -1,8 +1,10 @@
 package com.empty.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +28,13 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value = "/random", method = RequestMethod.GET)
-	public @ResponseBody List<VideoEntity> getRandomVideos(@RequestParam Integer offset) {
-		return videoService.getRamdomVideos(offset);
+	public @ResponseBody Map<String, Object> getRandomVideos(@RequestParam Integer currPage, HttpServletResponse res) {
+		Map<String, Object> map = videoService.getVideos(currPage);
+		if(!map.get("message").equals("success")) {
+			res.setStatus(404);
+		}
+		return map;
+		
 	}
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
