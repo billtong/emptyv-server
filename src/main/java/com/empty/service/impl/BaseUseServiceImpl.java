@@ -28,7 +28,6 @@ public class BaseUseServiceImpl implements BaseUserService {
 			return null;
 		}
 		return user;
-
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class BaseUseServiceImpl implements BaseUserService {
 		// 检查是否有重复用户名或邮箱名
 		if (userMapper.findUserByName(userEntity.getUserName()) == null
 				&& userMapper.findUserByEmail(userEntity.getUserEmail()) == null) {
-
+			/*
 			// 发送激活邮件
 			try {
 				MailUtil.sendTo(MailUtil.generateRegisterMailBody(userEntity), userEntity.getUserEmail());
@@ -46,8 +45,9 @@ public class BaseUseServiceImpl implements BaseUserService {
 				return false;
 			}
 			// 如果邮件发送成功的话，填表然后返回R true
+			 */
 			userMapper.saveNewUser(userEntity);
-			message.put("message", "success. activating email sent.");
+			message.put("message", "success. You can log in now!");
 			return true;
 		}
 		if(userMapper.findUserByName(userEntity.getUserName()) != null) {
@@ -61,6 +61,9 @@ public class BaseUseServiceImpl implements BaseUserService {
 		return false;
 	}
 
+	/**
+	 * 暂时废弃不用了
+	 */
 	@Override
 	public boolean updateUserActivateState(String activatedCode) {
 		UserEntity user = userMapper.findUserByEmail(DataTools.decode(activatedCode));

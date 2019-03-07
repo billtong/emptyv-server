@@ -4,14 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 public class CommentEntity {
-	
 	private Integer commentId;
 	private Integer commentParentId; 
 	private String commentContent;
 	private Date commentDate;
 	private Integer videoId;
 	private Integer userId;
-	
 
 	/**
 	 * 注意: 子评论（commentChild）是在service层生成的，没有持久化
@@ -60,7 +58,4 @@ public class CommentEntity {
 	public void setCommentChild(List<CommentEntity> commentChild) {
 		this.commentChild = commentChild;
 	}
-
-	
-	
 }

@@ -67,15 +67,9 @@
 	</insert>
 
 	<delete id="deleteCommentById" parameterType="int">
-
 		delete from comment
 		where
 		comment_id = #{commentId}
-
 	</delete>
-
-
 	<!-- 对评论点赞后期添加 <update id="updateComment" parameterType="commentEntity"></update> -->
-
-
 </mapper>

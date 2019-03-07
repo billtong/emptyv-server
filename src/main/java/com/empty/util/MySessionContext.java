@@ -14,7 +14,6 @@ public class MySessionContext {
 		sessionMap = new HashMap<String, HttpSession>();
 	}
 	
-	
 	/*
 	 * 从外部获取这个唯一的MySessionContext
 	 */
@@ -24,8 +23,6 @@ public class MySessionContext {
 		}
 		return instance;
 	}
-	
-	
 	
 	/*
 	 * 给session监听器用的
@@ -45,7 +42,6 @@ public class MySessionContext {
 		}
 	}
 	
-	
 	/*
 	 * 给程序员用的，获得相应的session
 	 */
@@ -55,7 +51,4 @@ public class MySessionContext {
 		}
 		return sessionMap.get(sessionId);
 	}
-	
-	
-
 }

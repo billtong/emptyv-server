@@ -35,21 +35,17 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, String> userSignUp(HttpServletResponse res, @RequestBody HashMap<String, String> signMap) {
-		
 		HashMap<String, String> message = new HashMap<>();
-		
 		UserEntity newUser = new UserEntity();
 		newUser.setUserName(signMap.get("userName"));
 		newUser.setUserPassword(signMap.get("userPassword"));
 		newUser.setUserEmail(signMap.get("userEmail"));
-		
 		userService.registerNewUser(newUser, message);
-
 		return message;
 	}
 	
 	/**
-	 * 激活邮件里的链接
+	 * 激活邮件里的链接 （舍弃）
 	 * 1.Param里要有code
 	 * @param code
 	 * @return
@@ -70,7 +66,6 @@ public class UserController {
 	@RequestMapping(value = "/login",  method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> userLogin(HttpSession session, HttpServletRequest req, HttpServletResponse res, @RequestBody HashMap<String, String> loginMap) {
 		HashMap<String, Object> message = new HashMap<>();
-		
 		//将token按照用户名字储存到服务器的session中，再将该token返回
 		if(userService.checkUserPassword(loginMap.get("userName"), loginMap.get("userPassword"))) {
 			String token = UUID.randomUUID().toString().replace("-", "");
@@ -80,7 +75,6 @@ public class UserController {
 			message.put("user", (userService.getUserByName(loginMap.get("userName"))));
 			return message;
 		}
-		
 		//其他情況是返回错误信息
 		res.setStatus(401);
 		message.put("message", "error");
@@ -120,6 +114,4 @@ public class UserController {
 	public @ResponseBody UserEntity getAllUserInfo(@RequestParam Integer userId) {
 		return userService.getUserAll(userId);
 	}
-	
-
 }

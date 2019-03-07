@@ -23,7 +23,6 @@
 		user_id = #{userId}
 	</select>
 
-
 	<select id="findUserByName" parameterType="string"
 		resultType="userEntity">
 		select
@@ -42,8 +41,6 @@
 		user_name like
 		#{userName}
 	</select>
-
-
 
 	<select id="findUserByEmail" parameterType="string"
 		resultType="userEntity">
@@ -94,10 +91,7 @@
 	</delete>
 
 	<update id="updateUser" parameterType="userEntity">
-
-
 		update user
-
 		<set>
 			<if test="userName != null and userName != ''">user_name = #{userName},</if>
 
@@ -112,14 +106,7 @@
 			<if test="userActivatedState != null">user_activated_state = #{userActivatedState}</if>
 
 		</set>
-
 		where
 		user_id = #{userId}
-
 	</update>
-
-
-
-
-
 </mapper>

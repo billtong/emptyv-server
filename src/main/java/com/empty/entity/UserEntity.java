@@ -3,7 +3,6 @@ package com.empty.entity;
 import java.util.Date;
 
 public class UserEntity {
-	
 	private Integer userId;
 	private String userName;
 	private String userPassword;
@@ -12,7 +11,6 @@ public class UserEntity {
 	private Date userRegDate;
 	private String userIcon;
 	private Byte userActivatedState;
-	
 	
 	public Integer getUserId() {
 		return userId;
@@ -62,5 +60,4 @@ public class UserEntity {
 	public void setUserActivatedState(Byte userActivatedState) {
 		this.userActivatedState = userActivatedState;
 	}
-
 }
