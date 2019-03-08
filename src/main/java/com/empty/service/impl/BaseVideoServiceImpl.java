@@ -1,7 +1,6 @@
 package com.empty.service.impl;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,43 +18,77 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	private BaseVideoMapper videoMapper;
 
 	@Override
-	public List<VideoEntity> searchVideoByName(String videoName) {
-		return videoMapper.findVideosByName(videoName);
-	}
-
-	@Override
 	public VideoEntity viewVideoById(Integer videoId) {
 		VideoEntity video = videoMapper.findVideoById(videoId);
-		if(video!=null) {
-			video.setVideoViewNum(DataTools.stringAdder(video.getVideoViewNum()));
+		if (video != null) {
+			video.setVideoViewNum(DataTools.stringAdder(video.getVideoViewNum(), 1));
 			videoMapper.updateVideo(video);
 		}
 		return video;
 	}
-	
+
 	@Override
-	public void saveNewVideo(VideoEntity video) {
-		videoMapper.saveNewVideo(video);
+	public Map<String, Object> getVideos(Integer currPage, String word, String filter, Integer sizes) {
+		Map<String, Object> sqlParamsMap = new HashMap<>();
+		Map<String, Object> videoMap = new HashMap<>();
+		if (sizes >= 0) {
+			int offset = (currPage - 1) * sizes;
+			sqlParamsMap.put("offset", offset);
+			sqlParamsMap.put("sizes", sizes);
+			if (!filter.equals("date") && !filter.equals("view") && !filter.equals("rate")) {
+				filter = "date"; // 默认日期为filter
+			}
+			sqlParamsMap.put("filter", filter);
+			sqlParamsMap.put("word", word);
+			int totalVideos = videoMapper.findVideoNum(sqlParamsMap);
+			if (offset >= 0 && offset < totalVideos) {
+				int totalPages = totalVideos % sizes == 0 ? totalVideos / sizes : totalVideos / sizes + 1;
+				videoMap.put("totalPages", totalPages);
+				videoMap.put("videoList", videoMapper.selectVideos(sqlParamsMap));
+				videoMap.put("message", "success");
+			}
+		} else {
+			videoMap.put("message", "failed geting videos");
+		}
+		return videoMap;
 	}
 
+	@Override
+	public boolean videoAction(Integer videoId, String action) {
+		if (videoId >= 1 && action != null) {
+			VideoEntity video = videoMapper.findVideoById(videoId);
+			if (video != null) {
+				switch (action) {
+				case "like":
+					video.setVideoLikeNum(DataTools.stringAdder(video.getVideoLikeNum(), 1));
+					break;
+				case "unlike":
+					video.setVideoUnlikeNum(DataTools.stringAdder(video.getVideoUnlikeNum(), 1));
+					break;
+				case "favourite":
+					video.setVideoFavouriteNum(DataTools.stringAdder(video.getVideoFavouriteNum(), 1));
+					break;
+				case "comment":
+					video.setVideoCommentNum(DataTools.stringAdder(video.getVideoCommentNum(), 1));
+					break;
+				case "danmu":
+					video.setVideoDanmuNum(DataTools.stringAdder(video.getVideoDanmuNum(), 1));
+					break;
+				default:
+					return false;
+				}
+				videoMapper.updateVideo(video);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 还没使用
+	 */
 	@Override
 	public void deleteVideoById(Integer videoId) {
 		videoMapper.deleteVideoById(videoId);
-	}
-
-	@Override
-	public Map<String, Object> getVideos(Integer currPage) {
-		Map<String, Object> videoMap = new HashMap<>();
-		int offset = (currPage-1) * VIDEOS_PAGE_SIZE; 
-		int totalVideos = videoMapper.findVideoNum();
-		if(offset >= 0 && offset < totalVideos) {
-			int totalPages = totalVideos % VIDEOS_PAGE_SIZE == 0 ? totalVideos/VIDEOS_PAGE_SIZE : totalVideos/VIDEOS_PAGE_SIZE + 1; 
-			videoMap.put("totalPages", totalPages);
-			videoMap.put("videoList", videoMapper.selectLatestLimitVideos(offset));
-			videoMap.put("message", "success");	
-		} else {
-			videoMap.put("message", "page number error");
-		}
-		return videoMap;
 	}
 }

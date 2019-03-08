@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Logger {
 
-	//private String logFilePath = Logger.class.getResource("log.txt").getFile();
+	// private String logFilePath = Logger.class.getResource("log.txt").getFile();
 	private String logFilePath = "D://0-Project//Empty//empty_video//log.txt";
 
 	@Pointcut("execution(* com.empty.service..*.*(..))")
@@ -36,7 +36,8 @@ public class Logger {
 			DataTools.WriteStringToFile2(logFilePath, "The method " + methodName + " end. result<" + result + ">");
 		} catch (Throwable e) {
 			// 异常通知
-			DataTools.WriteStringToFile2(logFilePath, "！！错误！！ : this method " + methodName + " end.ex message<" + e + ">");
+			DataTools.WriteStringToFile2(logFilePath,
+					"！！错误！！ : this method " + methodName + " end.ex message<" + e + ">");
 			throw new RuntimeException(e);
 		}
 		// 后置通知

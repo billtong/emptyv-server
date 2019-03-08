@@ -11,16 +11,17 @@ public class CorsInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		 	String origin = request.getHeader("Origin");
-	        response.setHeader("Access-Control-Allow-Origin", origin);
-	        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-	        response.setHeader("Access-Control-Max-Age", "3600");
-	        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,Content-Type,access-control-allow-origin");
-	        response.setHeader("Access-Control-Allow-Credentials", "true");
-	        String method = request.getMethod();
-	        if(method.equalsIgnoreCase("OPTIONS")){
-	        	return true;
-	        }
+		String origin = request.getHeader("Origin");
+		response.setHeader("Access-Control-Allow-Origin", origin);
+		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		response.setHeader("Access-Control-Max-Age", "3600");
+		response.setHeader("Access-Control-Allow-Headers",
+				"x-requested-with,Authorization,Content-Type,access-control-allow-origin");
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+		String method = request.getMethod();
+		if (method.equalsIgnoreCase("OPTIONS")) {
+			return true;
+		}
 		return true;
 	}
 
@@ -32,8 +33,7 @@ public class CorsInterceptor implements HandlerInterceptor {
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {	
+			throws Exception {
 	}
 
 }
-

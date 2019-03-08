@@ -58,6 +58,11 @@
 			<bean class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
 		</mvc:interceptor>
 		
+		<mvc:interceptor>
+            <mvc:mapping path="/api/video/react"/>
+            <bean class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
+        </mvc:interceptor>
+		
 	</mvc:interceptors>
 
 </beans>

@@ -17,11 +17,11 @@ public class DataTools {
 	}
 
 	/*
-	 * 用于视频点击数+1
+	 * 用于字符串+1
 	 */
-	public static String stringAdder(String ori) {
+	public static String stringAdder(String ori, long adder) {
 		Long num = Long.valueOf(ori);
-		num++;
+		num += adder;
 		return String.valueOf(num);
 	}
 
@@ -41,22 +41,22 @@ public class DataTools {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * 用于加密激活信息
 	 */
 	public static String encode(String str) {
-        return Base64.getEncoder().encodeToString(str.getBytes());
-    }
+		return Base64.getEncoder().encodeToString(str.getBytes());
+	}
 
-    public static String encode(int value) {
-        return Base64.getEncoder().encodeToString(String.valueOf(value).getBytes());
-    }
+	public static String encode(int value) {
+		return Base64.getEncoder().encodeToString(String.valueOf(value).getBytes());
+	}
 
-    public static String decode(String code) {
-        byte[] decodedCode = Base64.getDecoder().decode(code);
-        String s = new String(decodedCode);
-        return s;
-    }
+	public static String decode(String code) {
+		byte[] decodedCode = Base64.getDecoder().decode(code);
+		String s = new String(decodedCode);
+		return s;
+	}
 
 }

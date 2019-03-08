@@ -6,14 +6,6 @@
 
 <mapper namespace="com.empty.mapper.BaseVideoMapper">
 
-	<select id="selectLatestLimitVideos" parameterType="int"
-		resultType="videoEntity">
-		select * from video
-		order by video_date desc
-		limit #{offset}, 20
-	</select>
-
-
 	<select id="findVideoById" parameterType="int"
 		resultType="videoEntity">
 		select *
@@ -23,20 +15,34 @@
 		#{videoId}
 	</select>
 
-	<select id="findVideosByName" parameterType="string"
+	<select id="selectVideos" parameterType="Map"
 		resultType="videoEntity">
-		select *
-		from
-		video
+		select * from video
 
-		where
-		video_name
-		like "%"#{videoName}"%"
-		order by video_date desc
+		<if test="word != null and word != ''">where video_name like "%"#{word}"%"</if>
+
+		<if test="filter != null and filter != '' and filter == 'date'">order by video_date desc</if>
+
+		<if test="filter != null and filter != '' and filter == 'view'">order by cast(video_view_num as decimal) DESC</if>
+
+		<if test="filter != null and filter != '' and filter == 'rate'">ORDER BY CAST(video_favourite_num AS DECIMAL) DESC</if>
+
+		limit #{offset},
+		#{sizes}
 	</select>
 
 	<select id="findVideoNum" resultType="int">
 		SELECT COUNT(*) FROM video
+
+		<if test="word != null and word != ''">where video_name like "%"#{word}"%"</if>
+
+		<if test="filter != null and filter != '' and filter == 'date'">order by video_date desc</if>
+
+		<if test="filter != null and filter != '' and filter == 'view'">order by cast(video_view_num as decimal) DESC</if>
+
+		<if test="filter != null and filter != '' and filter == 'rate'">ORDER BY CAST(video_favourite_num AS DECIMAL) DESC</if>
+		limit #{offset},
+		#{sizes}
 	</select>
 
 	<insert id="saveNewVideo" parameterType="videoEntity">
@@ -47,7 +53,9 @@
 		video_src,
 		user_id,
 		video_desc,
-		video_tag
+		video_tag,
+		video_thumbnail_img,
+		video_preview_bg
 		)
 		values
 		(
@@ -55,7 +63,9 @@
 		#{videoSrc},
 		#{userId},
 		#{videoDesc},
-		#{videoTag}
+		#{videoTag},
+		#{videoThumbnailImg},
+		#{videoPreviewBg}
 		)
 
 	</insert>
@@ -72,17 +82,29 @@
 
 		update video
 		<set>
-			<if test="videoName != null and videoName != ''">video_name = #{videoName} ,</if>
+			<if test="videoName != null and videoName != ''">video_name = #{videoName},</if>
 
-			<if test="userId != null">user_id = #{userId} ,</if>
-
-			<if test="videoDesc != null and videoDesc != ''">video_desc = #{videoDesc} ,</if>
+			<if test="videoDesc != null and videoDesc != ''">video_desc = #{videoDesc},</if>
 
 			<if test="videoTag != null and videoTag != ''">video_tag = #{videoTag},</if>
 
-			<if test="videoViewNum != null">video_view_num = #{videoViewNum},</if>
+			<if test="videoViewNum != null and videoViewNum != ''">video_view_num = #{videoViewNum},</if>
 
-			<if test="videoThumbnailImg != null">video_thumbnail_img = #{videoThumbnailImg}</if>
+			<if test="videoThumbnailImg != null and videoThumbnailImg != ''">video_thumbnail_img = #{videoThumbnailImg},</if>
+
+			<if test="videoBadge != null and videoBadge != ''">video_badge = #{videoBadge},</if>
+
+			<if test="videoPreviewBg != null and videoPreviewBg != ''">video_preview_bg = #{videoPreviewBg},</if>
+
+			<if test="videoLikeNum != null and videoLikeNum != ''">video_like_num = #{videoLikeNum},</if>
+
+			<if test="videoUnlikeNum != null and videoUnlikeNum != ''">video_unlike_num = #{videoUnlikeNum},</if>
+
+			<if test="videoFavouriteNum != null and videoFavouriteNum != ''">video_favourite_num = #{videoFavouriteNum},</if>
+
+			<if test="videoDanmuNum != null and videoDanmuNum != ''">video_danmu_num = #{videoDanmuNum},</if>
+
+			<if test="videoCommentNum != null and videoCommentNum != ''">video_comment_num = #{videoCommentNum}</if>
 
 		</set>
 

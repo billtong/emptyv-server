@@ -13,15 +13,14 @@ public class UserTokenInterceptor implements HandlerInterceptor {
 
 	@Resource(name = "userService")
 	BaseUseServiceImpl userService;
-	
+
 	@Override
-	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
 		String token = req.getParameter("token");
 		Integer userId = Integer.parseInt(req.getParameter("userId"));
 		String sessionId = req.getParameter("sessionId");
-		Boolean isTokenCorrect= userService.checkUserToken(userId, token, sessionId);
-		if(isTokenCorrect) {
+		Boolean isTokenCorrect = userService.checkUserToken(userId, token, sessionId);
+		if (isTokenCorrect) {
 			return true;
 		} else {
 			res.setStatus(403);

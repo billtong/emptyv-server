@@ -1,6 +1,5 @@
 package com.empty.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -22,24 +21,29 @@ public class VideoController {
 	@Resource(name = "videoService")
 	BaseVideoService videoService;
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody List<VideoEntity> searchVideo(@RequestParam String words) {
-		return videoService.searchVideoByName(words);
-	}
-	
-	@RequestMapping(value = "/random", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> getRandomVideos(@RequestParam Integer currPage, HttpServletResponse res) {
-		Map<String, Object> map = videoService.getVideos(currPage);
-		if(!map.get("message").equals("success")) {
-			res.setStatus(404);
-		}
-		return map;
-		
-	}
-
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/getVideo", method = RequestMethod.GET)
 	public @ResponseBody VideoEntity getVideoById(@RequestParam Integer videoId) {
 		return videoService.viewVideoById(videoId);
+	}
+
+	@RequestMapping(value = "/getVideoList", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> searchVideo(@RequestParam Integer currPage, @RequestParam String word,
+			@RequestParam String filter, @RequestParam Integer sizes, HttpServletResponse res) {
+		Map<String, Object> map = videoService.getVideos(currPage, word, filter, sizes);
+		if (!map.get("message").equals("success")) {
+			res.setStatus(400);
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "/patchVideoData", method = RequestMethod.PATCH)
+	public @ResponseBody String reactVideo(@RequestParam Integer videoId, @RequestParam String action,
+			HttpServletResponse res) {
+		if (videoService.videoAction(videoId, action)) {
+			return " react success";
+		}
+		res.setStatus(304);
+		return "react failed";
 	}
 
 }

@@ -8,21 +8,23 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
 public class MailUtil {
 
 	// 网站官方邮箱
 	public static final String myEmailAccount = "emptyvideo@outlook.com";
 	public static final String myEmailPassword = "Bill$$990226";
 	public static final String myEmailSMTPHost = "smtp.office365.com";
-	public static final int myEmailConectionMaxTimeout =  1000*60*1; 
-	public static final int myEmailSMTPPort = 587; 
+	public static final int myEmailConectionMaxTimeout = 1000 * 60 * 1;
+	public static final int myEmailSMTPPort = 587;
 	public static final String serverUrl = "http://localhost:8080/empty-server/api/user/activated?code=";
 
-	//Encryption method: STARTTLS
-			
+	// Encryption method: STARTTLS
+
 	public static String generateRegisterMailBody(UserEntity userEntity) {
 		String code = DataTools.encode(userEntity.getUserEmail());
-		String body = "<div>please click the link to finish your final step!</div>"+"<div align='center'> <a href='"+ serverUrl+code+"'>ENTER</a></div>"; 
+		String body = "<div>please click the link to finish your final step!</div>" + "<div align='center'> <a href='"
+				+ serverUrl + code + "'>ENTER</a></div>";
 		return body;
 	}
 
@@ -32,10 +34,10 @@ public class MailUtil {
 		props.setProperty("mail.smtp.host", myEmailSMTPHost);
 		props.setProperty("mail.smtp.auth", "true");
 		props.setProperty("mail.smtp.starttls.enable", "true");
-		//如果网络连接超过三分钟 断掉
+		// 如果网络连接超过三分钟 断掉
 		props.setProperty("mail.smtp.connectiontimeout", String.valueOf(myEmailConectionMaxTimeout));
 		props.setProperty("mail.smtp.port", String.valueOf(myEmailSMTPPort));
-		
+
 		Session session = Session.getDefaultInstance(props);
 		session.setDebug(true);
 		Transport transport = session.getTransport();
