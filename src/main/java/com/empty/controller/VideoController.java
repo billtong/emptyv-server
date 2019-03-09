@@ -22,10 +22,15 @@ public class VideoController {
 	BaseVideoService videoService;
 
 	@RequestMapping(value = "/getVideo", method = RequestMethod.GET)
-	public @ResponseBody VideoEntity getVideoById(@RequestParam Integer videoId) {
-		return videoService.viewVideoById(videoId);
+	public @ResponseBody VideoEntity getVideoById(@RequestParam Integer videoId,  HttpServletResponse res) {
+		VideoEntity v = videoService.getVideoById(videoId);
+		if(v!=null) {
+			return v;
+		}
+		res.setStatus(404);
+		return null;
 	}
-
+	
 	@RequestMapping(value = "/getVideoList", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> searchVideo(@RequestParam Integer currPage, @RequestParam String word,
 			@RequestParam String filter, @RequestParam Integer sizes, HttpServletResponse res) {
@@ -36,7 +41,17 @@ public class VideoController {
 		return map;
 	}
 
-	@RequestMapping(value = "/patchVideoData", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/patchViewNum", method = RequestMethod.PATCH)
+	public @ResponseBody String patchViewNum(@RequestParam Integer videoId, HttpServletResponse res) {
+		if (videoService.videoAction(videoId, "view")) {
+			return " react success";
+		}
+		res.setStatus(304);
+		return "react failed";
+	}
+
+	//需要token验证
+	@RequestMapping(value = "/patchOtherNum", method = RequestMethod.PATCH)
 	public @ResponseBody String reactVideo(@RequestParam Integer videoId, @RequestParam String action,
 			HttpServletResponse res) {
 		if (videoService.videoAction(videoId, action)) {

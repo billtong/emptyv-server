@@ -59,7 +59,7 @@
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
-            <mvc:mapping path="/api/video/react"/>
+            <mvc:mapping path="/api/video//patchOtherNum"/>
             <bean class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
         </mvc:interceptor>
 		

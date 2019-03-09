@@ -18,12 +18,8 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	private BaseVideoMapper videoMapper;
 
 	@Override
-	public VideoEntity viewVideoById(Integer videoId) {
+	public VideoEntity getVideoById(Integer videoId) {
 		VideoEntity video = videoMapper.findVideoById(videoId);
-		if (video != null) {
-			video.setVideoViewNum(DataTools.stringAdder(video.getVideoViewNum(), 1));
-			videoMapper.updateVideo(video);
-		}
 		return video;
 	}
 
@@ -59,6 +55,9 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 			VideoEntity video = videoMapper.findVideoById(videoId);
 			if (video != null) {
 				switch (action) {
+				case "view":
+					video.setVideoViewNum(DataTools.stringAdder(video.getVideoViewNum(), 1));
+					break;
 				case "like":
 					video.setVideoLikeNum(DataTools.stringAdder(video.getVideoLikeNum(), 1));
 					break;

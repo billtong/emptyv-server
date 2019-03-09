@@ -15,11 +15,8 @@ public interface BaseVideoService {
 	 */
 	Map<String, Object> getVideos(Integer currPage, String word, String filter, Integer sizes);
 
-	/*
-	 * 从表中根据id查到视频item 如果存在就将view-num+1
-	 */
-	VideoEntity viewVideoById(Integer videoId);
-
+	VideoEntity getVideoById(Integer videoId);
+	
 	boolean videoAction(Integer videoId, String action);
 
 	void deleteVideoById(Integer videoId);
