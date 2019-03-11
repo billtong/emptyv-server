@@ -30,23 +30,22 @@
 			<tx:method name="save*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
-			
-			<!-- view会改变点击数 -->
-			<tx:method name="view*" propagation="REQUIRED"/>
-			
+			<tx:method name="action*" propagation="REQUIRED" />
+
 			<!-- 注册新用户 -->
 			<tx:method name="register*" propagation="REQUIRED" />
-			
-			
+
+            <!-- 验证用户信息 -->
 			<tx:method name="check*" propagation="SUPPORTS"
 				read-only="true" />
-				
+
+            <!-- 根据id获取json -->
 			<tx:method name="get*" propagation="SUPPORTS"
 				read-only="true" />
-			
+
 			<tx:method name="search*" propagation="SUPPORTS"
 				read-only="true" />
-				
+
 
 		</tx:attributes>
 	</tx:advice>

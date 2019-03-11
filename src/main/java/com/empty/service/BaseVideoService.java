@@ -13,11 +13,26 @@ public interface BaseVideoService {
 	 * @param filter
 	 * @return
 	 */
-	Map<String, Object> getVideos(Integer currPage, String word, String filter, Integer sizes);
+	Map<String, Object> getVideoList(Integer currPage, String word, String filter, Integer sizes);
 
+	/**
+	 * 
+	 * @param videoId
+	 * @return
+	 */
 	VideoEntity getVideoById(Integer videoId);
-	
-	boolean videoAction(Integer videoId, String action);
 
+	/**
+	 * 
+	 * @param videoId
+	 * @param action
+	 * @return
+	 */
+	boolean actionVideo(Integer videoId, String action);
+
+	/**
+	 * 
+	 * @param videoId
+	 */
 	void deleteVideoById(Integer videoId);
 }
