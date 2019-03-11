@@ -6,7 +6,7 @@ import com.empty.entity.CommentEntity;
 
 public interface BaseCommentService {
 
-	List<CommentEntity> getCommentByVideoId(Integer videoId);
+	List<CommentEntity> searchCommentByVideoId(Integer videoId);
 
 	void saveNewComment(CommentEntity comment);
 

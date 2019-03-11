@@ -33,7 +33,7 @@ public class CommentController {
 	 */
 	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	public @ResponseBody List<CommentEntity> loadCommentByVideoId(@RequestParam Integer videoId) {
-		return commentService.getCommentByVideoId(videoId);
+		return commentService.searchCommentByVideoId(videoId);
 	}
 
 	/**

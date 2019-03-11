@@ -20,26 +20,17 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 	@Autowired
 	BaseVideoMapper baseVideoMapper;
 
-	/**
-	 * 获取该视频的的comment
-	 */
 	@Override
-	public List<CommentEntity> getCommentByVideoId(Integer videoId) {
+	public List<CommentEntity> searchCommentByVideoId(Integer videoId) {
 		List<CommentEntity> rawList = baseCommentMapper.selectCommentsByVideoId(videoId);
 		return rawList;
 	}
 
-	/**
-	 * 发射新的评论
-	 */
 	@Override
 	public void saveNewComment(CommentEntity comment) {
 		baseCommentMapper.saveNewComment(comment);
 	}
 
-	/**
-	 * 暂时废弃，不用
-	 */
 	@Override
 	public boolean checkDeletePerms(Integer commentId, Integer userId) {
 		CommentEntity comment = baseCommentMapper.selectCommentById(commentId);
@@ -56,9 +47,6 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 		}
 	}
 
-	/**
-	 * 暂时废弃不用
-	 */
 	@Override
 	public void deleteComment(Integer commentId) {
 		baseCommentMapper.deleteCommentById(commentId);

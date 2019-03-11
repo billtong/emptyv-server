@@ -24,7 +24,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	}
 
 	@Override
-	public Map<String, Object> getVideoList(Integer currPage, String word, String filter, Integer sizes) {
+	public Map<String, Object> getVideos(Integer currPage, String word, String filter, Integer sizes) {
 		Map<String, Object> sqlParamsMap = new HashMap<>();
 		Map<String, Object> videoMap = new HashMap<>();
 		if (sizes >= 0) {
@@ -50,7 +50,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	}
 
 	@Override
-	public boolean actionVideo(Integer videoId, String action) {
+	public boolean videoAction(Integer videoId, String action) {
 		if (videoId >= 1 && action != null) {
 			VideoEntity video = videoMapper.findVideoById(videoId);
 			if (video != null) {

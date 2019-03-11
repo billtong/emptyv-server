@@ -1,6 +1,3 @@
-CREATE DATABASE empty_db;
-USE empty_db;
-
 CREATE TABLE `video` (                                                                                                                
           `video_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,                                                                                
           `video_name` VARCHAR(50) NOT NULL,                                                                                                  
