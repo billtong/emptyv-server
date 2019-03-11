@@ -8,28 +8,51 @@ public interface BaseUserService {
 
 	UserEntity getUserAll(Integer userId);
 
-	/*
-	 * 用于注册账户 return ture表示成功
+	/**
+	 * 
+	 * @param userEntity
+	 * @param message
+	 * @return
 	 */
 	boolean registerNewUser(UserEntity userEntity, HashMap<String, String> message);
 
-	/*
-	 * 用于激活账户 return ture表示成功
+	/**
+	 * 
+	 * @param activatedCode
+	 * @return
 	 */
 	boolean updateUserActivateState(String activatedCode);
 
-	/*
-	 * 用于登陆 return ture表示成功
+	/**
+	 * 
+	 * @param userName
+	 * @param userPassword
+	 * @return
 	 */
 	boolean checkUserPassword(String userName, String userPassword);
 
-	/*
-	 * 用于更改信息 return ture表示成功
+	/**
+	 * 
+	 * @param newUserEntity
+	 * @return
 	 */
 	boolean updateUserInfo(UserEntity newUserEntity);
 
+	/**
+	 * 检查user的token
+	 * 
+	 * @param userId
+	 * @param token
+	 * @param sessionId
+	 * @return
+	 */
 	boolean checkUserToken(Integer userId, String token, String sessionId);
 
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 */
 	UserEntity getUserByName(String userName);
 
 }

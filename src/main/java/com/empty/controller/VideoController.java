@@ -34,7 +34,7 @@ public class VideoController {
 	@RequestMapping(value = "/getVideoList", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> searchVideo(@RequestParam Integer currPage, @RequestParam String word,
 			@RequestParam String filter, @RequestParam Integer sizes, HttpServletResponse res) {
-		Map<String, Object> map = videoService.getVideos(currPage, word, filter, sizes);
+		Map<String, Object> map = videoService.getVideoList(currPage, word, filter, sizes);
 		if (!map.get("message").equals("success")) {
 			res.setStatus(400);
 		}
@@ -43,7 +43,7 @@ public class VideoController {
 
 	@RequestMapping(value = "/patchViewNum", method = RequestMethod.PATCH)
 	public @ResponseBody String patchViewNum(@RequestParam Integer videoId, HttpServletResponse res) {
-		if (videoService.videoAction(videoId, "view")) {
+		if (videoService.actionVideo(videoId, "view")) {
 			return " react success";
 		}
 		res.setStatus(304);
@@ -54,7 +54,7 @@ public class VideoController {
 	@RequestMapping(value = "/patchOtherNum", method = RequestMethod.PATCH)
 	public @ResponseBody String reactVideo(@RequestParam Integer videoId, @RequestParam String action,
 			HttpServletResponse res) {
-		if (videoService.videoAction(videoId, action)) {
+		if (videoService.actionVideo(videoId, action)) {
 			return " react success";
 		}
 		res.setStatus(304);
