@@ -19,5 +19,7 @@ public interface BaseVideoService {
 	
 	boolean videoAction(Integer videoId, String action);
 
+	boolean updateTags(Integer videoId, String tagJsonString);
+	
 	void deleteVideoById(Integer videoId);
 }

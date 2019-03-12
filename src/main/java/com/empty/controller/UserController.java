@@ -27,12 +27,8 @@ public class UserController {
 	@Resource(name = "userService")
 	BaseUseServiceImpl userService;
 
-	/**
-	 * 注册endpoint 1.Body里要至少有userName userPassword userEmail
-	 * 
-	 * @param signMap
-	 * @return
-	 */
+	
+	//注册endpoint 1.Body里要至少有userName userPassword userEmail
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, String> userSignUp(HttpServletResponse res,
 			@RequestBody HashMap<String, String> signMap) {
@@ -45,24 +41,15 @@ public class UserController {
 		return message;
 	}
 
-	/**
-	 * 激活邮件里的链接 （舍弃） 1.Param里要有code
-	 * 
-	 * @param code
-	 * @return
-	 */
+	
+	 //激活邮件里的链接 （舍弃） 1.Param里要有code
 	@RequestMapping(value = "/activated", method = RequestMethod.GET)
 	public @ResponseBody String activatedNewUser(@RequestParam String code) {
 		return userService.updateUserActivateState(code) ? "success" : "failed";
 	}
 
-	/**
-	 * 登陆 1.Body里要有 userName，userPassword，userEmail 返回session id，用来匹配到相应的sessionid
-	 * 
-	 * @param session
-	 * @param loginMap
-	 * @return
-	 */
+	 //登陆 
+	//1.Body里要有 userName，userPassword，userEmail 返回session id，用来匹配到相应的sessionid
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> userLogin(HttpSession session, HttpServletRequest req,
 			HttpServletResponse res, @RequestBody HashMap<String, String> loginMap) {
@@ -82,12 +69,7 @@ public class UserController {
 		return message;
 	}
 
-	/**
-	 * 登出，将sessionContext中储存的session删掉
-	 * 
-	 * @param userJson
-	 * @return
-	 */
+	// 登出，将sessionContext中储存的session删掉 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public @ResponseBody Map<String, String> userLogout(@RequestBody Map<String, String> userJson,
 			HttpServletResponse res) {
@@ -106,12 +88,8 @@ public class UserController {
 		return message;
 	}
 
-	/**
-	 * 加载用户信息（被token check拦截） 1.Header里要有token 2.Param里要有userId
-	 * 
-	 * @param userId
-	 * @return
-	 */
+	
+	//加载用户信息（被token check拦截） 1.Header里要有token 2.Param里要有userId
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
 	public @ResponseBody UserEntity getAllUserInfo(@RequestParam Integer userId) {
 		return userService.getUserAll(userId);

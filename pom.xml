@@ -35,6 +35,7 @@
 		</dependency>
 		<!-- Spring MVC模块依赖结束 -->
 
+
 		<!-- MyBatis模块依赖开始 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -60,7 +61,6 @@
 			<version>8.0.13</version>
 		</dependency>
 		<!--数据库连接池依赖 结束 -->
-
 
 		<!-- Spring常用模块开始 -->
 		<dependency>

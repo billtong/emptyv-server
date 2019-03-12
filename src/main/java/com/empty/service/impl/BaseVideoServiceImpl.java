@@ -90,4 +90,15 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	public void deleteVideoById(Integer videoId) {
 		videoMapper.deleteVideoById(videoId);
 	}
+
+	@Override
+	public boolean updateTags(Integer videoId, String tagJsonString) {
+		VideoEntity video = videoMapper.findVideoById(videoId);
+		if(video != null && tagJsonString != null) {
+			video.setVideoTag(tagJsonString);
+			videoMapper.updateVideo(video);
+			return true;
+		}
+		return false;
+	}
 }

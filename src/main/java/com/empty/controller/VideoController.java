@@ -22,15 +22,15 @@ public class VideoController {
 	BaseVideoService videoService;
 
 	@RequestMapping(value = "/getVideo", method = RequestMethod.GET)
-	public @ResponseBody VideoEntity getVideoById(@RequestParam Integer videoId,  HttpServletResponse res) {
+	public @ResponseBody VideoEntity getVideoById(@RequestParam Integer videoId, HttpServletResponse res) {
 		VideoEntity v = videoService.getVideoById(videoId);
-		if(v!=null) {
+		if (v != null) {
 			return v;
 		}
 		res.setStatus(404);
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/getVideoList", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> searchVideo(@RequestParam Integer currPage, @RequestParam String word,
 			@RequestParam String filter, @RequestParam Integer sizes, HttpServletResponse res) {
@@ -41,6 +41,7 @@ public class VideoController {
 		return map;
 	}
 
+	//
 	@RequestMapping(value = "/patchViewNum", method = RequestMethod.PATCH)
 	public @ResponseBody String patchViewNum(@RequestParam Integer videoId, HttpServletResponse res) {
 		if (videoService.videoAction(videoId, "view")) {
@@ -50,7 +51,7 @@ public class VideoController {
 		return "react failed";
 	}
 
-	//需要token验证
+	// 需要token验证
 	@RequestMapping(value = "/patchOtherNum", method = RequestMethod.PATCH)
 	public @ResponseBody String reactVideo(@RequestParam Integer videoId, @RequestParam String action,
 			HttpServletResponse res) {
@@ -61,4 +62,14 @@ public class VideoController {
 		return "react failed";
 	}
 
+	// 需要token验证
+	@RequestMapping(value = "/patchTags", method = RequestMethod.PATCH)
+	public @ResponseBody String patchTags(@RequestParam String tagJsonString, @RequestParam Integer videoId,
+			HttpServletResponse res) {
+		if (videoService.updateTags(videoId, tagJsonString)) {
+			return "update tags success";
+		}
+		res.setStatus(304);
+		return "update tags failed";
+	}
 }

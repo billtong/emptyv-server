@@ -55,13 +55,10 @@
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/api/comment/write"/>
+			<mvc:mapping path="/api/video/patchOtherNum"/>
+			<mvc:mapping path="/api/video/patchTags"/>
 			<bean class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
 		</mvc:interceptor>
-		
-		<mvc:interceptor>
-            <mvc:mapping path="/api/video//patchOtherNum"/>
-            <bean class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
-        </mvc:interceptor>
 		
 	</mvc:interceptors>
 
