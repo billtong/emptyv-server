@@ -25,22 +25,24 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 
 	@Override
 	public Map<String, Object> getVideos(Integer currPage, String word, String filter, Integer sizes) {
-		Map<String, Object> sqlParamsMap = new HashMap<>();
 		Map<String, Object> videoMap = new HashMap<>();
 		if (sizes >= 0) {
 			int offset = (currPage - 1) * sizes;
-			sqlParamsMap.put("offset", offset);
-			sqlParamsMap.put("sizes", sizes);
+			Map<String, Object> getVideosSqlMap = new HashMap<>();
+			getVideosSqlMap.put("offset", offset);
+			getVideosSqlMap.put("sizes", sizes);
 			if (!filter.equals("date") && !filter.equals("view") && !filter.equals("rate")) {
 				filter = "date"; // 默认日期为filter
 			}
-			sqlParamsMap.put("filter", filter);
-			sqlParamsMap.put("word", word);
-			int totalVideos = videoMapper.findVideoNum(sqlParamsMap);
+			getVideosSqlMap.put("filter", filter);
+			getVideosSqlMap.put("word", word);
+			Map<String, Object> getNumSqlMap = new HashMap<>();
+			getNumSqlMap.put("word", word);
+			int totalVideos = videoMapper.findVideoNum(getNumSqlMap);
 			if (offset >= 0 && offset < totalVideos) {
 				int totalPages = totalVideos % sizes == 0 ? totalVideos / sizes : totalVideos / sizes + 1;
 				videoMap.put("totalPages", totalPages);
-				videoMap.put("videoList", videoMapper.selectVideos(sqlParamsMap));
+				videoMap.put("videoList", videoMapper.selectVideos(getVideosSqlMap));
 				videoMap.put("message", "success");
 			}
 		} else {
@@ -94,7 +96,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	@Override
 	public boolean updateTags(Integer videoId, String tagJsonString) {
 		VideoEntity video = videoMapper.findVideoById(videoId);
-		if(video != null && tagJsonString != null) {
+		if (video != null && tagJsonString != null) {
 			video.setVideoTag(tagJsonString);
 			videoMapper.updateVideo(video);
 			return true;

@@ -31,14 +31,8 @@ public interface BaseVideoMapper {
 	 */
 	List<VideoEntity> selectVideos(Map<String, Object> map);
 
-	/**
-	 * 获得视频条目数量
-	 * 
-	 * @param map = { offset: (int), //开始查找的位置 sizes: (int), //查找的条目数
-	 *            filter:(string), //[date(新的考前), view, rate(多大考前)] word: (String)
-	 *            //匹配关键字 暂时指匹配title }
-	 * @return
-	 */
+	
+	//获得视频条目数量
 	Integer findVideoNum(Map<String, Object> map);
 
 	/**
