@@ -18,7 +18,6 @@
 	<select id="selectVideos" parameterType="Map"
 		resultType="videoEntity">
 		select * from video
-
 		<if test="word != null and word != ''">where video_name like "%"#{word}"%"</if>
 
 		<if test="filter != null and filter != '' and filter == 'date'">order by video_date desc</if>
@@ -26,8 +25,6 @@
 		<if test="filter != null and filter != '' and filter == 'view'">order by cast(video_view_num as decimal) DESC</if>
 
 		<if test="filter != null and filter != '' and filter == 'rate'">ORDER BY CAST(video_favourite_num AS DECIMAL) DESC</if>
-
-		LIMIT #{sizes} OFFSET #{offset}
 	</select>
 
 	<select id="findVideoNum" parameterType="Map" resultType="int">

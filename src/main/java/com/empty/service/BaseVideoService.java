@@ -5,15 +5,9 @@ import java.util.Map;
 import com.empty.entity.VideoEntity;
 
 public interface BaseVideoService {
-	/**
-	 * 查找字符传或者直接从整个数据库搜索
-	 * 
-	 * @param currPage
-	 * @param word
-	 * @param filter
-	 * @return
-	 */
-	Map<String, Object> getVideos(Integer currPage, String word, String filter, Integer sizes);
+	
+	//查找字符传或者直接从整个数据库搜索 
+	Map<String, Object> getVideos(String word, String filter);
 
 	VideoEntity getVideoById(Integer videoId);
 	

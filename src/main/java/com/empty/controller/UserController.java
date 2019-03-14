@@ -41,13 +41,6 @@ public class UserController {
 		return message;
 	}
 
-	
-	 //激活邮件里的链接 （舍弃） 1.Param里要有code
-	@RequestMapping(value = "/activated", method = RequestMethod.GET)
-	public @ResponseBody String activatedNewUser(@RequestParam String code) {
-		return userService.updateUserActivateState(code) ? "success" : "failed";
-	}
-
 	 //登陆 
 	//1.Body里要有 userName，userPassword，userEmail 返回session id，用来匹配到相应的sessionid
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -70,6 +63,7 @@ public class UserController {
 	}
 
 	// 登出，将sessionContext中储存的session删掉 
+	// 目前没有考虑一个特殊情况，服务重启的话，可能倒是不同步而出现bug
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public @ResponseBody Map<String, String> userLogout(@RequestBody Map<String, String> userJson,
 			HttpServletResponse res) {
@@ -93,5 +87,11 @@ public class UserController {
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
 	public @ResponseBody UserEntity getAllUserInfo(@RequestParam Integer userId) {
 		return userService.getUserAll(userId);
+	}
+	
+	 //激活邮件里的链接 （舍弃） 1.Param里要有code
+	@RequestMapping(value = "/activated", method = RequestMethod.GET)
+	public @ResponseBody String activatedNewUser(@RequestParam String code) {
+		return userService.updateUserActivateState(code) ? "success" : "failed";
 	}
 }

@@ -32,13 +32,9 @@ public class VideoController {
 	}
 
 	@RequestMapping(value = "/getVideoList", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> searchVideo(@RequestParam Integer currPage, @RequestParam String word,
-			@RequestParam String filter, @RequestParam Integer sizes, HttpServletResponse res) {
-		Map<String, Object> map = videoService.getVideos(currPage, word, filter, sizes);
-		if (!map.get("message").equals("success")) {
-			res.setStatus(400);
-		}
-		return map;
+	public @ResponseBody Map<String, Object> searchVideo(@RequestParam String word, @RequestParam String filter,
+			HttpServletResponse res) {
+		return videoService.getVideos(word, filter);
 	}
 
 	//

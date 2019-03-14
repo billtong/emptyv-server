@@ -24,30 +24,15 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	}
 
 	@Override
-	public Map<String, Object> getVideos(Integer currPage, String word, String filter, Integer sizes) {
+	public Map<String, Object> getVideos(String word, String filter) {
 		Map<String, Object> videoMap = new HashMap<>();
-		if (sizes >= 0) {
-			int offset = (currPage - 1) * sizes;
-			Map<String, Object> getVideosSqlMap = new HashMap<>();
-			getVideosSqlMap.put("offset", offset);
-			getVideosSqlMap.put("sizes", sizes);
-			if (!filter.equals("date") && !filter.equals("view") && !filter.equals("rate")) {
-				filter = "date"; // 默认日期为filter
-			}
-			getVideosSqlMap.put("filter", filter);
-			getVideosSqlMap.put("word", word);
-			Map<String, Object> getNumSqlMap = new HashMap<>();
-			getNumSqlMap.put("word", word);
-			int totalVideos = videoMapper.findVideoNum(getNumSqlMap);
-			if (offset >= 0 && offset < totalVideos) {
-				int totalPages = totalVideos % sizes == 0 ? totalVideos / sizes : totalVideos / sizes + 1;
-				videoMap.put("totalPages", totalPages);
-				videoMap.put("videoList", videoMapper.selectVideos(getVideosSqlMap));
-				videoMap.put("message", "success");
-			}
-		} else {
-			videoMap.put("message", "failed geting videos");
+		Map<String, Object> getVideosSqlMap = new HashMap<>();
+		if (!filter.equals("date") && !filter.equals("view") && !filter.equals("rate")) {
+			filter = "date"; // 默认日期为filter
 		}
+		getVideosSqlMap.put("filter", filter);
+		getVideosSqlMap.put("word", word);
+		videoMap.put("videoList", videoMapper.selectVideos(getVideosSqlMap));
 		return videoMap;
 	}
 
