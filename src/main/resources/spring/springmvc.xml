@@ -57,6 +57,9 @@
 			<mvc:mapping path="/api/comment/write" />
 			<mvc:mapping path="/api/video/patchOtherNum" />
 			<mvc:mapping path="/api/video/patchTags" />
+			<mvc:mapping path="/api/fav/patchFav" />
+			<mvc:mapping path="/api/fav/postNewFav" />
+			<mvc:mapping path="/api/fav/deleteFav" />
 			<bean
 				class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
 		</mvc:interceptor>

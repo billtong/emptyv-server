@@ -47,7 +47,7 @@
 
 	</select>
 
-	<insert id="saveNewComment" parameterType="commentEntity">
+	<insert id="saveNewComment" parameterType="commentEntity" keyColumn="commentId" keyProperty="commentId" useGeneratedKeys="true">
 
 		insert into comment
 		(
@@ -63,7 +63,6 @@
 		#{videoId},
 		#{userId}
 		)
-
 	</insert>
 
 	<delete id="deleteCommentById" parameterType="int">

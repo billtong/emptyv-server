@@ -68,16 +68,20 @@ public class UserController {
 	public @ResponseBody Map<String, String> userLogout(@RequestBody Map<String, String> userJson,
 			HttpServletResponse res) {
 		Map<String, String> message = new HashMap<>();
-		// System.out.println(MySessionContext.getInstance().sessionMap.toString());
-		HttpSession session = MySessionContext.getInstance().getSession(userJson.get("sessionId"));
-		String serverToken = (String) session.getAttribute(userJson.get("userName"));
-		String userToken = userJson.get("token");
-		if (serverToken.equals(userToken)) {
-			MySessionContext.getInstance().delSession(session);
-			message.put("message", "delete token success");
-		} else {
-			message.put("message", "delete token failed");
-			res.setStatus(302);
+		try {
+			// System.out.println(MySessionContext.getInstance().sessionMap.toString());
+			HttpSession session = MySessionContext.getInstance().getSession(userJson.get("sessionId"));
+			String serverToken = (String) session.getAttribute(userJson.get("userName"));
+			String userToken = userJson.get("token");
+			if (serverToken.equals(userToken)) {
+				MySessionContext.getInstance().delSession(session);
+				message.put("message", "delete token success");
+			} else {
+				message.put("message", "delete token failed");
+				res.setStatus(302);
+			}
+		}catch(NullPointerException e) {
+			message.put("message", "it is already deleted");
 		}
 		return message;
 	}

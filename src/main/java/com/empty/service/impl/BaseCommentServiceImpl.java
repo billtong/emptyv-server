@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empty.entity.CommentEntity;
+import com.empty.entity.HistoryEntity;
 import com.empty.entity.VideoEntity;
 import com.empty.mapper.BaseCommentMapper;
 import com.empty.mapper.BaseVideoMapper;
+import com.empty.mapper.HistoryMapper;
 import com.empty.service.BaseCommentService;
+import com.empty.service.HistoryService;
 
 @Service("commentService")
 public class BaseCommentServiceImpl implements BaseCommentService {
@@ -19,6 +22,9 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 
 	@Autowired
 	BaseVideoMapper baseVideoMapper;
+	
+	@Autowired
+	HistoryService historyService;
 
 	@Override
 	public List<CommentEntity> searchCommentByVideoId(Integer videoId) {
@@ -27,8 +33,9 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 	}
 
 	@Override
-	public void saveNewComment(CommentEntity comment) {
+	public void saveNewComment(CommentEntity comment, Integer userId) {
 		baseCommentMapper.saveNewComment(comment);
+		historyService.saveNewHistory(userId, 5, comment.getVideoId(), comment.getCommentId());
 	}
 
 	@Override

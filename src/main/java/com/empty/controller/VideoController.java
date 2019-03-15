@@ -39,8 +39,8 @@ public class VideoController {
 
 	//
 	@RequestMapping(value = "/patchViewNum", method = RequestMethod.PATCH)
-	public @ResponseBody String patchViewNum(@RequestParam Integer videoId, HttpServletResponse res) {
-		if (videoService.videoAction(videoId, "view")) {
+	public @ResponseBody String patchViewNum(@RequestParam Integer videoId, Integer userId, HttpServletResponse res) {
+		if (videoService.videoAction(videoId, "view", userId)) {
 			return " react success";
 		}
 		res.setStatus(304);
@@ -49,9 +49,9 @@ public class VideoController {
 
 	// 需要token验证
 	@RequestMapping(value = "/patchOtherNum", method = RequestMethod.PATCH)
-	public @ResponseBody String reactVideo(@RequestParam Integer videoId, @RequestParam String action,
-			HttpServletResponse res) {
-		if (videoService.videoAction(videoId, action)) {
+	public @ResponseBody String reactVideo(@RequestParam Integer videoId, @RequestParam Integer userId,
+			@RequestParam String action, HttpServletResponse res) {
+		if (videoService.videoAction(videoId, action, userId)) {
 			return " react success";
 		}
 		res.setStatus(304);
@@ -61,7 +61,7 @@ public class VideoController {
 	// 需要token验证
 	@RequestMapping(value = "/patchTags", method = RequestMethod.PATCH)
 	public @ResponseBody String patchTags(@RequestParam String tagJsonString, @RequestParam Integer videoId,
-			HttpServletResponse res) {
+			@RequestParam Integer userId, HttpServletResponse res) {
 		if (videoService.updateTags(videoId, tagJsonString)) {
 			return "update tags success";
 		}
