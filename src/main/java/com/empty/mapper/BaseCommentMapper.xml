@@ -64,6 +64,10 @@
 		#{userId}
 		)
 
+		<selectKey resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+
 	</insert>
 
 	<delete id="deleteCommentById" parameterType="int">

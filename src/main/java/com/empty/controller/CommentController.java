@@ -37,8 +37,8 @@ public class CommentController {
 	//2.Header里要有一个token
 	//3.Param里要有一个userId
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public @ResponseBody String writeComment(@RequestBody CommentEntity comment) {
-		commentService.saveNewComment(comment);
+	public @ResponseBody String writeComment(@RequestBody CommentEntity comment, @RequestParam Integer userId) {
+		commentService.saveNewComment(comment, userId);
 		return "write success";
 	}
 

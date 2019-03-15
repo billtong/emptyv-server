@@ -24,6 +24,7 @@ public class FavController {
 	@Resource(name = "favService")
 	FavService favService;
 
+	//根据favList里的id值动态生成videoLis一起传回来
 	@RequestMapping(value = "getFavById", method = RequestMethod.GET)
 	public @ResponseBody FavEntity getFavById(@RequestParam Integer favId, HttpServletResponse res) {
 		FavEntity fav = favService.getFavByFavId(favId);
@@ -43,8 +44,8 @@ public class FavController {
 	}
 
 	@RequestMapping(value = "patchFav", method = RequestMethod.PATCH)
-	public @ResponseBody String patchVideos(@RequestBody FavEntity newFav, HttpServletResponse res) {
-		if (favService.updateFav(newFav)) {
+	public @ResponseBody String patchVideos(@RequestBody FavEntity newFav,@RequestParam Integer userId, HttpServletResponse res) {
+		if (userId == newFav.getUserId() && favService.updateFav(newFav)) {
 			return "success";
 		} else {
 			res.setStatus(404);
@@ -62,8 +63,8 @@ public class FavController {
 	}
 	 */
 	@RequestMapping(value = "postNewFav", method = RequestMethod.POST)
-	public @ResponseBody String postNewFav(@RequestBody FavEntity newFav, HttpServletResponse res) {
-		if (favService.saveNewFav(newFav)) {
+	public @ResponseBody String postNewFav(@RequestBody FavEntity newFav,@RequestParam Integer userId, HttpServletResponse res) {
+		if (userId == newFav.getUserId() && favService.saveNewFav(newFav)) {
 			return "success";
 		} else {
 			res.setStatus(400);
@@ -72,15 +73,12 @@ public class FavController {
 	}
 	
 	@RequestMapping(value = "deleteFav", method = RequestMethod.DELETE)
-	public @ResponseBody String postNewFav(@RequestParam Integer favId, HttpServletResponse res) {
-		if (favService.deleteFavByFavId(favId)) {
+	public @ResponseBody String deleteFav(@RequestParam Integer favId,@RequestParam Integer userId, HttpServletResponse res) {
+		if (favService.deleteFavByFavId(favId, userId)) {
 			return "success";
 		} else {
 			res.setStatus(400);
 			return "failed";
 		}
 	}
-	
-	
-	
 }

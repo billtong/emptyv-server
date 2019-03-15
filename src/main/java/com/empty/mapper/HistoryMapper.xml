@@ -6,6 +6,32 @@
 
 
 <mapper namespace="com.empty.mapper.HistoryMapper">
+	<select id="findByUserId" parameterType="int"
+		resultType="historyEntity">
+		SELECT
+		*
+		FROM
+		`empty_db`.`history`
+		WHERE user_id = #{userId}
+		ORDER BY history_time DESC
+	</select>
 
+	<insert id="saveNewHistory"></insert>
+
+	<insert id="saveNewHistory" parameterType="historyEntity">
+		INSERT INTO `empty_db`.`history` (
+		`user_id`,
+		`video_id`,
+		`action`,
+		<if test="commentId != null">`comment_id`</if>
+		)
+		VALUES
+		(
+		#{userId}
+		#{videoId},
+		#{action}
+		<if test="commentId != null">#{commentId}</if>
+		)
+	</insert>
 
 </mapper>

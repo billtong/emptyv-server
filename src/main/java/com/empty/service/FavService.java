@@ -69,8 +69,9 @@ public class FavService {
 		return false;
 	}
 
-	public boolean deleteFavByFavId(Integer favId) {
-		if(favMapper.getFavByFavId(favId) != null) {
+	public boolean deleteFavByFavId(Integer favId, Integer userId) {
+		FavEntity fav = favMapper.getFavByFavId(favId);
+		if(fav != null && fav.getUserId() == userId) {
 			favMapper.deleteFav(favId);
 			return true;
 		}

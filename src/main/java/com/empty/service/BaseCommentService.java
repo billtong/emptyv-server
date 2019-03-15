@@ -8,7 +8,7 @@ public interface BaseCommentService {
 
 	List<CommentEntity> searchCommentByVideoId(Integer videoId);
 
-	void saveNewComment(CommentEntity comment);
+	void saveNewComment(CommentEntity comment, Integer userId);
 
 	/**
 	 * 如果是true ：能删除 如果是false：不能删除

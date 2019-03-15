@@ -11,7 +11,7 @@ public interface BaseVideoService {
 
 	VideoEntity getVideoById(Integer videoId);
 	
-	boolean videoAction(Integer videoId, String action);
+	boolean videoAction(Integer videoId, String action,Integer userId);
 
 	boolean updateTags(Integer videoId, String tagJsonString);
 	
