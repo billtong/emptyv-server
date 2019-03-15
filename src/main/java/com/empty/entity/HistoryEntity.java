@@ -14,14 +14,6 @@ public class HistoryEntity {
 	private VideoEntity video;
 	private CommentEntity comment;
 	
-	public enum histoyActionCode {
-		View,
-		Like,
-		UnLike,
-		Favourite,
-		Comment
-	}
-	
 	public HistoryEntity(Integer userId, Integer videoId, Integer action,
 			Integer commentId) {
 		super();

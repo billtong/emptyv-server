@@ -16,21 +16,19 @@
 		ORDER BY history_time DESC
 	</select>
 
-	<insert id="saveNewHistory"></insert>
-
 	<insert id="saveNewHistory" parameterType="historyEntity">
-		INSERT INTO `empty_db`.`history` (
-		`user_id`,
-		`video_id`,
+		INSERT INTO `history` (
+		<if test="commentId != null">`comment_id`,</if>
 		`action`,
-		<if test="commentId != null">`comment_id`</if>
+		`user_id`,
+		`video_id`
 		)
 		VALUES
 		(
-		#{userId}
-		#{videoId},
-		#{action}
-		<if test="commentId != null">#{commentId}</if>
+		<if test="commentId != null">#{commentId},</if>
+		#{action},
+		#{userId},
+		#{videoId}
 		)
 	</insert>
 

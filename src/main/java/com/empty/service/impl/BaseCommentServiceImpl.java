@@ -34,8 +34,8 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 
 	@Override
 	public void saveNewComment(CommentEntity comment, Integer userId) {
-		Integer commentId = baseCommentMapper.saveNewComment(comment);
-		historyService.saveNewHistory(userId, HistoryEntity.histoyActionCode.Comment.ordinal(), comment.getVideoId(), commentId);
+		baseCommentMapper.saveNewComment(comment);
+		historyService.saveNewHistory(userId, 5, comment.getVideoId(), comment.getCommentId());
 	}
 
 	@Override

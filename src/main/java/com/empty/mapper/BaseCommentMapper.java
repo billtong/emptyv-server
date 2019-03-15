@@ -10,7 +10,7 @@ public interface BaseCommentMapper {
 
 	List<CommentEntity> selectCommentsByVideoId(Integer videoId);
 
-	int saveNewComment(CommentEntity comment);
+	void saveNewComment(CommentEntity comment);
 
 	void deleteCommentById(Integer commentId);
 
