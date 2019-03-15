@@ -35,7 +35,7 @@
 						<value>QuoteFieldNames</value>
 						<value>WriteNullNumberAsZero</value>
 						<value>WriteNullStringAsEmpty</value>
-						<!-- <value>DisableCircularReferenceDetect</value> -->
+						<value>DisableCircularReferenceDetect</value>
 					</list>
 				</property>
 			</bean>
@@ -47,19 +47,20 @@
 	<mvc:default-servlet-handler />
 
 	<mvc:interceptors>
-		
+
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/**" />
 			<bean class="com.empty.controller.interceptor.CorsInterceptor"></bean>
 		</mvc:interceptor>
-		
+
 		<mvc:interceptor>
-			<mvc:mapping path="/api/comment/write"/>
-			<mvc:mapping path="/api/video/patchOtherNum"/>
-			<mvc:mapping path="/api/video/patchTags"/>
-			<bean class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
+			<mvc:mapping path="/api/comment/write" />
+			<mvc:mapping path="/api/video/patchOtherNum" />
+			<mvc:mapping path="/api/video/patchTags" />
+			<bean
+				class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
 		</mvc:interceptor>
-		
+
 	</mvc:interceptors>
 
 </beans>
