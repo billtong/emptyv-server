@@ -7,21 +7,12 @@ public class HistoryEntity {
 	private Date historyTime;
 	private Integer userId;
 	private Integer videoId;
-	private Integer action;	//1(看) 2(喜欢) 3(不喜欢) 4(收藏) 5(评论)
+	private Integer action; // 1(看) 2(喜欢) 3(不喜欢) 4(收藏) 5(评论)
 	private Integer commentId;
 
-	//根据id动态生成的
+	// 根据id动态生成的
 	private VideoEntity video;
 	private CommentEntity comment;
-	
-	public HistoryEntity(Integer userId, Integer videoId, Integer action,
-			Integer commentId) {
-		super();
-		this.userId = userId;
-		this.videoId = videoId;
-		this.action = action;
-		this.commentId = commentId;
-	}
 	
 	public Integer getHistoryId() {
 		return historyId;

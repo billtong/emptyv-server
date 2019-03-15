@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empty.entity.CommentEntity;
-import com.empty.entity.HistoryEntity;
 import com.empty.entity.VideoEntity;
 import com.empty.mapper.BaseCommentMapper;
 import com.empty.mapper.BaseVideoMapper;
-import com.empty.mapper.HistoryMapper;
 import com.empty.service.BaseCommentService;
 import com.empty.service.HistoryService;
 
@@ -22,7 +20,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 
 	@Autowired
 	BaseVideoMapper baseVideoMapper;
-	
+
 	@Autowired
 	HistoryService historyService;
 

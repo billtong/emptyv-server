@@ -26,6 +26,4 @@ public class HistoryController {
 	public @ResponseBody List<HistoryEntity> getHistory (@RequestParam Integer userId) {
 		return historyService.getHistoryList(userId);
 	}
-
-	
 }

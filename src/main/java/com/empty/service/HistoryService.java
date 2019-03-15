@@ -27,8 +27,8 @@ public class HistoryService {
 		for (int i = 0; i < hists.size(); i++) {
 			HistoryEntity his = hists.get(i);
 			his.setVideo(videoMapper.findVideoById(hists.get(i).getVideoId()));
-			if(hists.get(i).getCommentId() != null) {
-				his.setComment(commentMapper.selectCommentById(hists.get(i).getCommentId()));	
+			if (hists.get(i).getCommentId() != null) {
+				his.setComment(commentMapper.selectCommentById(hists.get(i).getCommentId()));
 			}
 			hists.set(i, his);
 		}
@@ -36,7 +36,12 @@ public class HistoryService {
 	}
 
 	public void saveNewHistory(Integer userId, int action, Integer videoId, Integer commentId) {
-		historyMapper.saveNewHistory(new HistoryEntity(userId, videoId, action, commentId));
+		HistoryEntity history = new HistoryEntity();
+		history.setUserId(userId);
+		history.setAction(action);
+		history.setVideoId(videoId);
+		history.setCommentId(commentId);
+		historyMapper.saveNewHistory(history);
 	}
 
 }
