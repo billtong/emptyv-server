@@ -57,7 +57,7 @@ CREATE TABLE `history`(
     `history_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     `history_desc` VARCHAR(100) NOT NULL, 
     `user_id` INT UNSIGNED NOT NULL, 
-    `video_id` INT UNSIGNED DEFAULT NULL NULL; 
+    `video_id` INT UNSIGNED DEFAULT NULL NULL,
     `comment_id` INT UNSIGNED, 
     PRIMARY KEY (`history_id`) 
 );  

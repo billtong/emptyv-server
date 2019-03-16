@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.empty</groupId>
 	<artifactId>empty-server</artifactId>
-	<version>0.0.1</version>
 	<packaging>war</packaging>
 	<dependencies>
 		<!-- JavaEE web容器模块依赖开始 -->
