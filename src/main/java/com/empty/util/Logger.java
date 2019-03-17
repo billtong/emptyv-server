@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Logger {
 
+	//服务器
+	//private String logFilePath = "//home//log.txt";
 	// private String logFilePath = Logger.class.getResource("log.txt").getFile();
 	private String logFilePath = "D://0-Project//Empty//empty_video//log.txt";
 

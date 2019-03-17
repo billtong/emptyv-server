@@ -8,10 +8,14 @@ import javax.servlet.http.HttpSession;
 public class MySessionContext {
 
 	private static MySessionContext instance;
-	public Map<String, HttpSession> sessionMap;
+	private Map<String, HttpSession> sessionMap;
 
 	private MySessionContext() {
-		sessionMap = new HashMap<String, HttpSession>();
+		sessionMap = new HashMap<>();
+	}
+	
+	public Map<String, HttpSession> getSessionMap() {
+		return this.sessionMap;
 	}
 
 	/*

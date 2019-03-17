@@ -1,3 +1,5 @@
+CREATE DATABASE `empty_db` CHARACTER SET utf8 COLLATE utf8_general_ci;
+use empty_db;
 CREATE TABLE `video` (                                                                                                                
 	`video_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,                                                                                
 	`video_name` VARCHAR(50) NOT NULL,                                                                                                  
@@ -16,7 +18,7 @@ CREATE TABLE `video` (
 	`video_comment_num` VARCHAR(15) NOT NULL DEFAULT '0',
 	`video_danmu_num` VARCHAR(15) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`video_id`)                                                                                                            
-);    
+)DEFAULT CHARSET=utf8 ;    
 
 CREATE TABLE `comment` (                                            
 	`comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,            
@@ -26,7 +28,7 @@ CREATE TABLE `comment` (
 	`video_id` int(10) unsigned NOT NULL,                             
 	`user_id` int(10) unsigned DEFAULT NULL,                          
 	PRIMARY KEY (`comment_id`)                                        
-);
+)DEFAULT CHARSET=utf8 ;
 
 
 CREATE TABLE `user` (                                                                
@@ -37,9 +39,9 @@ CREATE TABLE `user` (
 	`user_perm` varchar(50) DEFAULT NULL,                                              
 	`user_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,                      
 	`user_icon` varchar(50) DEFAULT NULL,                                              
-	`user_activated_state` tinyint(4) NOT NULL DEFAULT '0',                            
+	`user_activated_state` tinyint(4) NOT NULL DEFAULT '1',                            
 	PRIMARY KEY (`user_id`)                                                            
-);
+)DEFAULT CHARSET=utf8;
         
         
 CREATE TABLE `fav`(
@@ -50,17 +52,17 @@ CREATE TABLE `fav`(
 	`fav_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 	`fav_is_publish` BOOLEAN NOT NULL DEFAULT TRUE, 
 	PRIMARY KEY (`fav_id`) 
-);
+)DEFAULT CHARSET=utf8;
     
 CREATE TABLE `history`( 
     `history_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
     `history_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-    `history_desc` VARCHAR(100) NOT NULL, 
+    `action` VARCHAR(1) NOT NULL, 
     `user_id` INT UNSIGNED NOT NULL, 
-    `video_id` INT UNSIGNED DEFAULT NULL NULL,
+    `video_id` INT UNSIGNED,
     `comment_id` INT UNSIGNED, 
     PRIMARY KEY (`history_id`) 
-);  
+)DEFAULT CHARSET=utf8;
 
 
 
