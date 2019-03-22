@@ -61,6 +61,7 @@
 			<mvc:mapping path="/api/fav/postNewFav" />
 			<mvc:mapping path="/api/fav/deleteFav" />
 			<mvc:mapping path="/api/history/*"/>
+			<mvc:mapping path="/api/dan/write"/>
 			<bean
 				class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
 		</mvc:interceptor>

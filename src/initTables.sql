@@ -64,5 +64,16 @@ CREATE TABLE `history`(
     PRIMARY KEY (`history_id`) 
 )DEFAULT CHARSET=utf8;
 
+CREATE TABLE `dan`( 
+    `dan_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+    `dan_send_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    `dan_start_time` VARCHAR(10) NOT NULL DEFAULT '00:00:00', 
+    `dan_content` VARCHAR(100) NOT NULL, 
+    `dan_style` VARCHAR(255) NOT NULL, 
+    `video_id` INT UNSIGNED NOT NULL, 
+    `user_id` INT UNSIGNED NOT NULL, 
+    PRIMARY KEY (`dan_id`) 
+)DEFAULT CHARSET=utf8;
+
 
 
