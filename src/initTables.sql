@@ -64,16 +64,16 @@ CREATE TABLE `history`(
     PRIMARY KEY (`history_id`) 
 )DEFAULT CHARSET=utf8;
 
-CREATE TABLE `dan`( 
-    `dan_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
-    `dan_send_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-    `dan_start_time` VARCHAR(10) NOT NULL DEFAULT '00:00:00', 
-    `dan_content` VARCHAR(100) NOT NULL, 
-    `dan_style` VARCHAR(255) NOT NULL, 
-    `video_id` INT UNSIGNED NOT NULL, 
-    `user_id` INT UNSIGNED NOT NULL, 
-    PRIMARY KEY (`dan_id`) 
-)DEFAULT CHARSET=utf8;
+CREATE TABLE `dan` (
+  `dan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `dan_send_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dan_curr_time` double unsigned NOT NULL DEFAULT '0',
+  `dan_content` varchar(100) NOT NULL,
+  `dan_style` varchar(255) NOT NULL,
+  `video_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`dan_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8
 
 
 

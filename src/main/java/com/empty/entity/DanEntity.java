@@ -5,7 +5,7 @@ import java.util.Date;
 public class DanEntity {
 	private Integer danId;
 	private Date danSendTime;
-	private Integer danCurrTime;	//弹幕弹出时间单位是秒 和myVideoCurrentTime一样
+	private Double danCurrTime;	//弹幕弹出时间单位是秒 和myVideoCurrentTime一样
 	private String danContent;
 	private String danStyle;	//这里可以直接存放css json对象
 	private Integer videoId;
@@ -59,11 +59,11 @@ public class DanEntity {
 		this.userId = userId;
 	}
 
-	public Integer getDanCurrTime() {
+	public Double getDanCurrTime() {
 		return danCurrTime;
 	}
 
-	public void setDanCurrTime(Integer danCurrTime) {
+	public void setDanCurrTime(Double danCurrTime) {
 		this.danCurrTime = danCurrTime;
 	}
 }
