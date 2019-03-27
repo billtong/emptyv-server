@@ -24,7 +24,7 @@ public class FavController {
 	@Resource(name = "favService")
 	FavService favService;
 
-	//根据favList里的id值动态生成videoLis一起传回来
+	// 根据favList里的id值动态生成videoLis一起传回来
 	@RequestMapping(value = "getFavById", method = RequestMethod.GET)
 	public @ResponseBody FavEntity getFavById(@RequestParam Integer favId, HttpServletResponse res) {
 		FavEntity fav = favService.getFavByFavId(favId);
@@ -44,7 +44,8 @@ public class FavController {
 	}
 
 	@RequestMapping(value = "patchFav", method = RequestMethod.PATCH)
-	public @ResponseBody String patchVideos(@RequestBody FavEntity newFav,@RequestParam Integer userId, HttpServletResponse res) {
+	public @ResponseBody String patchVideos(@RequestBody FavEntity newFav, @RequestParam Integer userId,
+			HttpServletResponse res) {
 		if (userId == newFav.getUserId() && favService.updateFav(newFav)) {
 			return "success";
 		} else {
@@ -54,16 +55,12 @@ public class FavController {
 	}
 
 	/*
-	body
-	{
-	"favName" : "SSSS",
-	"favList" : "2,1,4",
-	"userId" : 1,
-	"favIsPublish": 0
-	}
+	 * body { "favName" : "SSSS", "favList" : "2,1,4", "userId" : 1, "favIsPublish":
+	 * 0 }
 	 */
 	@RequestMapping(value = "postNewFav", method = RequestMethod.POST)
-	public @ResponseBody String postNewFav(@RequestBody FavEntity newFav,@RequestParam Integer userId, HttpServletResponse res) {
+	public @ResponseBody String postNewFav(@RequestBody FavEntity newFav, @RequestParam Integer userId,
+			HttpServletResponse res) {
 		if (userId == newFav.getUserId() && favService.saveNewFav(newFav)) {
 			return "success";
 		} else {
@@ -71,9 +68,10 @@ public class FavController {
 			return "failed";
 		}
 	}
-	
+
 	@RequestMapping(value = "deleteFav", method = RequestMethod.DELETE)
-	public @ResponseBody String deleteFav(@RequestParam Integer favId,@RequestParam Integer userId, HttpServletResponse res) {
+	public @ResponseBody String deleteFav(@RequestParam Integer favId, @RequestParam Integer userId,
+			HttpServletResponse res) {
 		if (favService.deleteFavByFavId(favId, userId)) {
 			return "success";
 		} else {

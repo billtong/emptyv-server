@@ -10,7 +10,7 @@
 	</welcome-file-list>
 
 
-<!-- 监听session -->
+	<!-- 监听session -->
 	<listener>
 		<listener-class>com.empty.util.MySessionListener</listener-class>
 	</listener>
@@ -26,7 +26,7 @@
 	</context-param>
 
 	<!-- SpringMVC模块初始化 -->
-	
+
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -41,8 +41,5 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-		
-
 
 </web-app>

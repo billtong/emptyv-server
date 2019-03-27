@@ -118,6 +118,12 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.3.21.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.3.21.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- Spring常用模块结束 -->
 
 		<!-- Junit 单元测试模块开始 -->

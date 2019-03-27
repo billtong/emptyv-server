@@ -13,8 +13,8 @@ import com.empty.util.MySessionContext;
 
 @Controller
 @RequestMapping(value = "/test/session", produces = "application/json;charset=UTF-8")
-public class sessionController {
-
+public class SessionController {
+	
 	
 	@RequestMapping(value = "/getAllSessions", method = RequestMethod.GET)
 	public @ResponseBody Map<String,HttpSession> getAllSession () {

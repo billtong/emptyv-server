@@ -22,31 +22,29 @@
 	<!-- === 配置平台事物管理器 结束 === -->
 
 	<!-- *** 配置事务增强处理Bean,指定事务管理器 start *** -->
-	<tx:advice id="txAdvice"
-		transaction-manager="transactionManager">
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-
 			<!-- 传播行为 -->
 			<tx:method name="save*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
-			
+
 			<!-- view会改变点击数 -->
-			<tx:method name="view*" propagation="REQUIRED"/>
-			
+			<tx:method name="view*" propagation="REQUIRED" />
+
 			<!-- 注册新用户 -->
 			<tx:method name="register*" propagation="REQUIRED" />
-			
-			
+
+
 			<tx:method name="check*" propagation="SUPPORTS"
 				read-only="true" />
-				
+
 			<tx:method name="get*" propagation="SUPPORTS"
 				read-only="true" />
-			
+
 			<tx:method name="search*" propagation="SUPPORTS"
 				read-only="true" />
-				
+
 
 		</tx:attributes>
 	</tx:advice>
