@@ -1,13 +1,19 @@
 package com.empty.service.impl;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empty.entity.CommentEntity;
+import com.empty.entity.UserEntity;
 import com.empty.entity.VideoEntity;
 import com.empty.mapper.BaseCommentMapper;
+import com.empty.mapper.BaseUserMapper;
 import com.empty.mapper.BaseVideoMapper;
 import com.empty.service.BaseCommentService;
 import com.empty.service.HistoryService;
@@ -19,15 +25,39 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 	BaseCommentMapper baseCommentMapper;
 
 	@Autowired
+	BaseUserMapper baseUserMapper;
+
+	@Autowired
 	BaseVideoMapper baseVideoMapper;
 
 	@Autowired
 	HistoryService historyService;
 
 	@Override
-	public List<CommentEntity> searchCommentByVideoId(Integer videoId) {
+	public List<List<CommentEntity>> searchCommentByVideoId(Integer videoId) {
 		List<CommentEntity> rawList = baseCommentMapper.selectCommentsByVideoId(videoId);
-		return rawList;
+		Iterator<CommentEntity> rawIte = rawList.iterator();
+		List<List<CommentEntity>> newll = new LinkedList<>();
+		Map<Integer, Integer> idMap = new HashMap<>(); // 储存comment楼层对应的comment id号
+		while (rawIte.hasNext()) {
+			CommentEntity ce = rawIte.next();
+			UserEntity ue = baseUserMapper.selectUserById(ce.getUserId());
+			Map<String, String> userInfo = new HashMap<>();
+			userInfo.put("userName", ue.getUserName());
+			userInfo.put("userIcon", ue.getUserIcon());
+			ce.setUserInfo(userInfo);
+			if (ce.getCommentParentId().equals(Integer.valueOf(0))) {
+				List<CommentEntity> newl = new LinkedList<>();
+				newl.add(ce);
+				newll.add(newl);
+				idMap.put(ce.getCommentId(), newll.size() - 1);
+			} else {
+				Integer index = idMap.get(ce.getCommentParentId());
+				newll.get(index).add(ce);
+				idMap.put(ce.getCommentId(), index);
+			}
+		}
+		return newll;
 	}
 
 	@Override

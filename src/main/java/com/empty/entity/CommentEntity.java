@@ -1,21 +1,21 @@
 package com.empty.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 public class CommentEntity {
 	private Integer commentId;
-	private Integer commentParentId;
+	private Integer commentParentId;	//0为根评论
 	private String commentContent;
 	private Date commentDate;
 	private Integer videoId;
 	private Integer userId;
-
-	/**
-	 * 注意: 子评论（commentChild）是在service层生成的，没有持久化
-	 */
-	private List<CommentEntity> commentChild;
-
+	
+	//在返回comment传时注入
+	//"userName", ue.getUserName());
+	//"userIcon", ue.getUserIcon());
+	private Map<String, String> userInfo;
+	
 	public Integer getCommentId() {
 		return commentId;
 	}
@@ -64,11 +64,11 @@ public class CommentEntity {
 		this.userId = userId;
 	}
 
-	public List<CommentEntity> getCommentChild() {
-		return commentChild;
+	public Map<String, String> getUserInfo() {
+		return userInfo;
 	}
 
-	public void setCommentChild(List<CommentEntity> commentChild) {
-		this.commentChild = commentChild;
+	public void setUserInfo(Map<String, String> userInfo) {
+		this.userInfo = userInfo;
 	}
 }

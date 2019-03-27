@@ -28,7 +28,7 @@ public class CommentController {
 	// 加载一个视频的所有评论 
 	//1.param里要有videoId
 	@RequestMapping(value = "/load", method = RequestMethod.GET)
-	public @ResponseBody List<CommentEntity> loadCommentByVideoId(@RequestParam Integer videoId) {
+	public @ResponseBody List<List<CommentEntity>> loadCommentByVideoId(@RequestParam Integer videoId) {
 		return commentService.searchCommentByVideoId(videoId);
 	}
 

@@ -43,7 +43,7 @@
 		where
 		video_id =
 		#{videoId}
-		order by comment_date desc
+		order by comment_date asc
 
 	</select>
 
@@ -51,14 +51,14 @@
 
 		insert into comment
 		(
-		<if test="commentParentId !=null">comment_parent_id,</if>
+		comment_parent_id,
 		comment_content,
 		video_id,
 		user_id
 		)
 		values
 		(
-		<if test="commentParentId !=null">#{commentParentId},</if>
+		#{commentParentId},
 		#{commentContent},
 		#{videoId},
 		#{userId}

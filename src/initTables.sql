@@ -31,17 +31,18 @@ CREATE TABLE `comment` (
 )DEFAULT CHARSET=utf8 ;
 
 
-CREATE TABLE `user` (                                                                
-	`user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,                                
-	`user_name` varchar(50) NOT NULL,                                                  
-	`user_password` varchar(50) NOT NULL,                                              
-	`user_email` varchar(50) NOT NULL,                                                 
-	`user_perm` varchar(50) DEFAULT NULL,                                              
-	`user_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,                      
-	`user_icon` varchar(50) DEFAULT NULL,                                              
-	`user_activated_state` tinyint(4) NOT NULL DEFAULT '1',                            
-	PRIMARY KEY (`user_id`)                                                            
-)DEFAULT CHARSET=utf8;
+CREATE TABLE `user` (
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) NOT NULL,
+  `user_password` varchar(50) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
+  `user_perm` varchar(50) DEFAULT NULL,
+  `user_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `user_activated_state` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`user_id`)
+) DEFAULT CHARSET=utf8 ;
+
         
         
 CREATE TABLE `fav`(
