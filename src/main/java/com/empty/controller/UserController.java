@@ -49,6 +49,7 @@ public class UserController {
 		// 将token按照用户名字储存到服务器的session中，再将该token返回
 		if (userService.checkUserPassword(loginMap.get("userName"), loginMap.get("userPassword"))) {
 			String token = UUID.randomUUID().toString().replace("-", "");
+			session.setMaxInactiveInterval(7*24*60*60); //token保存的时间，即7日不上站就自己删掉了 7day=7*24*60*60	
 			session.setAttribute(loginMap.get("userName"), token);
 			message.put("token", token);
 			message.put("sessionId", session.getId());
