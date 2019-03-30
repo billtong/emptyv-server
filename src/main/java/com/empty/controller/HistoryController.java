@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.empty.entity.CommentEntity;
 import com.empty.entity.HistoryEntity;
 import com.empty.service.HistoryService;
-import com.empty.service.impl.BaseUseServiceImpl;
 
 @Controller
 @RequestMapping(value = "/api/history", produces = "application/json;charset=UTF-8")

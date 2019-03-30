@@ -10,7 +10,6 @@ public class UserEntity {
 	private String userPerm;
 	private Date userRegDate;
 	private String userIcon;
-	private Byte userActivatedState;
 
 	public Integer getUserId() {
 		return userId;
@@ -66,13 +65,5 @@ public class UserEntity {
 
 	public void setUserIcon(String userIcon) {
 		this.userIcon = userIcon;
-	}
-
-	public Byte getUserActivatedState() {
-		return userActivatedState;
-	}
-
-	public void setUserActivatedState(Byte userActivatedState) {
-		this.userActivatedState = userActivatedState;
 	}
 }

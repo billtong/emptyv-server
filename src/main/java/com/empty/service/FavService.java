@@ -1,12 +1,7 @@
 package com.empty.service;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,17 +47,17 @@ public class FavService {
 	}
 
 	public boolean updateFav(FavEntity newFav) {
-		if(newFav != null) {
-			if(newFav.getFavId()!=null && favMapper.getFavByFavId(newFav.getFavId()) != null) {
+		if (newFav != null) {
+			if (newFav.getFavId() != null && favMapper.getFavByFavId(newFav.getFavId()) != null) {
 				favMapper.updateFav(newFav);
-				return true;	
+				return true;
 			}
 		}
 		return false;
 	}
 
 	public boolean saveNewFav(FavEntity newFav) {
-		if(newFav != null) {
+		if (newFav != null) {
 			favMapper.saveNewFav(newFav);
 			return true;
 		}
@@ -71,12 +66,11 @@ public class FavService {
 
 	public boolean deleteFavByFavId(Integer favId, Integer userId) {
 		FavEntity fav = favMapper.getFavByFavId(favId);
-		if(fav != null && fav.getUserId() == userId) {
+		if (fav != null && fav.getUserId() == userId) {
 			favMapper.deleteFav(favId);
 			return true;
 		}
 		return false;
 	}
 
-	
 }

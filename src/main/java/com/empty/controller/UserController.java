@@ -91,10 +91,4 @@ public class UserController {
 	public @ResponseBody UserEntity getAllUserInfo(@RequestParam Integer userId) {
 		return userService.getUserAll(userId);
 	}
-
-	// 激活邮件里的链接 （舍弃） 1.Param里要有code
-	@RequestMapping(value = "/activated", method = RequestMethod.GET)
-	public @ResponseBody String activatedNewUser(@RequestParam String code) {
-		return userService.updateUserActivateState(code) ? "success" : "failed";
-	}
 }

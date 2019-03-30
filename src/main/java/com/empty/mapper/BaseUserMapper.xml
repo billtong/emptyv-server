@@ -8,15 +8,7 @@
 	<select id="selectUserById" parameterType="int"
 		resultType="userEntity">
 		select
-		user_id,
-		user_name,
-		user_password,
-		user_email,
-		user_perm,
-		user_reg_date,
-		user_icon,
-		user_activated_state
-
+		*
 		from
 		user
 		where
@@ -26,15 +18,7 @@
 	<select id="findUserByName" parameterType="string"
 		resultType="userEntity">
 		select
-		user_id,
-		user_name,
-		user_password,
-		user_email,
-		user_perm,
-		user_reg_date,
-		user_icon,
-		user_activated_state
-
+		*
 		from
 		user
 		where
@@ -45,15 +29,7 @@
 	<select id="findUserByEmail" parameterType="string"
 		resultType="userEntity">
 		select
-		user_id,
-		user_name,
-		user_password,
-		user_email,
-		user_perm,
-		user_reg_date,
-		user_icon,
-		user_activated_state
-
+		*
 		from
 		user
 		where
@@ -101,9 +77,7 @@
 
 			<if test="userPerm != null and userPerm != ''">user_perm = #{userPerm},</if>
 
-			<if test="userIcon != null and userIcon != ''">user_icon = #{userIcon},</if>
-
-			<if test="userActivatedState != null">user_activated_state = #{userActivatedState}</if>
+			<if test="userIcon != null and userIcon != ''">user_icon = #{userIcon}</if>
 
 		</set>
 		where

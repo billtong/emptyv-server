@@ -23,10 +23,6 @@ public class BaseUseServiceImpl implements BaseUserService {
 	@Override
 	public UserEntity getUserAll(Integer userId) {
 		UserEntity user = userMapper.selectUserById(userId);
-		// 该用户还没有激活 返回空值
-		if (user.getUserActivatedState().equals((byte) 0)) {
-			return null;
-		}
 		return user;
 	}
 
@@ -56,30 +52,12 @@ public class BaseUseServiceImpl implements BaseUserService {
 		return false;
 	}
 
-	/**
-	 * 暂时废弃不用了
-	 */
-	@Override
-	public boolean updateUserActivateState(String activatedCode) {
-		UserEntity user = userMapper.findUserByEmail(DataTools.decode(activatedCode));
-		// 判断是否已经激活,且注册用户存在
-		if (user != null && user.getUserActivatedState().equals((byte) 0)) {
-			user.setUserActivatedState((byte) 1);
-			userMapper.updateUser(user);
-			return true;
-		}
-		return false;
-	}
 
 	@Override
 	public boolean checkUserPassword(String userName, String userPassword) {
 		UserEntity user = userMapper.findUserByName(userName);
 		// 该用户不存在返回失败 false
 		if (user == null) {
-			return false;
-		}
-		// 该用户还没有激活 返回false失败
-		if (user.getUserActivatedState().equals((byte) 0)) {
 			return false;
 		}
 		// sql不区分大小写，这里必须判断一下
@@ -98,10 +76,6 @@ public class BaseUseServiceImpl implements BaseUserService {
 		UserEntity user = userMapper.selectUserById(newUserEntity.getUserId());
 		// 该用户不存在返回失败 false
 		if (user == null) {
-			return false;
-		}
-		// 该用户还没有激活 返回false失败
-		if (user.getUserActivatedState().equals((byte) 0)) {
 			return false;
 		}
 		userMapper.updateUser(newUserEntity);

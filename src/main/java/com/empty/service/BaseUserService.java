@@ -13,10 +13,6 @@ public interface BaseUserService {
 	 */
 	boolean registerNewUser(UserEntity userEntity, HashMap<String, String> message);
 
-	/*
-	 * 用于激活账户 return ture表示成功
-	 */
-	boolean updateUserActivateState(String activatedCode);
 
 	/*
 	 * 用于登陆 return ture表示成功
