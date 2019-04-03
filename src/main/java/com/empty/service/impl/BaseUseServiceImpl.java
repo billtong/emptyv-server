@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import com.empty.entity.UserEntity;
 import com.empty.mapper.BaseUserMapper;
 import com.empty.service.BaseUserService;
-import com.empty.util.DataTools;
-//import com.empty.util.MailUtil;
 import com.empty.util.MySessionContext;
 
 @Service("userService")

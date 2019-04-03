@@ -9,7 +9,13 @@ public class UserEntity {
 	private String userEmail;
 	private String userPerm;
 	private Date userRegDate;
-	private String userIcon;
+	private String userIcon;	//50 max sizes
+	private String userBanner;
+	private String userDesc;
+	private String userLoc;
+	private String userSite;
+	private Integer userLevel;	//user level
+	private String userAchi;	//user achievement
 
 	public Integer getUserId() {
 		return userId;
@@ -65,5 +71,53 @@ public class UserEntity {
 
 	public void setUserIcon(String userIcon) {
 		this.userIcon = userIcon;
+	}
+
+	public String getUserBanner() {
+		return userBanner;
+	}
+
+	public void setUserBanner(String userBanner) {
+		this.userBanner = userBanner;
+	}
+
+	public String getUserDesc() {
+		return userDesc;
+	}
+
+	public void setUserDesc(String userDesc) {
+		this.userDesc = userDesc;
+	}
+
+	public String getUserLoc() {
+		return userLoc;
+	}
+
+	public void setUserLoc(String userLoc) {
+		this.userLoc = userLoc;
+	}
+
+	public String getUserSite() {
+		return userSite;
+	}
+
+	public void setUserSite(String userSite) {
+		this.userSite = userSite;
+	}
+
+	public Integer getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(Integer userLevel) {
+		this.userLevel = userLevel;
+	}
+
+	public String getUserAchi() {
+		return userAchi;
+	}
+
+	public void setUserAchi(String userAchi) {
+		this.userAchi = userAchi;
 	}
 }

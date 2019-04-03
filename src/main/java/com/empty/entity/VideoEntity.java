@@ -12,7 +12,6 @@ public class VideoEntity {
 	private String videoDesc; // 视频描述，可以没有
 	private String videoTag; // 视频标签，可以没有
 	private String videoThumbnailImg; // 视频的图像，可以没有
-	private String videoPreviewBg; // 视频的预览视频，可以没有
 	private String videoViewNum; // 点击数，默认为‘0’
 	private String videoLikeNum; // 点赞数，默认为‘0’
 	private String videoUnlikeNum; // 倒赞数，默认为‘0’
@@ -26,14 +25,6 @@ public class VideoEntity {
 
 	public void setVideoBadge(String videoBadge) {
 		this.videoBadge = videoBadge;
-	}
-
-	public String getVideoPreviewBg() {
-		return videoPreviewBg;
-	}
-
-	public void setVideoPreviewBg(String videoPreviewBg) {
-		this.videoPreviewBg = videoPreviewBg;
 	}
 
 	public String getVideoLikeNum() {

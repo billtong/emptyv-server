@@ -41,8 +41,7 @@
 		user_id,
 		video_desc,
 		video_tag,
-		video_thumbnail_img,
-		video_preview_bg
+		video_thumbnail_img
 		)
 		values
 		(
@@ -51,8 +50,7 @@
 		#{userId},
 		#{videoDesc},
 		#{videoTag},
-		#{videoThumbnailImg},
-		#{videoPreviewBg}
+		#{videoThumbnailImg}
 		)
 
 	</insert>
@@ -80,8 +78,6 @@
 			<if test="videoThumbnailImg != null and videoThumbnailImg != ''">video_thumbnail_img = #{videoThumbnailImg},</if>
 
 			<if test="videoBadge != null and videoBadge != ''">video_badge = #{videoBadge},</if>
-
-			<if test="videoPreviewBg != null and videoPreviewBg != ''">video_preview_bg = #{videoPreviewBg},</if>
 
 			<if test="videoLikeNum != null and videoLikeNum != ''">video_like_num = #{videoLikeNum},</if>
 
