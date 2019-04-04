@@ -47,7 +47,6 @@
 
 	</select>
 
-	<insert id="saveNewComment" parameterType="commentEntity" keyColumn="commentId" keyProperty="commentId" useGeneratedKeys="true">
 	<insert id="saveNewComment" parameterType="commentEntity"
 		keyColumn="commentId" keyProperty="commentId" useGeneratedKeys="true">
 
