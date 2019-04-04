@@ -1,5 +1,6 @@
 package com.empty.service.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -57,6 +58,8 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 				idMap.put(ce.getCommentId(), index);
 			}
 		}
+		//新的到前面去
+		Collections.reverse(newll);
 		return newll;
 	}
 

@@ -48,8 +48,11 @@
 	</select>
 
 	<insert id="saveNewComment" parameterType="commentEntity" keyColumn="commentId" keyProperty="commentId" useGeneratedKeys="true">
+	<insert id="saveNewComment" parameterType="commentEntity"
+		keyColumn="commentId" keyProperty="commentId" useGeneratedKeys="true">
 
-		insert into comment
+		insert
+		into comment
 		(
 		comment_parent_id,
 		comment_content,

@@ -14,12 +14,13 @@ public class Logger {
 	//服务器
 	//private String logFilePath = "//home//log.txt";
 	// private String logFilePath = Logger.class.getResource("log.txt").getFile();
-	private String logFilePath = "D://0-Project//Empty//empty_video//log.txt";
+	//private String logFilePath = "D://0-Project//Empty//empty_video//log.txt";
 
 	@Pointcut("execution(* com.empty.service..*.*(..))")
 	public void declearJoinPointExpression() {
 	}
-
+	
+	/*
 	@Around(value = "declearJoinPointExpression()")
 	public Object aroundMethod(ProceedingJoinPoint point) {
 
@@ -46,6 +47,10 @@ public class Logger {
 		DataTools.WriteStringToFile2(logFilePath, "The method " + methodName + " end.");
 		return result;
 	}
+	
+	 */
+
+	
 
 	/*
 	 * @Before("declearJoinPointExpression()") public void beforMethod(JoinPoint
