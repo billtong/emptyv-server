@@ -16,6 +16,8 @@ public interface BaseCommentService {
 
 	void saveNewComment(CommentEntity comment, Integer userId);
 
+	public void saveNewCommentA(CommentEntity comment);
+	
 	boolean checkDeletePerms(Integer commentId, Integer userId);
 
 	void deleteComment(Integer commentId);

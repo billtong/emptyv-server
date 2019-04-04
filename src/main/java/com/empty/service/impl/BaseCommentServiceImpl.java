@@ -58,7 +58,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 				idMap.put(ce.getCommentId(), index);
 			}
 		}
-		//新的到前面去
+		// 新的到前面去
 		Collections.reverse(newll);
 		return newll;
 	}
@@ -66,7 +66,16 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 	@Override
 	public void saveNewComment(CommentEntity comment, Integer userId) {
 		baseCommentMapper.saveNewComment(comment);
-		historyService.saveNewHistory(userId, 5, comment.getVideoId(), comment.getCommentId());
+		if (comment.getVideoId() != 0) {
+			historyService.saveNewHistory(userId, 5, comment.getVideoId(), comment.getCommentId());
+		}
+	}
+
+	@Override
+	public void saveNewCommentA(CommentEntity comment) {
+		comment.setUserId(0);
+		comment.setVideoId(0);
+		baseCommentMapper.saveNewComment(comment);
 	}
 
 	@Override

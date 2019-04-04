@@ -37,6 +37,14 @@ public class CommentController {
 		commentService.saveNewComment(comment, userId);
 		return "write success";
 	}
+	
+	//用于about page的匿名留言，不用token check拦截
+	@RequestMapping(value = "/writeA", method = RequestMethod.POST)
+	public @ResponseBody String writeCommentA(@RequestBody CommentEntity comment) {
+		commentService.saveNewCommentA(comment);
+		return "write success";
+	}
+	
 
 	// 删除一条评论（被token check拦截）
 	// 1.Header里要有一个token

@@ -19,6 +19,10 @@ public class UserTokenInterceptor implements HandlerInterceptor {
 		try {
 			String token = req.getParameter("token");
 			Integer userId = Integer.parseInt(req.getParameter("userId"));
+			if (userId == 0) {	//匿名用户不能通过token check
+				res.setStatus(403);	
+				return false;
+			}
 			String sessionId = req.getParameter("sessionId");
 			Boolean isTokenCorrect = userService.checkUserToken(userId, token, sessionId);
 			if (isTokenCorrect) {

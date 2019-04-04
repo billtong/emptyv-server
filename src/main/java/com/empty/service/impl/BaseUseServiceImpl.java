@@ -62,6 +62,10 @@ public class BaseUseServiceImpl implements BaseUserService {
 		if (user == null) {
 			return false;
 		}
+		// 匿名用户不能通过token check
+		if (user.getUserId() == 0) {
+			return false;
+		}
 		// sql不区分大小写，这里必须判断一下
 		if (!user.getUserName().equals(userName)) {
 			return false;
