@@ -86,9 +86,13 @@ public class UserController {
 		return message;
 	}
 
-	// 加载用户信息（被token check拦截） 1.Header里要有token 2.Param里要有userId
+	// 公开加载用户信息
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
-	public @ResponseBody UserEntity getAllUserInfo(@RequestParam Integer userId) {
-		return userService.getUserAll(userId);
+	public @ResponseBody UserEntity getAllUserInfo(@RequestParam Integer userId, HttpServletResponse res) {
+		UserEntity user = userService.getUser(userId);
+		if(user == null) {
+			res.setStatus(404);
+		}
+		return user;
 	}
 }

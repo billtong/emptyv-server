@@ -19,8 +19,13 @@ public class BaseUseServiceImpl implements BaseUserService {
 	BaseUserMapper userMapper;
 
 	@Override
-	public UserEntity getUserAll(Integer userId) {
+	public UserEntity getUser(Integer userId) {
 		UserEntity user = userMapper.selectUserById(userId);
+		if (user != null) {
+			user.setUserPassword(null);
+			user.setUserEmail(null);
+			user.setUserPerm(null);
+		}
 		return user;
 	}
 
@@ -49,7 +54,6 @@ public class BaseUseServiceImpl implements BaseUserService {
 		}
 		return false;
 	}
-
 
 	@Override
 	public boolean checkUserPassword(String userName, String userPassword) {

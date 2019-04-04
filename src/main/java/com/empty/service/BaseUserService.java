@@ -6,7 +6,7 @@ import com.empty.entity.UserEntity;
 
 public interface BaseUserService {
 
-	UserEntity getUserAll(Integer userId);
+	UserEntity getUser(Integer userId);
 
 	/*
 	 * 用于注册账户 return ture表示成功
