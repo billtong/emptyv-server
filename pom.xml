@@ -34,7 +34,14 @@
 			<version>1.2.54</version>
 		</dependency>
 		<!-- Spring MVC模块依赖结束 -->
-
+        
+        <!-- 大文件上传模块依赖开始 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<!-- 大文件上传模块依赖结束 -->
 
 		<!-- MyBatis模块依赖开始 -->
 		<dependency>

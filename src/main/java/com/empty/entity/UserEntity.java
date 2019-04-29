@@ -9,7 +9,7 @@ public class UserEntity {
 	private String userEmail;
 	private String userPerm;
 	private Date userRegDate;
-	private String userIcon;	//50 max sizes
+	private String userIcon;
 	private String userBanner;
 	private String userDesc;
 	private String userLoc;

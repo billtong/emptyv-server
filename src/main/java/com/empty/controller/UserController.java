@@ -85,6 +85,17 @@ public class UserController {
 		}
 		return message;
 	}
+	
+	//更新用户信息
+	@RequestMapping(value="update", method = RequestMethod.PATCH)
+	public @ResponseBody String updateUser(@RequestBody UserEntity newUser, HttpServletResponse res) {
+		if(userService.updateUserInfo(newUser)) {
+			return "success";
+		} else {
+			res.setStatus(400);
+			return "failed";
+		}
+	}
 
 	// 公开加载用户信息
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)

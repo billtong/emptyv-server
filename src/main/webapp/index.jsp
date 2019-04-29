@@ -7,6 +7,9 @@
 <title>首页</title>
 </head>
 <body>
-	<h1>Empty Server</h1>
+	<h1>The Empty Video Server</h1>
+    <p>
+        Author: B.T
+    </p>
 </body>
 </html>

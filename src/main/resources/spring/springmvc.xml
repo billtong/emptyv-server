@@ -13,8 +13,24 @@
           http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<!-- 上传文件大小限制为31M，31*1024*1024 -->
+			<value>32505856</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+
+
 	<!-- 配置扫描的包 -->
-	<context:component-scan base-package="com.empty.controller" />
+	<context:component-scan
+		base-package="com.empty.controller" />
 
 	<!-- 注册HandlerMapper、HandlerAdapter两个映射类 -->
 	<mvc:annotation-driven>
@@ -56,11 +72,16 @@
 			<mvc:mapping path="/api/comment/write" />
 			<mvc:mapping path="/api/video/patchOtherNum" />
 			<mvc:mapping path="/api/video/patchTags" />
+			
+			<mvc:mapping path="/api/dan/write" />
+			
 			<mvc:mapping path="/api/fav/patchFav" />
 			<mvc:mapping path="/api/fav/postNewFav" />
 			<mvc:mapping path="/api/fav/deleteFav" />
-			<mvc:mapping path="/api/history/*"/>
-			<mvc:mapping path="/api/dan/write"/>
+			
+			<mvc:mapping path="/api/history/*" />
+			<mvc:mapping path="/api/user/update" />
+			<mvc:mapping path="/api/file/*" />
 			<bean
 				class="com.empty.controller.interceptor.UserTokenInterceptor"></bean>
 		</mvc:interceptor>

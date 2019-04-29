@@ -80,10 +80,12 @@ public class BaseUseServiceImpl implements BaseUserService {
 	@Override
 	public boolean updateUserInfo(UserEntity newUserEntity) {
 		UserEntity user = userMapper.selectUserById(newUserEntity.getUserId());
-		// 该用户不存在返回失败 false
 		if (user == null) {
 			return false;
 		}
+		newUserEntity.setUserId(user.getUserId());
+		newUserEntity.setUserRegDate(user.getUserRegDate());
+		newUserEntity.setUserPerm(user.getUserPerm());
 		userMapper.updateUser(newUserEntity);
 		return true;
 	}
