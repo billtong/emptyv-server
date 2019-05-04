@@ -22,7 +22,8 @@
 	<!-- === 配置平台事物管理器 结束 === -->
 
 	<!-- *** 配置事务增强处理Bean,指定事务管理器 start *** -->
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
 		<tx:attributes>
 			<!-- 传播行为 -->
 			<tx:method name="save*" propagation="REQUIRED" />

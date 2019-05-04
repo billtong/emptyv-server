@@ -72,13 +72,13 @@
 			<mvc:mapping path="/api/comment/write" />
 			<mvc:mapping path="/api/video/patchOtherNum" />
 			<mvc:mapping path="/api/video/patchTags" />
-			
+
 			<mvc:mapping path="/api/dan/write" />
-			
+
 			<mvc:mapping path="/api/fav/patchFav" />
 			<mvc:mapping path="/api/fav/postNewFav" />
 			<mvc:mapping path="/api/fav/deleteFav" />
-			
+
 			<mvc:mapping path="/api/history/*" />
 			<mvc:mapping path="/api/user/update" />
 			<mvc:mapping path="/api/file/*" />

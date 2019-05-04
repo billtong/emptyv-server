@@ -12,9 +12,7 @@ public class CommentEntity {
 	private Integer userId;
 	
 	//在返回comment传时注入
-	//"userName", ue.getUserName());
-	//"userIcon", ue.getUserIcon());
-	private Map<String, String> userInfo;
+	private UserEntity userInfo;
 	
 	public Integer getCommentId() {
 		return commentId;
@@ -64,11 +62,11 @@ public class CommentEntity {
 		this.userId = userId;
 	}
 
-	public Map<String, String> getUserInfo() {
+	public UserEntity getUserInfo() {
 		return userInfo;
 	}
 
-	public void setUserInfo(Map<String, String> userInfo) {
+	public void setUserInfo(UserEntity userInfo) {
 		this.userInfo = userInfo;
 	}
 }

@@ -23,14 +23,18 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 	@Resource(name = "historyService")
 	HistoryService historyService;
 
+	@Resource(name = "userService")
+	BaseUseServiceImpl userService;
+
 	@Override
 	public VideoEntity getVideoById(Integer videoId) {
 		VideoEntity video = videoMapper.findVideoById(videoId);
+		video.setUserInfo(userService.getUser(video.getUserId()));
 		return video;
 	}
 
 	@Override
-	public Map<String, Object> getVideos(String word, String filter) {
+	public Map<String, Object> getVideos(String word, String filter, Integer userId) {
 		Map<String, Object> videoMap = new HashMap<>();
 		Map<String, Object> getVideosSqlMap = new HashMap<>();
 		if (!filter.equals("date") && !filter.equals("view") && !filter.equals("rate")) {
@@ -38,6 +42,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
 		}
 		getVideosSqlMap.put("filter", filter);
 		getVideosSqlMap.put("word", word);
+		getVideosSqlMap.put("userId", userId);
 		videoMap.put("videoList", videoMapper.selectVideos(getVideosSqlMap));
 		return videoMap;
 	}

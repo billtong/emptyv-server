@@ -33,11 +33,10 @@ public class VideoController {
 
 	@RequestMapping(value = "/getVideoList", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> searchVideo(@RequestParam String word, @RequestParam String filter,
-			HttpServletResponse res) {
-		return videoService.getVideos(word, filter);
+			@RequestParam Integer userId, HttpServletResponse res) {
+		return videoService.getVideos(word, filter, userId);
 	}
 
-	//
 	@RequestMapping(value = "/patchViewNum", method = RequestMethod.PATCH)
 	public @ResponseBody String patchViewNum(@RequestParam Integer videoId, Integer userId, HttpServletResponse res) {
 		if (videoService.videoAction(videoId, "view", userId)) {

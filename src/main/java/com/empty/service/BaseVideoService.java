@@ -7,7 +7,7 @@ import com.empty.entity.VideoEntity;
 public interface BaseVideoService {
 	
 	//查找字符传或者直接从整个数据库搜索 
-	Map<String, Object> getVideos(String word, String filter);
+	Map<String, Object> getVideos(String word, String filter, Integer userId);
 
 	VideoEntity getVideoById(Integer videoId);
 	

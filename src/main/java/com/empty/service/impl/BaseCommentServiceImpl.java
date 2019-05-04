@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,9 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 	@Autowired
 	BaseVideoMapper baseVideoMapper;
 
+	@Resource(name = "userService")
+	BaseUseServiceImpl userService;
+
 	@Autowired
 	HistoryService historyService;
 
@@ -42,11 +47,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 		Map<Integer, Integer> idMap = new HashMap<>(); // 储存comment楼层对应的comment id号
 		while (rawIte.hasNext()) {
 			CommentEntity ce = rawIte.next();
-			UserEntity ue = baseUserMapper.selectUserById(ce.getUserId());
-			Map<String, String> userInfo = new HashMap<>();
-			userInfo.put("userName", ue.getUserName());
-			userInfo.put("userIcon", ue.getUserIcon());
-			ce.setUserInfo(userInfo);
+			ce.setUserInfo(userService.getUser(ce.getUserId()));
 			if (ce.getCommentParentId().equals(Integer.valueOf(0))) {
 				List<CommentEntity> newl = new LinkedList<>();
 				newl.add(ce);

@@ -19,6 +19,8 @@ public class VideoEntity {
 	private String videoDanmuNum; // 弹幕数，默认为‘0’
 	private String videoCommentNum; // 评论数，默认为‘0’
 
+	private UserEntity userInfo; 	//getVideoList时生成;
+	
 	public String getVideoBadge() {
 		return videoBadge;
 	}
@@ -137,5 +139,13 @@ public class VideoEntity {
 
 	public void setVideoCommentNum(String videoCommentNum) {
 		this.videoCommentNum = videoCommentNum;
+	}
+
+	public UserEntity getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserEntity userInfo) {
+		this.userInfo = userInfo;
 	}
 }

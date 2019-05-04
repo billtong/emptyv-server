@@ -18,11 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileController {
 
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
-	public @ResponseBody String uploadFile(@RequestParam String[] filepaths, MultipartFile[] files, HttpServletResponse res,
-			HttpServletRequest req) {
+	public @ResponseBody String uploadFile(@RequestParam String[] filepaths, MultipartFile[] files,
+			HttpServletResponse res, HttpServletRequest req) {
 		if (files != null) {
-			
-			for(int i=0; i<files.length; i++) {
+			for (int i = 0; i < files.length; i++) {
 				String path = req.getSession().getServletContext().getRealPath("/");
 				path = path.replace("empty-server-1.0.0", "empty-video-files").concat(filepaths[i]);
 				File desFile = new File(path);
@@ -35,7 +34,7 @@ public class FileController {
 					e.printStackTrace();
 					res.setStatus(400);
 					return "failed";
-				}	
+				}
 			}
 			return "success";
 		} else {
