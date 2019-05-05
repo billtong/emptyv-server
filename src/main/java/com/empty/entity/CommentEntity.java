@@ -1,18 +1,19 @@
 package com.empty.entity;
 
 import java.util.Date;
+import java.util.Map;
 
 public class CommentEntity {
 	private Integer commentId;
-	private Integer commentParentId; // 0为根评论
+	private Integer commentParentId;	//0为根评论
 	private String commentContent;
 	private Date commentDate;
 	private Integer videoId;
 	private Integer userId;
-
-	// 在返回comment传时注入
+	
+	//在返回comment传时注入
 	private UserEntity userInfo;
-
+	
 	public Integer getCommentId() {
 		return commentId;
 	}

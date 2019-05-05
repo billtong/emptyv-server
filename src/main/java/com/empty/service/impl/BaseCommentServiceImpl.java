@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empty.entity.CommentEntity;
+import com.empty.entity.UserEntity;
 import com.empty.entity.VideoEntity;
 import com.empty.mapper.BaseCommentMapper;
 import com.empty.mapper.BaseUserMapper;
