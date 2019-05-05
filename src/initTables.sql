@@ -28,8 +28,6 @@ CREATE TABLE `comment` (
 	`user_id` int(10) unsigned DEFAULT NULL,                          
 	PRIMARY KEY (`comment_id`)                                        
 )DEFAULT CHARSET=utf8 ;
-
-
 CREATE TABLE `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) NOT NULL,
@@ -45,11 +43,7 @@ CREATE TABLE `user` (
   `user_level` int(10) unsigned NOT NULL DEFAULT '0',
   `user_achi` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-)DEFAULT CHARSET=utf8
-
-
-        
-        
+)DEFAULT CHARSET=utf8;
 CREATE TABLE `fav`(
 	`fav_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
 	`fav_name` VARCHAR(50) NOT NULL, 
@@ -59,7 +53,6 @@ CREATE TABLE `fav`(
 	`fav_is_publish` BOOLEAN NOT NULL DEFAULT TRUE, 
 	PRIMARY KEY (`fav_id`) 
 )DEFAULT CHARSET=utf8;
-    
 CREATE TABLE `history`( 
     `history_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
     `history_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
@@ -69,7 +62,6 @@ CREATE TABLE `history`(
     `comment_id` INT UNSIGNED, 
     PRIMARY KEY (`history_id`) 
 )DEFAULT CHARSET=utf8;
-
 CREATE TABLE `dan` (
   `dan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `dan_send_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -79,8 +71,8 @@ CREATE TABLE `dan` (
   `video_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`dan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8
-
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+commit;
 
 
 

@@ -9,7 +9,7 @@
 <body>
 	<h1>The Empty Video Server</h1>
     <p>
-        Author: B.T
+        Author: emptyvideo team
     </p>
 </body>
 </html>
