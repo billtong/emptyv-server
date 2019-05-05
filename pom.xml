@@ -22,20 +22,15 @@
 		</dependency>
 		<!-- JavaEE web容器模块依赖结束 -->
 
-		<!-- Spring MVC模块依赖开始 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.21.RELEASE</version>
-		</dependency>
+		<!-- Json自动转换模块开始 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.54</version>
 		</dependency>
-		<!-- Spring MVC模块依赖结束 -->
-        
-        <!-- 大文件上传模块依赖开始 -->
+		<!-- Json自动转换模块结束 -->
+
+		<!-- 大文件上传模块依赖开始 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -70,6 +65,11 @@
 		<!--数据库连接池依赖 结束 -->
 
 		<!-- Spring常用模块开始 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.3.21.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -146,7 +146,6 @@
 			<version>1.6.2</version>
 		</dependency>
 	</dependencies>
-
 
 	<build>
 		<plugins>

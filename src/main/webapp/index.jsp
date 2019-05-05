@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
 </head>
-<body>
-	<h1>The Empty Video Server</h1>
-    <p>
-        Author: emptyvideo team
-    </p>
-</body>
+	<body>
+		<h1>The Empty Video Server</h1>
+	    <p>
+	        Author: emptyvideo team
+	    </p>
+	</body>
 </html>
