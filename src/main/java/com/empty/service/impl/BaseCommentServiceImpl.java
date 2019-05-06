@@ -1,6 +1,5 @@
 package com.empty.service.impl;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -115,7 +114,6 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 	public void deleteComment(Integer commentId) {
     CommentEntity ce = baseCommentMapper.selectCommentById(commentId);
     List<CommentEntity> celist = baseCommentMapper.selectCommentsByVideoId(ce.getVideoId());
-    Iterator<CommentEntity> i = celist.iterator();
     if(ce.getCommentParentId().equals(Integer.valueOf(0))) {
       List<Integer> delList = new ArrayList<>();
       for(CommentEntity item : celist) {

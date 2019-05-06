@@ -37,7 +37,7 @@ public class BaseUseServiceImpl implements BaseUserService {
 			/*
 			 * // 发送激活邮件 try {
 			 * MailUtil.sendTo(MailUtil.generateRegisterMailBody(userEntity),
-			 * userEntity.getUserEmail()); } catch (Exception e) { // TODO Auto-generated
+			 * userEntity.getUserEmail()); } catch (Exception e) {
 			 * catch block e.printStackTrace(); return false; } // 如果邮件发送成功的话，填表然后返回R true
 			 */
 			userMapper.saveNewUser(userEntity);

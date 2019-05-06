@@ -1,8 +1,5 @@
 package com.empty.util;
 
-import java.util.Arrays;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
@@ -15,7 +12,6 @@ public class Logger {
 	//private String logFilePath = "//home//log.txt";
 	// private String logFilePath = Logger.class.getResource("log.txt").getFile();
 	//private String logFilePath = "D://0-Project//Empty//empty_video//log.txt";
-
 	@Pointcut("execution(* com.empty.service..*.*(..))")
 	public void declearJoinPointExpression() {
 	}

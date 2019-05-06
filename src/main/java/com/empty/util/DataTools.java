@@ -37,7 +37,6 @@ public class DataTools {
 			bw.close();
 			fw.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

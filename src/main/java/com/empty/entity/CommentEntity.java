@@ -1,7 +1,6 @@
 package com.empty.entity;
 
 import java.util.Date;
-import java.util.Map;
 
 public class CommentEntity {
 	private Integer commentId;
