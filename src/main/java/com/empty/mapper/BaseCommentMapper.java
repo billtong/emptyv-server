@@ -14,6 +14,6 @@ public interface BaseCommentMapper {
 
 	void deleteCommentById(Integer commentId);
 
-	// void updateComment(CommentEntity comment);
+  void updateComment(CommentEntity comment);
 
 }

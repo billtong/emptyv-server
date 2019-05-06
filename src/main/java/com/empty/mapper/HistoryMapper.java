@@ -7,6 +7,6 @@ import com.empty.entity.HistoryEntity;
 public interface HistoryMapper {
 	List<HistoryEntity> findByUserId(Integer userId);
 
-	void saveNewHistory(HistoryEntity historyEntity);
+  void saveNewHistory(HistoryEntity historyEntity);
 
 }

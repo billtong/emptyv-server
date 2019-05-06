@@ -3,6 +3,7 @@ package com.empty.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,10 +50,13 @@ public class CommentController {
 	// 删除一条评论（被token check拦截）
 	// 1.Header里要有一个token
 	// 2.Param里要有 userId和commentId
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteComment(@RequestParam Integer userId, @RequestParam Integer commentId) {
-		if (commentService.checkDeletePerms(commentId, userId)) {
-			commentService.deleteComment(commentId);
-		}
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public void deleteComment(@RequestParam Integer userId, @RequestParam Integer commentId, HttpServletResponse res) {
+    if (commentService.checkDeletePerms(commentId, userId)) {
+      commentService.deleteComment(commentId);
+      res.setStatus(200);
+		} else {
+      res.setStatus(403);
+    }
 	}
 }

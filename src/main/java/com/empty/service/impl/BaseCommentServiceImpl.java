@@ -1,5 +1,7 @@
 package com.empty.service.impl;
 
+import java.io.Console;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empty.entity.CommentEntity;
-import com.empty.entity.UserEntity;
 import com.empty.entity.VideoEntity;
 import com.empty.mapper.BaseCommentMapper;
 import com.empty.mapper.BaseUserMapper;
@@ -77,9 +78,9 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 		comment.setUserId(0);
 		comment.setVideoId(0);
 		baseCommentMapper.saveNewComment(comment);
-	}
-
-	@Override
+  }
+  
+  @Override
 	public boolean checkDeletePerms(Integer commentId, Integer userId) {
 		CommentEntity comment = baseCommentMapper.selectCommentById(commentId);
 		VideoEntity video = baseVideoMapper.findVideoById(comment.getVideoId());
@@ -95,8 +96,45 @@ public class BaseCommentServiceImpl implements BaseCommentService {
 		}
 	}
 
+  public Integer getRootId(CommentEntity ce, List<CommentEntity> list) {
+    if(ce.getCommentParentId().equals(Integer.valueOf(0))) {
+      return ce.getCommentId();
+    } 
+    Iterator<CommentEntity> i = list.iterator();
+    while(i.hasNext()) {
+      CommentEntity item = (CommentEntity) i.next();
+      if(item.getCommentId().equals(ce.getCommentParentId())) {
+        ce = item;
+        return getRootId(ce, list);
+      }  
+    }
+    return null;
+  }
+
 	@Override
 	public void deleteComment(Integer commentId) {
+    CommentEntity ce = baseCommentMapper.selectCommentById(commentId);
+    List<CommentEntity> celist = baseCommentMapper.selectCommentsByVideoId(ce.getVideoId());
+    Iterator<CommentEntity> i = celist.iterator();
+    if(ce.getCommentParentId().equals(Integer.valueOf(0))) {
+      List<Integer> delList = new ArrayList<>();
+      for(CommentEntity item : celist) {
+        System.out.println(getRootId(item, celist));
+        if (!ce.getCommentId().equals(item.getCommentId()) && ce.getCommentId().equals(getRootId(item, celist))) {
+          delList.add(item.getCommentId());
+        }
+      }
+      for(Integer id : delList) {
+        baseCommentMapper.deleteCommentById(id);
+      }
+    } else {
+      for(CommentEntity item : celist) {
+        if(item.getCommentParentId().equals(ce.getCommentId())) {
+          item.setCommentParentId(ce.getCommentParentId());
+          baseCommentMapper.updateComment(item);
+        }
+      }
+    }
 		baseCommentMapper.deleteCommentById(commentId);
 	}
 }

@@ -67,6 +67,16 @@
 		)
 	</insert>
 
+  <update id="updateComment" parameterType="commentEntity">
+    UPDATE empty_db.comment 
+  <set>
+    <if test="commentParentId != null">comment_parent_id = #{commentParentId},</if>
+    <if test="commentContent != null and commentContent != ''">comment_content = #{commentContent}</if>
+  </set>
+  
+  WHERE comment_id = #{commentId} ;
+
+  </update>
 	<delete id="deleteCommentById" parameterType="int">
 		delete from comment
 		where
