@@ -1,5 +1,5 @@
 CREATE DATABASE `empty_db` CHARACTER SET utf8 COLLATE utf8_general_ci;
-use empty_db;
+use empty_db
 CREATE TABLE `video` (                                                                                                                
 	`video_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,                                                                                
 	`video_name` VARCHAR(50) NOT NULL,                                                                                                  
@@ -17,8 +17,7 @@ CREATE TABLE `video` (
 	`video_comment_num` VARCHAR(15) NOT NULL DEFAULT '0',
 	`video_danmu_num` VARCHAR(15) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`video_id`)                                                                                                            
-)DEFAULT CHARSET=utf8 ;    
-
+)   
 CREATE TABLE `comment` (                                            
 	`comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,            
 	`comment_parent_id` int(10) unsigned NOT NULL DEFAULT '0',        
@@ -27,7 +26,7 @@ CREATE TABLE `comment` (
 	`video_id` int(10) unsigned NOT NULL,                             
 	`user_id` int(10) unsigned DEFAULT NULL,                          
 	PRIMARY KEY (`comment_id`)                                        
-)DEFAULT CHARSET=utf8 ;
+)
 CREATE TABLE `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) NOT NULL,
@@ -43,7 +42,7 @@ CREATE TABLE `user` (
   `user_level` int(10) unsigned NOT NULL DEFAULT '0',
   `user_achi` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-)DEFAULT CHARSET=utf8;
+)
 CREATE TABLE `fav`(
 	`fav_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
 	`fav_name` VARCHAR(50) NOT NULL, 
@@ -52,7 +51,7 @@ CREATE TABLE `fav`(
 	`fav_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 	`fav_is_publish` BOOLEAN NOT NULL DEFAULT TRUE, 
 	PRIMARY KEY (`fav_id`) 
-)DEFAULT CHARSET=utf8;
+)
 CREATE TABLE `history`( 
     `history_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
     `history_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
@@ -61,7 +60,7 @@ CREATE TABLE `history`(
     `video_id` INT UNSIGNED,
     `comment_id` INT UNSIGNED, 
     PRIMARY KEY (`history_id`) 
-)DEFAULT CHARSET=utf8;
+)
 CREATE TABLE `dan` (
   `dan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `dan_send_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -71,7 +70,16 @@ CREATE TABLE `dan` (
   `video_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`dan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+)
+CREATE TABLE `message` (
+  `msg_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `msg_type` varchar(20) NOT NULL DEFAULT '"text"',
+  `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `msg_content` varchar(255) NOT NULL,
+  `sender_id` int(10) unsigned NOT NULL,
+  `listener_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`msg_id`)
+)
 commit;
 
 

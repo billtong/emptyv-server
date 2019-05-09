@@ -9,13 +9,6 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
-
-	<!-- 监听session -->
-	<listener>
-		<listener-class>com.empty.util.MySessionListener</listener-class>
-	</listener>
-
-
 	<!-- Spring模块初始化 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -41,5 +34,10 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+	<!-- 监听session -->
+	<listener>
+		<listener-class>com.empty.util.MySessionListener</listener-class>
+	</listener>
 
 </web-app>

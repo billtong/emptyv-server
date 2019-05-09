@@ -1,5 +1,8 @@
 target/
+.idea/
+empty-server.iml
 .settings/
 .classpath
 .project
 .vscode
+package-lock.json
