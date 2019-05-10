@@ -12,7 +12,7 @@ VALUES
   'anonymous',
   'anonymous',
   'http://178.128.236.114:8080/empty-video-files/images/user/0/userIcon.jpg'
-)
+);
 
 
 commit;

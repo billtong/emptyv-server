@@ -17,70 +17,70 @@ CREATE TABLE `video` (
 	`video_comment_num` VARCHAR(15) NOT NULL DEFAULT '0',
 	`video_danmu_num` VARCHAR(15) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`video_id`)                                                                                                            
-)   
-CREATE TABLE `comment` (                                            
-	`comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,            
-	`comment_parent_id` int(10) unsigned NOT NULL DEFAULT '0',        
-	`comment_content` varchar(255) NOT NULL,                          
-	`comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,      
-	`video_id` int(10) unsigned NOT NULL,                             
-	`user_id` int(10) unsigned DEFAULT NULL,                          
-	PRIMARY KEY (`comment_id`)                                        
-)
+);
+CREATE TABLE `comment` (
+	`comment_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`comment_parent_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`comment_content` VARCHAR(255) NOT NULL,
+	`comment_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`video_id` INT(10) UNSIGNED NOT NULL,
+	`user_id` INT(10) UNSIGNED DEFAULT NULL,
+	PRIMARY KEY (`comment_id`)
+);
 CREATE TABLE `user` (
-  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) NOT NULL,
-  `user_password` varchar(50) NOT NULL,
-  `user_email` varchar(50) NOT NULL,
-  `user_perm` varchar(50) DEFAULT NULL,
-  `user_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_icon` varchar(255) DEFAULT NULL,
-  `user_banner` varchar(255) DEFAULT NULL,
-  `user_desc` varchar(255) DEFAULT NULL,
-  `user_loc` varchar(50) DEFAULT NULL,
-  `user_site` varchar(255) DEFAULT NULL,
-  `user_level` int(10) unsigned NOT NULL DEFAULT '0',
-  `user_achi` varchar(255) DEFAULT NULL,
+  `user_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(50) NOT NULL,
+  `user_password` VARCHAR(50) NOT NULL,
+  `user_email` VARCHAR(50) NOT NULL,
+  `user_perm` VARCHAR(50) DEFAULT NULL,
+  `user_reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_icon` VARCHAR(255) DEFAULT NULL,
+  `user_banner` VARCHAR(255) DEFAULT NULL,
+  `user_desc` VARCHAR(255) DEFAULT NULL,
+  `user_loc` VARCHAR(50) DEFAULT NULL,
+  `user_site` VARCHAR(255) DEFAULT NULL,
+  `user_level` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `user_achi` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-)
+);
 CREATE TABLE `fav`(
-	`fav_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
-	`fav_name` VARCHAR(50) NOT NULL, 
-	`fav_list` VARCHAR(255) NOT NULL, 
-	`user_id` INT UNSIGNED NOT NULL, 
-	`fav_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-	`fav_is_publish` BOOLEAN NOT NULL DEFAULT TRUE, 
-	PRIMARY KEY (`fav_id`) 
-)
-CREATE TABLE `history`( 
-    `history_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
-    `history_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-    `action` VARCHAR(1) NOT NULL, 
-    `user_id` INT UNSIGNED NOT NULL, 
+	`fav_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`fav_name` VARCHAR(50) NOT NULL,
+	`fav_list` VARCHAR(255) NOT NULL,
+	`user_id` INT UNSIGNED NOT NULL,
+	`fav_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`fav_is_publish` BOOLEAN NOT NULL DEFAULT TRUE,
+	PRIMARY KEY (`fav_id`)
+);
+CREATE TABLE `history`(
+    `history_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `history_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `action` VARCHAR(1) NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
     `video_id` INT UNSIGNED,
-    `comment_id` INT UNSIGNED, 
-    PRIMARY KEY (`history_id`) 
-)
+    `comment_id` INT UNSIGNED,
+    PRIMARY KEY (`history_id`)
+);
 CREATE TABLE `dan` (
-  `dan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `dan_send_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dan_curr_time` double unsigned NOT NULL DEFAULT '0',
-  `dan_content` varchar(100) NOT NULL,
-  `dan_style` varchar(255) NOT NULL,
-  `video_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
+  `dan_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `dan_send_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dan_curr_time` DOUBLE UNSIGNED NOT NULL DEFAULT '0',
+  `dan_content` VARCHAR(100) NOT NULL,
+  `dan_style` VARCHAR(255) NOT NULL,
+  `video_id` INT(10) UNSIGNED NOT NULL,
+  `user_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`dan_id`)
-)
+);
 CREATE TABLE `message` (
-  `msg_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `msg_type` varchar(20) NOT NULL DEFAULT '"text"',
-  `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `msg_content` varchar(255) NOT NULL,
-  `sender_id` int(10) unsigned NOT NULL,
-  `listener_id` int(10) unsigned NOT NULL,
+  `msg_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `msg_type` VARCHAR(20) NOT NULL DEFAULT '"text"',
+  `msg_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `msg_content` VARCHAR(255) NOT NULL,
+  `sender_id` INT(10) UNSIGNED NOT NULL,
+  `listener_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`msg_id`)
-)
-commit;
+);
+COMMIT;
 
 
 
