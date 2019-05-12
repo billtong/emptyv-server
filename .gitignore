@@ -1,8 +1,13 @@
+###maven package
 target/
-.idea/
-
 .settings/
 .classpath
 .project
-.vscode
+
+###IJ, configuration files
+.idea/
 empty-server.iml
+
+###vscode configuration files
+.vscode
+package-lock.json
