@@ -6,27 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empty.entity.DanEntity;
-import com.empty.mapper.BaseDanMapper;
+import com.empty.dao.BaseDanMapper;
 import com.empty.service.BaseDanService;
 
 @Service("danService")
 public class BaseDanServiceImpl implements BaseDanService {
 
-	@Autowired
-	BaseDanMapper baseDanMapper;
+    @Autowired
+    BaseDanMapper baseDanMapper;
 
-	@Override
-	public List<DanEntity> getVideoDan(Integer videoId) {
-		return baseDanMapper.selectDanByVideoId(videoId);
-	}
+    @Override
+    public List<DanEntity> getVideoDan(Integer videoId) {
+        return baseDanMapper.selectDanByVideoId(videoId);
+    }
 
-	@Override
-	public boolean saveNewDan(DanEntity newDan) {
-		if (newDan == null) {
-			return false;
-		}
-		baseDanMapper.saveNewDan(newDan);
-		return true;
-	}
+    @Override
+    public boolean saveNewDan(DanEntity newDan) {
+        if (newDan == null) {
+            return false;
+        }
+        baseDanMapper.saveNewDan(newDan);
+        return true;
+    }
 
 }

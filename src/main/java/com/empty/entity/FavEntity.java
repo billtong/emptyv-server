@@ -4,69 +4,69 @@ import java.util.Date;
 import java.util.List;
 
 public class FavEntity {
-	private Integer favId;
-	private String favName;
-	private String favList;
-	private Integer userId;
-	private Date favDate;
-	private boolean favIsPublish;
+    private Integer favId;
+    private String favName;
+    private String favList;
+    private Integer userId;
+    private Date favDate;
+    private boolean favIsPublish;
 
-	// 不放在数据空中，而是根据favList生成的
-	private List<VideoEntity> videoList;
+    // 不放在数据空中，而是根据favList生成的
+    private List<VideoEntity> videoList;
 
-	public Integer getFavId() {
-		return favId;
-	}
+    public Integer getFavId() {
+        return favId;
+    }
 
-	public void setFavId(Integer favId) {
-		this.favId = favId;
-	}
+    public void setFavId(Integer favId) {
+        this.favId = favId;
+    }
 
-	public String getFavName() {
-		return favName;
-	}
+    public String getFavName() {
+        return favName;
+    }
 
-	public void setFavName(String favName) {
-		this.favName = favName;
-	}
+    public void setFavName(String favName) {
+        this.favName = favName;
+    }
 
-	public String getFavList() {
-		return favList;
-	}
+    public String getFavList() {
+        return favList;
+    }
 
-	public void setFavList(String favList) {
-		this.favList = favList;
-	}
+    public void setFavList(String favList) {
+        this.favList = favList;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public Date getFavDate() {
-		return favDate;
-	}
+    public Date getFavDate() {
+        return favDate;
+    }
 
-	public void setFavDate(Date favDate) {
-		this.favDate = favDate;
-	}
+    public void setFavDate(Date favDate) {
+        this.favDate = favDate;
+    }
 
-	public boolean isFavIsPublish() {
-		return favIsPublish;
-	}
+    public boolean isFavIsPublish() {
+        return favIsPublish;
+    }
 
-	public void setFavIsPublish(boolean favIsPublish) {
-		this.favIsPublish = favIsPublish;
-	}
+    public void setFavIsPublish(boolean favIsPublish) {
+        this.favIsPublish = favIsPublish;
+    }
 
-	public List<VideoEntity> getVideoList() {
-		return videoList;
-	}
+    public List<VideoEntity> getVideoList() {
+        return videoList;
+    }
 
-	public void setVideoList(List<VideoEntity> videoList) {
-		this.videoList = videoList;
-	}
+    public void setVideoList(List<VideoEntity> videoList) {
+        this.videoList = videoList;
+    }
 }

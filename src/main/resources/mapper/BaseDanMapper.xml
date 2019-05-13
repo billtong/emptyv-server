@@ -4,10 +4,9 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.empty.mapper.BaseDanMapper">
-
-	<select id="selectDanByVideoId" parameterType="int"
-		resultType="danEntity">
+<mapper namespace="com.empty.dao.BaseDanMapper">
+    <select id="selectDanByVideoId" parameterType="int"
+            resultType="danEntity">
 		SELECT
 		*
 		FROM
@@ -18,8 +17,7 @@
 		dan_curr_time ASC
 	</select>
 
-
-	<insert id="saveNewDan" parameterType="danEntity">
+    <insert id="saveNewDan" parameterType="danEntity">
 		INSERT INTO
 		`dan` (
 		`dan_curr_time`,
