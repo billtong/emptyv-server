@@ -16,7 +16,7 @@ public class FileController {
 
     @RequestMapping(value = "upload", method = RequestMethod.POST)
     public String uploadFile(@RequestParam String[] filepaths, MultipartFile[] files,
-                      HttpServletResponse res, HttpServletRequest req) {
+                             HttpServletResponse res, HttpServletRequest req) {
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 String path = req.getSession().getServletContext().getRealPath("/");

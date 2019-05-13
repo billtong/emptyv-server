@@ -39,7 +39,7 @@ public class FavController {
 
     @RequestMapping(value = "patchFav", method = RequestMethod.PATCH)
     public String patchVideos(@RequestBody FavEntity newFav, @RequestParam Integer userId,
-                       HttpServletResponse res) {
+                              HttpServletResponse res) {
         if (userId == newFav.getUserId() && favService.updateFav(newFav)) {
             return "success";
         } else {
@@ -54,7 +54,7 @@ public class FavController {
      */
     @RequestMapping(value = "postNewFav", method = RequestMethod.POST)
     public String postNewFav(@RequestBody FavEntity newFav, @RequestParam Integer userId,
-                      HttpServletResponse res) {
+                             HttpServletResponse res) {
         if (userId == newFav.getUserId() && favService.saveNewFav(newFav)) {
             return "success";
         } else {
@@ -65,7 +65,7 @@ public class FavController {
 
     @RequestMapping(value = "deleteFav", method = RequestMethod.DELETE)
     public String deleteFav(@RequestParam Integer favId, @RequestParam Integer userId,
-                     HttpServletResponse res) {
+                            HttpServletResponse res) {
         if (favService.deleteFavByFavId(favId, userId)) {
             return "success";
         } else {

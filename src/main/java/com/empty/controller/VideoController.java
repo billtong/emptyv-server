@@ -30,7 +30,7 @@ public class VideoController {
 
     @RequestMapping(value = "/getVideoList", method = RequestMethod.GET)
     public Map<String, Object> searchVideo(@RequestParam String word, @RequestParam String filter,
-                                    @RequestParam Integer userId, HttpServletResponse res) {
+                                           @RequestParam Integer userId, HttpServletResponse res) {
         return videoService.getVideos(word, filter, userId);
     }
 
@@ -46,7 +46,7 @@ public class VideoController {
     // 需要token验证
     @RequestMapping(value = "/patchOtherNum", method = RequestMethod.PATCH)
     public String reactVideo(@RequestParam Integer videoId, @RequestParam Integer userId,
-                      @RequestParam String action, HttpServletResponse res) {
+                             @RequestParam String action, HttpServletResponse res) {
         if (videoService.videoAction(videoId, action, userId)) {
             return " react success";
         }
@@ -57,7 +57,7 @@ public class VideoController {
     // 需要token验证
     @RequestMapping(value = "/patchTags", method = RequestMethod.PATCH)
     public String patchTags(@RequestParam String tagJsonString, @RequestParam Integer videoId,
-                     @RequestParam Integer userId, HttpServletResponse res) {
+                            @RequestParam Integer userId, HttpServletResponse res) {
         if (videoService.updateTags(videoId, tagJsonString)) {
             return "update tags success";
         }
