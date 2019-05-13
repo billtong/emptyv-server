@@ -10,6 +10,8 @@ import com.empty.entity.FavEntity;
 import com.empty.entity.VideoEntity;
 import com.empty.dao.BaseVideoMapper;
 import com.empty.dao.FavMapper;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("favService")
 public class FavService {
@@ -21,12 +23,12 @@ public class FavService {
     BaseVideoMapper videoMapper;
 
     // 装载上 videoList发送回去
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public FavEntity getFavByFavId(Integer favId) {
         FavEntity fav = favMapper.getFavByFavId(favId);
         String[] videoIds = fav.getFavList().split(",");
         List<VideoEntity> videoList = new ArrayList<>();
         for (String str : videoIds) {
-            System.out.println(str);
             Integer videoId = Integer.parseInt(str);
             videoList.add(videoMapper.findVideoById(videoId));
         }
@@ -35,6 +37,7 @@ public class FavService {
     }
 
     // 多个favList
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<FavEntity> getFavsByUserId(Integer userId) {
         List<FavEntity> favList = favMapper.selectFavsByUserId(userId);
 
@@ -46,6 +49,7 @@ public class FavService {
         return favList;
     }
 
+    @Transactional
     public boolean updateFav(FavEntity newFav) {
         if (newFav != null) {
             if (newFav.getFavId() != null && favMapper.getFavByFavId(newFav.getFavId()) != null) {
@@ -56,6 +60,7 @@ public class FavService {
         return false;
     }
 
+    @Transactional
     public boolean saveNewFav(FavEntity newFav) {
         if (newFav != null) {
             favMapper.saveNewFav(newFav);
@@ -64,6 +69,7 @@ public class FavService {
         return false;
     }
 
+    @Transactional
     public boolean deleteFavByFavId(Integer favId, Integer userId) {
         FavEntity fav = favMapper.getFavByFavId(favId);
         if (fav != null && fav.getUserId() == userId) {

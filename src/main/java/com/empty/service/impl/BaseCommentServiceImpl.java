@@ -20,6 +20,8 @@ import com.empty.dao.BaseUserMapper;
 import com.empty.dao.BaseVideoMapper;
 import com.empty.service.BaseCommentService;
 import com.empty.service.HistoryService;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("commentService")
 public class BaseCommentServiceImpl implements BaseCommentService {
@@ -39,6 +41,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
     @Autowired
     HistoryService historyService;
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public List<List<CommentEntity>> searchCommentByVideoId(Integer videoId) {
         List<CommentEntity> rawList = baseCommentMapper.selectCommentsByVideoId(videoId);
@@ -64,6 +67,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         return newll;
     }
 
+    @Transactional
     @Override
     public void saveNewComment(CommentEntity comment, Integer userId) {
         baseCommentMapper.saveNewComment(comment);
@@ -72,6 +76,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         }
     }
 
+    @Transactional
     @Override
     public void saveNewCommentA(CommentEntity comment) {
         comment.setUserId(0);
@@ -79,6 +84,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         baseCommentMapper.saveNewComment(comment);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public boolean checkDeletePerms(Integer commentId, Integer userId) {
         CommentEntity comment = baseCommentMapper.selectCommentById(commentId);
@@ -95,6 +101,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         }
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Integer getRootId(CommentEntity ce, List<CommentEntity> list) {
         if (ce.getCommentParentId().equals(Integer.valueOf(0))) {
             return ce.getCommentId();
@@ -110,6 +117,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         return null;
     }
 
+    @Transactional
     @Override
     public void deleteComment(Integer commentId) {
         CommentEntity ce = baseCommentMapper.selectCommentById(commentId);

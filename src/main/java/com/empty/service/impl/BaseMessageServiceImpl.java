@@ -8,6 +8,8 @@ import com.empty.service.BaseMessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -24,6 +26,7 @@ public class BaseMessageServiceImpl implements BaseMessageService {
         return userId.equals(senderId);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public List<MessageEntity> getMsgListByUserId(Integer userId) {
         List<MessageEntity> list = msgMapper.getMsgListByUserId(userId);
@@ -34,6 +37,7 @@ public class BaseMessageServiceImpl implements BaseMessageService {
         return list;
     }
 
+    @Transactional
     @Override
     public boolean saveNewMsg(MessageEntity newMe, Integer userId) {
         if (newMe != null && newMe.getMsgContent() != null && newMe.getListenerId() != null && newMe.getSenderId() != null) {
@@ -47,6 +51,7 @@ public class BaseMessageServiceImpl implements BaseMessageService {
         return false;
     }
 
+    @Transactional
     @Override
     public boolean updateMsg(MessageEntity newMe, Integer userId) {
         if (newMe.getMsgContent() != null && !newMe.getMsgContent().equals("")) {
@@ -60,6 +65,7 @@ public class BaseMessageServiceImpl implements BaseMessageService {
         return false;
     }
 
+    @Transactional
     @Override
     public boolean deleteMsg(Integer msgId, Integer userId) {
         MessageEntity me = msgMapper.getMsg(msgId);

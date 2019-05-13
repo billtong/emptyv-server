@@ -11,13 +11,17 @@ import com.empty.entity.UserEntity;
 import com.empty.dao.BaseUserMapper;
 import com.empty.service.BaseUserService;
 import com.empty.util.MySessionContext;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service("userService")
 public class BaseUseServiceImpl implements BaseUserService {
 
     @Autowired
     BaseUserMapper userMapper;
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public UserEntity getUser(Integer userId) {
         UserEntity user = userMapper.selectUserById(userId);
@@ -29,6 +33,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         return user;
     }
 
+    @Transactional
     @Override
     public boolean registerNewUser(UserEntity userEntity, HashMap<String, String> message) {
         // 检查是否有重复用户名或邮箱名
@@ -49,6 +54,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         return false;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public boolean checkUserPassword(String userName, String userPassword) {
         UserEntity user = userMapper.findUserByName(userName);
@@ -71,6 +77,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         return false;
     }
 
+    @Transactional
     @Override
     public boolean updateUserInfo(UserEntity newUserEntity) {
         UserEntity user = userMapper.selectUserById(newUserEntity.getUserId());
@@ -84,6 +91,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         return true;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public boolean checkUserToken(Integer userId, String token, String sessionId) {
 
@@ -98,6 +106,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         }
     }
 
+    @Transactional
     @Override
     public UserEntity getUserByName(String userName) {
         return userMapper.findUserByName(userName);

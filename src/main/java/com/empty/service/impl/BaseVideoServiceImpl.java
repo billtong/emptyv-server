@@ -13,6 +13,8 @@ import com.empty.dao.BaseVideoMapper;
 import com.empty.service.BaseVideoService;
 import com.empty.service.HistoryService;
 import com.empty.util.DataTools;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("videoService")
 public class BaseVideoServiceImpl implements BaseVideoService {
@@ -26,6 +28,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
     @Resource(name = "userService")
     BaseUseServiceImpl userService;
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public VideoEntity getVideoById(Integer videoId) {
         VideoEntity video = videoMapper.findVideoById(videoId);
@@ -33,6 +36,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
         return video;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public Map<String, Object> getVideos(String word, String filter, Integer userId) {
         Map<String, Object> videoMap = new HashMap<>();
@@ -47,6 +51,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
         return videoMap;
     }
 
+    @Transactional
     @Override
     public boolean videoAction(Integer videoId, String action, Integer userId) {
         if (videoId >= 1 && action != null) {
@@ -92,11 +97,13 @@ public class BaseVideoServiceImpl implements BaseVideoService {
     /**
      * 还没使用
      */
+    @Transactional
     @Override
     public void deleteVideoById(Integer videoId) {
         videoMapper.deleteVideoById(videoId);
     }
 
+    @Transactional
     @Override
     public boolean updateTags(Integer videoId, String tagJsonString) {
         VideoEntity video = videoMapper.findVideoById(videoId);

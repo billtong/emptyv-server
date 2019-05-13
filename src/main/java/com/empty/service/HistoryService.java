@@ -9,6 +9,8 @@ import com.empty.entity.HistoryEntity;
 import com.empty.dao.BaseCommentMapper;
 import com.empty.dao.BaseVideoMapper;
 import com.empty.dao.HistoryMapper;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("historyService")
 public class HistoryService {
@@ -22,6 +24,7 @@ public class HistoryService {
     @Autowired
     BaseCommentMapper commentMapper;
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<HistoryEntity> getHistoryList(Integer userId) {
         List<HistoryEntity> hists = historyMapper.findByUserId(userId);
         for (int i = 0; i < hists.size(); i++) {
@@ -35,6 +38,7 @@ public class HistoryService {
         return hists;
     }
 
+    @Transactional
     public void saveNewHistory(Integer userId, int action, Integer videoId, Integer commentId) {
         HistoryEntity history = new HistoryEntity();
         history.setUserId(userId);
