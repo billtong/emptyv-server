@@ -1,151 +1,154 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class VideoEntity {
-	private Integer videoId; // 自动增加
-	private String videoName; // 最长50
-	private String videoSrc; // mp4, m3u8等可以
-	private Integer userId; // 发布用户id号
-	private Date videoDate; // 默认是后端部署的电脑系统时间
-	private String videoBadge; // 未来可能使用，类似头衔之类的
-	private String videoDesc; // 视频描述，可以没有
-	private String videoTag; // 视频标签，可以没有
-	private String videoThumbnailImg; // 视频的图像，可以没有
-	private String videoViewNum; // 点击数，默认为‘0’
-	private String videoLikeNum; // 点赞数，默认为‘0’
-	private String videoUnlikeNum; // 倒赞数，默认为‘0’
-	private String videoFavouriteNum; // 收藏数，默认为‘0’
-	private String videoDanmuNum; // 弹幕数，默认为‘0’
-	private String videoCommentNum; // 评论数，默认为‘0’
+public class VideoEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
 
-	private UserEntity userInfo; 	//getVideoList时生成;
-	
-	public String getVideoBadge() {
-		return videoBadge;
-	}
+    private Integer videoId; // 自动增加
+    private String videoName; // 最长50
+    private String videoSrc; // mp4, m3u8等可以
+    private Integer userId; // 发布用户id号
+    private Date videoDate; // 默认是后端部署的电脑系统时间
+    private String videoBadge; // 未来可能使用，类似头衔之类的
+    private String videoDesc; // 视频描述，可以没有
+    private String videoTag; // 视频标签，可以没有
+    private String videoThumbnailImg; // 视频的图像，可以没有
+    private String videoViewNum; // 点击数，默认为‘0’
+    private String videoLikeNum; // 点赞数，默认为‘0’
+    private String videoUnlikeNum; // 倒赞数，默认为‘0’
+    private String videoFavouriteNum; // 收藏数，默认为‘0’
+    private String videoDanmuNum; // 弹幕数，默认为‘0’
+    private String videoCommentNum; // 评论数，默认为‘0’
 
-	public void setVideoBadge(String videoBadge) {
-		this.videoBadge = videoBadge;
-	}
+    private UserEntity userInfo;    //getVideoList时生成;
 
-	public String getVideoLikeNum() {
-		return videoLikeNum;
-	}
+    public String getVideoBadge() {
+        return videoBadge;
+    }
 
-	public void setVideoLikeNum(String videoLikeNum) {
-		this.videoLikeNum = videoLikeNum;
-	}
+    public void setVideoBadge(String videoBadge) {
+        this.videoBadge = videoBadge;
+    }
 
-	public String getVideoUnlikeNum() {
-		return videoUnlikeNum;
-	}
+    public String getVideoLikeNum() {
+        return videoLikeNum;
+    }
 
-	public void setVideoUnlikeNum(String videoUnlikeNum) {
-		this.videoUnlikeNum = videoUnlikeNum;
-	}
+    public void setVideoLikeNum(String videoLikeNum) {
+        this.videoLikeNum = videoLikeNum;
+    }
 
-	public String getVideoFavouriteNum() {
-		return videoFavouriteNum;
-	}
+    public String getVideoUnlikeNum() {
+        return videoUnlikeNum;
+    }
 
-	public void setVideoFavouriteNum(String videoFavouriteNum) {
-		this.videoFavouriteNum = videoFavouriteNum;
-	}
+    public void setVideoUnlikeNum(String videoUnlikeNum) {
+        this.videoUnlikeNum = videoUnlikeNum;
+    }
 
-	public String getVideoDanmuNum() {
-		return videoDanmuNum;
-	}
+    public String getVideoFavouriteNum() {
+        return videoFavouriteNum;
+    }
 
-	public void setVideoDanmuNum(String videoDanmuNum) {
-		this.videoDanmuNum = videoDanmuNum;
-	}
+    public void setVideoFavouriteNum(String videoFavouriteNum) {
+        this.videoFavouriteNum = videoFavouriteNum;
+    }
 
-	public Integer getVideoId() {
-		return videoId;
-	}
+    public String getVideoDanmuNum() {
+        return videoDanmuNum;
+    }
 
-	public void setVideoId(Integer videoId) {
-		this.videoId = videoId;
-	}
+    public void setVideoDanmuNum(String videoDanmuNum) {
+        this.videoDanmuNum = videoDanmuNum;
+    }
 
-	public String getVideoName() {
-		return videoName;
-	}
+    public Integer getVideoId() {
+        return videoId;
+    }
 
-	public void setVideoName(String videoName) {
-		this.videoName = videoName;
-	}
+    public void setVideoId(Integer videoId) {
+        this.videoId = videoId;
+    }
 
-	public String getVideoSrc() {
-		return videoSrc;
-	}
+    public String getVideoName() {
+        return videoName;
+    }
 
-	public void setVideoSrc(String videoSrc) {
-		this.videoSrc = videoSrc;
-	}
+    public void setVideoName(String videoName) {
+        this.videoName = videoName;
+    }
 
-	public Date getVideoDate() {
-		return videoDate;
-	}
+    public String getVideoSrc() {
+        return videoSrc;
+    }
 
-	public void setVideoDate(Date videoDate) {
-		this.videoDate = videoDate;
-	}
+    public void setVideoSrc(String videoSrc) {
+        this.videoSrc = videoSrc;
+    }
 
-	public String getVideoDesc() {
-		return videoDesc;
-	}
+    public Date getVideoDate() {
+        return videoDate;
+    }
 
-	public void setVideoDesc(String videoDesc) {
-		this.videoDesc = videoDesc;
-	}
+    public void setVideoDate(Date videoDate) {
+        this.videoDate = videoDate;
+    }
 
-	public String getVideoTag() {
-		return videoTag;
-	}
+    public String getVideoDesc() {
+        return videoDesc;
+    }
 
-	public void setVideoTag(String videoTag) {
-		this.videoTag = videoTag;
-	}
+    public void setVideoDesc(String videoDesc) {
+        this.videoDesc = videoDesc;
+    }
 
-	public String getVideoViewNum() {
-		return videoViewNum;
-	}
+    public String getVideoTag() {
+        return videoTag;
+    }
 
-	public void setVideoViewNum(String videoViewNum) {
-		this.videoViewNum = videoViewNum;
-	}
+    public void setVideoTag(String videoTag) {
+        this.videoTag = videoTag;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public String getVideoViewNum() {
+        return videoViewNum;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setVideoViewNum(String videoViewNum) {
+        this.videoViewNum = videoViewNum;
+    }
 
-	public String getVideoThumbnailImg() {
-		return videoThumbnailImg;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setVideoThumbnailImg(String videoThumbnailImg) {
-		this.videoThumbnailImg = videoThumbnailImg;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public String getVideoCommentNum() {
-		return videoCommentNum;
-	}
+    public String getVideoThumbnailImg() {
+        return videoThumbnailImg;
+    }
 
-	public void setVideoCommentNum(String videoCommentNum) {
-		this.videoCommentNum = videoCommentNum;
-	}
+    public void setVideoThumbnailImg(String videoThumbnailImg) {
+        this.videoThumbnailImg = videoThumbnailImg;
+    }
 
-	public UserEntity getUserInfo() {
-		return userInfo;
-	}
+    public String getVideoCommentNum() {
+        return videoCommentNum;
+    }
 
-	public void setUserInfo(UserEntity userInfo) {
-		this.userInfo = userInfo;
-	}
+    public void setVideoCommentNum(String videoCommentNum) {
+        this.videoCommentNum = videoCommentNum;
+    }
+
+    public UserEntity getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserEntity userInfo) {
+        this.userInfo = userInfo;
+    }
 }

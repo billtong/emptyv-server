@@ -1,72 +1,104 @@
 package com.empty.service.impl;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.empty.entity.MessageEntity;
-import com.empty.mapper.BaseMessageMapper;
+import com.empty.dao.BaseMessageMapper;
 import com.empty.service.BaseMessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 @Service("messageService")
 public class BaseMessageServiceImpl implements BaseMessageService {
 
-  @Autowired
-  BaseMessageMapper msgMapper;
+    @Autowired
+    BaseMessageMapper msgMapper;
 
-  @Resource(name = "userService")
-  BaseUseServiceImpl userService;
+    //cache the messageEntity list for each userId;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
-  private boolean checkUserIsSender(Integer userId, Integer senderId) {
-    return userId.equals(senderId);
-  }
+    @Resource(name = "userService")
+    BaseUseServiceImpl userService;
 
-  @Override
-  public List<MessageEntity> getMsgListByUserId(Integer userId) {
-    List<MessageEntity> list = msgMapper.getMsgListByUserId(userId);
-    for(MessageEntity me : list) {
-      me.setSenderInfo(userService.getUser(me.getSenderId()));
-      me.setListenerInfo(userService.getUser(me.getListenerId()));
+    private boolean checkUserIsSender(Integer userId, Integer senderId) {
+        return userId.equals(senderId);
     }
-    return list;
-  }
 
-  @Override
-  public boolean saveNewMsg(MessageEntity newMe, Integer userId) {
-    if(newMe != null && newMe.getMsgContent() != null && newMe.getListenerId() != null && newMe.getSenderId() != null) {
-      if(newMe.getListenerId() > 0 && newMe.getSenderId() > 0 ) {
-        if(this.checkUserIsSender(userId, newMe.getSenderId())) {
-          msgMapper.saveNewMsg(newMe);
-          return true;
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
+    @Override
+    public List<MessageEntity> getMsgListByUserId(Integer userId) {
+        String msgListKey = "msg_list_" + userId;
+        ValueOperations<String, List<MessageEntity>> operations = redisTemplate.opsForValue();
+        boolean hasMsgListKey = redisTemplate.hasKey(msgListKey);
+        List<MessageEntity> list = hasMsgListKey ? operations.get(msgListKey) : msgMapper.getMsgListByUserId(userId);
+        if(!hasMsgListKey) {
+            operations.set(msgListKey, list,2, TimeUnit.SECONDS);
         }
-      }
-    }
-    return false;
-  }
-
-  @Override
-  public boolean updateMsg(MessageEntity newMe, Integer userId) {
-    if(newMe.getMsgContent() != null && !newMe.getMsgContent().equals("")) {
-      if(this.checkUserIsSender(userId, newMe.getSenderId())) {
-        if(msgMapper.getMsg(newMe.getMsgId()) != null) {
-          msgMapper.updateMsg(newMe);
-          return true;
+        for (MessageEntity me : list) {
+            me.setSenderInfo(userService.getUser(me.getSenderId()));
+            me.setListenerInfo(userService.getUser(me.getListenerId()));
         }
-      }
+        return list;
     }
-    return false;
-  }
 
-  @Override
-  public boolean deleteMsg(Integer msgId, Integer userId) {
-    MessageEntity me = msgMapper.getMsg(msgId);
-    if(me != null && this.checkUserIsSender(userId, me.getSenderId())) {
-      msgMapper.deleteMsg(msgId);
-      return true;
+    @Transactional
+    @Override
+    public boolean saveNewMsg(MessageEntity newMe, Integer userId) {
+        if (newMe != null && newMe.getMsgContent() != null && newMe.getListenerId() != null && newMe.getSenderId() != null) {
+            if (newMe.getListenerId() > 0 && newMe.getSenderId() > 0) {
+                if (this.checkUserIsSender(userId, newMe.getSenderId())) {
+                    msgMapper.saveNewMsg(newMe);
+                    String msgListKey = "msg_list_" + userId;
+                    deleteCache(msgListKey);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-    return false;
-  }
+
+    @Transactional
+    @Override
+    public boolean updateMsg(MessageEntity newMe, Integer userId) {
+        if (newMe.getMsgContent() != null && !newMe.getMsgContent().equals("")) {
+            if (this.checkUserIsSender(userId, newMe.getSenderId())) {
+                if (msgMapper.getMsg(newMe.getMsgId()) != null) {
+                    msgMapper.updateMsg(newMe);
+                    String key = "msg_list_" + userId;
+                    deleteCache(key);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteMsg(Integer msgId, Integer userId) {
+        MessageEntity me = msgMapper.getMsg(msgId);
+        if (me != null && this.checkUserIsSender(userId, me.getSenderId())) {
+            msgMapper.deleteMsg(msgId);
+            String key = "msg_list_" + userId;
+            deleteCache(key);
+            return true;
+        }
+        return false;
+    }
+
+    private void deleteCache(String key) {
+        if(redisTemplate.hasKey(key)) {
+            redisTemplate.delete(key);
+        }
+    }
+
 }

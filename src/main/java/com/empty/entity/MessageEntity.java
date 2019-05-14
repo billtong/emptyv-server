@@ -1,115 +1,118 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MessageEntity {
-  private Integer msgId;
-  private String msgContent;      
-  private String msgType;     //  默认是文本信息 “text”， 其他的信息on the way
-  private Date msgTime;
-  private Integer senderId;     //
-  private Integer listenerId;   //  聊天对象Id
+public class MessageEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
 
-  private UserEntity senderInfo;
-  private UserEntity listenerInfo;
+    private Integer msgId;
+    private String msgContent;
+    private String msgType;     //  默认是文本信息 “text”， 其他的信息on the way
+    private Date msgTime;
+    private Integer senderId;     //
+    private Integer listenerId;   //  聊天对象Id
 
-  /**
-   * @return the msgId
-   */
-  public Integer getMsgId() {
-    return msgId;
-  }
+    private UserEntity senderInfo;
+    private UserEntity listenerInfo;
 
-  /**
-   * @param msgId the msgId to set
-   */
-  public void setMsgId(Integer msgId) {
-    this.msgId = msgId;
-  }
+    /**
+     * @return the msgId
+     */
+    public Integer getMsgId() {
+        return msgId;
+    }
 
-  /**
-   * @return the msgType
-   */
-  public String getMsgType() {
-    return msgType;
-  }
+    /**
+     * @param msgId the msgId to set
+     */
+    public void setMsgId(Integer msgId) {
+        this.msgId = msgId;
+    }
 
-  /**
-   * @param msgType the msgType to set
-   */
-  public void setMsgType(String msgType) {
-    this.msgType = msgType;
-  }
+    /**
+     * @return the msgType
+     */
+    public String getMsgType() {
+        return msgType;
+    }
 
-  /**
-   * @return the msgTime
-   */
-  public Date getMsgTime() {
-    return msgTime;
-  }
+    /**
+     * @param msgType the msgType to set
+     */
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
+    }
 
-  /**
-   * @param msgTime the msgTime to set
-   */
-  public void setMsgTime(Date msgTime) {
-    this.msgTime = msgTime;
-  }
+    /**
+     * @return the msgTime
+     */
+    public Date getMsgTime() {
+        return msgTime;
+    }
 
-  /**
-   * @return the senderId
-   */
-  public Integer getSenderId() {
-    return senderId;
-  }
+    /**
+     * @param msgTime the msgTime to set
+     */
+    public void setMsgTime(Date msgTime) {
+        this.msgTime = msgTime;
+    }
 
-  /**
-   * @param senderId the senderId to set
-   */
-  public void setSenderId(Integer senderId) {
-    this.senderId = senderId;
-  }
+    /**
+     * @return the senderId
+     */
+    public Integer getSenderId() {
+        return senderId;
+    }
 
-  /**
-   * @return the listenerId
-   */
-  public Integer getListenerId() {
-    return listenerId;
-  }
+    /**
+     * @param senderId the senderId to set
+     */
+    public void setSenderId(Integer senderId) {
+        this.senderId = senderId;
+    }
 
-  /**
-   * @param listenerId the listenerId to set
-   */
-  public void setListenerId(Integer listenerId) {
-    this.listenerId = listenerId;
-  }
+    /**
+     * @return the listenerId
+     */
+    public Integer getListenerId() {
+        return listenerId;
+    }
 
-  /**
-   * @return the msgContent
-   */
-  public String getMsgContent() {
-    return msgContent;
-  }
+    /**
+     * @param listenerId the listenerId to set
+     */
+    public void setListenerId(Integer listenerId) {
+        this.listenerId = listenerId;
+    }
 
-  /**
-   * @param msgContent the msgContent to set
-   */
-  public void setMsgContent(String msgContent) {
-    this.msgContent = msgContent;
-  }
+    /**
+     * @return the msgContent
+     */
+    public String getMsgContent() {
+        return msgContent;
+    }
 
-  public UserEntity getSenderInfo() {
-    return senderInfo;
-  }
+    /**
+     * @param msgContent the msgContent to set
+     */
+    public void setMsgContent(String msgContent) {
+        this.msgContent = msgContent;
+    }
 
-  public void setSenderInfo(UserEntity senderInfo) {
-    this.senderInfo = senderInfo;
-  }
+    public UserEntity getSenderInfo() {
+        return senderInfo;
+    }
 
-  public UserEntity getListenerInfo() {
-    return listenerInfo;
-  }
+    public void setSenderInfo(UserEntity senderInfo) {
+        this.senderInfo = senderInfo;
+    }
 
-  public void setListenerInfo(UserEntity listenerInfo) {
-    this.listenerInfo = listenerInfo;
-  }
+    public UserEntity getListenerInfo() {
+        return listenerInfo;
+    }
+
+    public void setListenerInfo(UserEntity listenerInfo) {
+        this.listenerInfo = listenerInfo;
+    }
 }

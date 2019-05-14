@@ -11,25 +11,24 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:spring/*.xml" })
+@ContextConfiguration(locations = {"classpath*:spring/*.xml"})
 public class TestController {
-	private MockMvc mvc;
+    private MockMvc mvc;
 
-	@Before
-	public void setup() {
-		//SessionController sc = new SessionController();
-		CommentController api = new CommentController();
-		mvc = MockMvcBuilders.standaloneSetup(api).build();
-	}
+    @Before
+    public void setup() {
+        //SessionController sc = new SessionController();
+        CommentController api = new CommentController();
+        mvc = MockMvcBuilders.standaloneSetup(api).build();
+    }
 
-	@Test
-	public void testGetSequence() {
-		try {
-			mvc.perform(MockMvcRequestBuilders.get("/api/comment/load?videoId=1")).andExpect(MockMvcResultMatchers.status().is(200));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    @Test
+    public void testGetSequence() {
+        try {
+            mvc.perform(MockMvcRequestBuilders.get("/api/comment/load?videoId=1")).andExpect(MockMvcResultMatchers.status().is(200));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

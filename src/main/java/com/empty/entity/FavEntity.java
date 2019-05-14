@@ -1,72 +1,75 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class FavEntity {
-	private Integer favId;
-	private String favName;
-	private String favList;
-	private Integer userId;
-	private Date favDate;
-	private boolean favIsPublish;
+public class FavEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
 
-	// 不放在数据空中，而是根据favList生成的
-	private List<VideoEntity> videoList;
+    private Integer favId;
+    private String favName;
+    private String favList;
+    private Integer userId;
+    private Date favDate;
+    private boolean favIsPublish;
 
-	public Integer getFavId() {
-		return favId;
-	}
+    // 不放在数据空中，而是根据favList生成的
+    private List<VideoEntity> videoList;
 
-	public void setFavId(Integer favId) {
-		this.favId = favId;
-	}
+    public Integer getFavId() {
+        return favId;
+    }
 
-	public String getFavName() {
-		return favName;
-	}
+    public void setFavId(Integer favId) {
+        this.favId = favId;
+    }
 
-	public void setFavName(String favName) {
-		this.favName = favName;
-	}
+    public String getFavName() {
+        return favName;
+    }
 
-	public String getFavList() {
-		return favList;
-	}
+    public void setFavName(String favName) {
+        this.favName = favName;
+    }
 
-	public void setFavList(String favList) {
-		this.favList = favList;
-	}
+    public String getFavList() {
+        return favList;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public void setFavList(String favList) {
+        this.favList = favList;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public Date getFavDate() {
-		return favDate;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public void setFavDate(Date favDate) {
-		this.favDate = favDate;
-	}
+    public Date getFavDate() {
+        return favDate;
+    }
 
-	public boolean isFavIsPublish() {
-		return favIsPublish;
-	}
+    public void setFavDate(Date favDate) {
+        this.favDate = favDate;
+    }
 
-	public void setFavIsPublish(boolean favIsPublish) {
-		this.favIsPublish = favIsPublish;
-	}
+    public boolean isFavIsPublish() {
+        return favIsPublish;
+    }
 
-	public List<VideoEntity> getVideoList() {
-		return videoList;
-	}
+    public void setFavIsPublish(boolean favIsPublish) {
+        this.favIsPublish = favIsPublish;
+    }
 
-	public void setVideoList(List<VideoEntity> videoList) {
-		this.videoList = videoList;
-	}
+    public List<VideoEntity> getVideoList() {
+        return videoList;
+    }
+
+    public void setVideoList(List<VideoEntity> videoList) {
+        this.videoList = videoList;
+    }
 }

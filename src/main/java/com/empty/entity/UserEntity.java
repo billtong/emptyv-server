@@ -1,123 +1,145 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserEntity {
-	private Integer userId;
-	private String userName;
-	private String userPassword;
-	private String userEmail;
-	private String userPerm;
-	private Date userRegDate;
-	private String userIcon;
-	private String userBanner;
-	private String userDesc;
-	private String userLoc;
-	private String userSite;
-	private Integer userLevel;	//user level
-	private String userAchi;	//user achievement
+public class UserEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
 
-	public Integer getUserId() {
-		return userId;
-	}
+    private Integer userId;
+    private String userName;
+    private String userPassword;
+    private String userEmail;
+    private String userPerm;
+    private Date userRegDate;
+    private String userIcon;
+    private String userBanner;
+    private String userDesc;
+    private String userLoc;
+    private String userSite;
+    private Integer userLevel;    //user level
+    private String userAchi;    //user achievement
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public String getUserPassword() {
-		return userPassword;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
+    public String getUserPassword() {
+        return userPassword;
+    }
 
-	public String getUserEmail() {
-		return userEmail;
-	}
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
 
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-	public String getUserPerm() {
-		return userPerm;
-	}
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
 
-	public void setUserPerm(String userPerm) {
-		this.userPerm = userPerm;
-	}
+    public String getUserPerm() {
+        return userPerm;
+    }
 
-	public Date getUserRegDate() {
-		return userRegDate;
-	}
+    public void setUserPerm(String userPerm) {
+        this.userPerm = userPerm;
+    }
 
-	public void setUserRegDate(Date userRegDate) {
-		this.userRegDate = userRegDate;
-	}
+    public Date getUserRegDate() {
+        return userRegDate;
+    }
 
-	public String getUserIcon() {
-		return userIcon;
-	}
+    public void setUserRegDate(Date userRegDate) {
+        this.userRegDate = userRegDate;
+    }
 
-	public void setUserIcon(String userIcon) {
-		this.userIcon = userIcon;
-	}
+    public String getUserIcon() {
+        return userIcon;
+    }
 
-	public String getUserBanner() {
-		return userBanner;
-	}
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
+    }
 
-	public void setUserBanner(String userBanner) {
-		this.userBanner = userBanner;
-	}
+    public String getUserBanner() {
+        return userBanner;
+    }
 
-	public String getUserDesc() {
-		return userDesc;
-	}
+    public void setUserBanner(String userBanner) {
+        this.userBanner = userBanner;
+    }
 
-	public void setUserDesc(String userDesc) {
-		this.userDesc = userDesc;
-	}
+    public String getUserDesc() {
+        return userDesc;
+    }
 
-	public String getUserLoc() {
-		return userLoc;
-	}
+    public void setUserDesc(String userDesc) {
+        this.userDesc = userDesc;
+    }
 
-	public void setUserLoc(String userLoc) {
-		this.userLoc = userLoc;
-	}
+    public String getUserLoc() {
+        return userLoc;
+    }
 
-	public String getUserSite() {
-		return userSite;
-	}
+    public void setUserLoc(String userLoc) {
+        this.userLoc = userLoc;
+    }
 
-	public void setUserSite(String userSite) {
-		this.userSite = userSite;
-	}
+    public String getUserSite() {
+        return userSite;
+    }
 
-	public Integer getUserLevel() {
-		return userLevel;
-	}
+    public void setUserSite(String userSite) {
+        this.userSite = userSite;
+    }
 
-	public void setUserLevel(Integer userLevel) {
-		this.userLevel = userLevel;
-	}
+    public Integer getUserLevel() {
+        return userLevel;
+    }
 
-	public String getUserAchi() {
-		return userAchi;
-	}
+    public void setUserLevel(Integer userLevel) {
+        this.userLevel = userLevel;
+    }
 
-	public void setUserAchi(String userAchi) {
-		this.userAchi = userAchi;
-	}
+    public String getUserAchi() {
+        return userAchi;
+    }
+
+    public void setUserAchi(String userAchi) {
+        this.userAchi = userAchi;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPerm='" + userPerm + '\'' +
+                ", userRegDate=" + userRegDate +
+                ", userIcon='" + userIcon + '\'' +
+                ", userBanner='" + userBanner + '\'' +
+                ", userDesc='" + userDesc + '\'' +
+                ", userLoc='" + userLoc + '\'' +
+                ", userSite='" + userSite + '\'' +
+                ", userLevel=" + userLevel +
+                ", userAchi='" + userAchi + '\'' +
+                '}';
+    }
 }

@@ -6,8 +6,8 @@ import com.empty.entity.DanEntity;
 
 public interface BaseDanService {
 
-	List<DanEntity> getVideoDan(Integer videoId);
+    List<DanEntity> getVideoDan(Integer videoId);
 
-	boolean saveNewDan(DanEntity newDan);
+    boolean saveNewDan(DanEntity newDan);
 
 }
