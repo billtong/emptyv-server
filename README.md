@@ -1,40 +1,29 @@
 # empty-video-server-1.3.0
 
-EmptyVideo server configuration guide
+## About Empty Video Server 1.3  
+The further goal of empty video are building in microservices and high level CI/CD. In order to achieve the goal, pivoting from SSM to Spring-Boot, Go and Node.js are necessary approaches. In 1.3.x, we will spend the most effort on rearranging the service layer towards 
+loose coupling modules. 
 
-## MySQL configuration
+## EmptyVideo server configuration guide.  
 
-Download [mysql](https://www.mysql.com/downloads/) DB on the local computer. MySql 5.7 is recommanded.
-You should run scripts below under the filepath `/src` for initialization. 
+### Java & Maven Configuration  
+https://wiki.jikexueyuan.com/project/maven/environment-setup.html
 
-```
-mysql -u <yourusername> -p <yourpassword>
-create empty_db;
-\. <absolute filepath to initTables.sql>
-\. <absolute filepath to initData.sql>
-```
 
-Set the username and password same as the those in `/src/mesources/db.properties` file. 
+### MySQL configuration  
+https://blog.csdn.net/sinat_35821285/article/details/86093121
 
-```
-create user "tong"@"localhost" identified by "tzy990226"；
-grant ALL ON empty_db.* to "tong@localhost";
-flush privileges;
-```
+### Redis configuration  
+https://www.jianshu.com/p/e16d23e358c0
 
-You can manually add/modify data by using [SQLyog](https://github.com/webyog/sqlyog-community/wiki/Downloads). You are all set for DB now.
-
-##Redis configuration  
-??
-
-## Run on localhost
-
-Download [Maven](https://maven.apache.org/download.cgi). Set the global environment on the local computer.(You can find the tutorial by searching it)  
-Run the script below in the terminal under the root filepath of this project.
+### Run on localhost
+Run the script below under the project root folder. Using the powerful feature of Eclipse J2EE or Intellij is recommanded.
 
 ```
 mvn clean package
-java -jar target/empty-video-server.jar
+java -jar target/empty-server-1.3.0.jar
 ```
 
-done(there is no hot load features yet)
+
+### Deploy on Server
+docker and jenkins for CI/CD on the way
