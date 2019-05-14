@@ -1,8 +1,11 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DanEntity {
+public class DanEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
+
     private Integer danId;
     private Date danSendTime;
     private Integer danCurrTime;    //弹幕弹出时间单位是秒 和myVideoCurrentTime一样

@@ -26,10 +26,12 @@ public class MessageController {
 
     @RequestMapping(value = "/write", method = RequestMethod.POST)
     public void writeNewMsg(@RequestBody MessageEntity newMe, @RequestParam Integer userId, HttpServletResponse res) {
-        if (msgService.saveNewMsg(newMe, userId))
+        if (msgService.saveNewMsg(newMe, userId)) {
             res.setStatus(200);
-        else
-            res.setStatus(403);
+        }
+        else {
+            res.setStatus(401);
+        }
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.PATCH)

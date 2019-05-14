@@ -1,8 +1,11 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MessageEntity {
+public class MessageEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
+
     private Integer msgId;
     private String msgContent;
     private String msgType;     //  默认是文本信息 “text”， 其他的信息on the way

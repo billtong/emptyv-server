@@ -1,9 +1,12 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class FavEntity {
+public class FavEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
+
     private Integer favId;
     private String favName;
     private String favList;

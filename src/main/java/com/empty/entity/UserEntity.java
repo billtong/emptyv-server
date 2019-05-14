@@ -1,8 +1,11 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserEntity {
+public class UserEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
+
     private Integer userId;
     private String userName;
     private String userPassword;
@@ -119,5 +122,24 @@ public class UserEntity {
 
     public void setUserAchi(String userAchi) {
         this.userAchi = userAchi;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPerm='" + userPerm + '\'' +
+                ", userRegDate=" + userRegDate +
+                ", userIcon='" + userIcon + '\'' +
+                ", userBanner='" + userBanner + '\'' +
+                ", userDesc='" + userDesc + '\'' +
+                ", userLoc='" + userLoc + '\'' +
+                ", userSite='" + userSite + '\'' +
+                ", userLevel=" + userLevel +
+                ", userAchi='" + userAchi + '\'' +
+                '}';
     }
 }

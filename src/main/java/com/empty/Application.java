@@ -8,9 +8,14 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.MultipartResolver;
@@ -26,6 +31,7 @@ import java.util.List;
 @EnableAspectJAutoProxy
 @MapperScan("com.empty.dao")
 @ServletComponentScan("com.empty.util")
+@EnableConfigurationProperties({ RedisProperties.class })
 public class Application implements WebMvcConfigurer {
 
     @Autowired
@@ -52,7 +58,6 @@ public class Application implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        //添加映射路径
         registry.addMapping("/**")
                 //放行哪些原始域
                 .allowedOrigins("*")
@@ -62,6 +67,15 @@ public class Application implements WebMvcConfigurer {
                 .allowedMethods("*")
                 //放行哪些原始域(头部信息)
                 .allowedHeaders("*");
+    }
+
+    //switch on redis transction feature
+    @Bean
+    public RedisTemplate customRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        template.setEnableTransactionSupport(true);
+        return template;
     }
 
     //显示声明CommonsMultipartResolver为mutipartResolver

@@ -1,10 +1,15 @@
 package com.empty.service.impl;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import com.empty.entity.UserEntity;
@@ -18,13 +23,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userService")
 public class BaseUseServiceImpl implements BaseUserService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseUseServiceImpl.class);
+
     @Autowired
     BaseUserMapper userMapper;
+
+    //cache userEntity for each userId
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public UserEntity getUser(Integer userId) {
-        UserEntity user = userMapper.selectUserById(userId);
+        String userKey = "user_" + userId;
+        ValueOperations<String, UserEntity> operations = redisTemplate.opsForValue();
+        boolean hasUserKey = redisTemplate.hasKey(userKey);
+        UserEntity user = hasUserKey ? operations.get(userKey) : userMapper.selectUserById(userId);
+        if(!hasUserKey) {
+            operations.set(userKey, user, 2, TimeUnit.SECONDS);
+        }
         if (user != null) {
             user.setUserPassword(null);
             user.setUserEmail(null);
@@ -79,23 +96,30 @@ public class BaseUseServiceImpl implements BaseUserService {
 
     @Transactional
     @Override
-    public boolean updateUserInfo(UserEntity newUserEntity) {
-        UserEntity user = userMapper.selectUserById(newUserEntity.getUserId());
+    public boolean updateUserInfo(UserEntity user) {
         if (user == null) {
             return false;
         }
-        newUserEntity.setUserId(user.getUserId());
-        newUserEntity.setUserRegDate(user.getUserRegDate());
-        newUserEntity.setUserPerm(user.getUserPerm());
-        userMapper.updateUser(newUserEntity);
+        userMapper.updateUser(user);
+        String key = "user_" + user.getUserId();
+        boolean hasKey = redisTemplate.hasKey(key);
+        if(hasKey) {
+            redisTemplate.delete(key);
+        }
         return true;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public boolean checkUserToken(Integer userId, String token, String sessionId) {
+        String userKey = "user_" + userId;
+        ValueOperations<String, UserEntity> operations = redisTemplate.opsForValue();
+        boolean hasUserKey = redisTemplate.hasKey(userKey);
 
-        UserEntity user = userMapper.selectUserById(userId);
+        UserEntity user = hasUserKey ? operations.get(userKey) : userMapper.selectUserById(userId);
+        if(!hasUserKey) {
+            operations.set(userKey, user,2, TimeUnit.SECONDS);
+        }
         HttpSession session = MySessionContext.getInstance().getSession(sessionId);
         String tokenCorrect = (String) session.getAttribute(user.getUserName());
         if (token.equals(tokenCorrect)) {
@@ -106,7 +130,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         }
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public UserEntity getUserByName(String userName) {
         return userMapper.findUserByName(userName);

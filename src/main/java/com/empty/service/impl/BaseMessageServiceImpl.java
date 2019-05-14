@@ -1,12 +1,15 @@
 package com.empty.service.impl;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.empty.entity.MessageEntity;
 import com.empty.dao.BaseMessageMapper;
 import com.empty.service.BaseMessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,10 @@ public class BaseMessageServiceImpl implements BaseMessageService {
     @Autowired
     BaseMessageMapper msgMapper;
 
+    //cache the messageEntity list for each userId;
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Resource(name = "userService")
     BaseUseServiceImpl userService;
 
@@ -26,10 +33,16 @@ public class BaseMessageServiceImpl implements BaseMessageService {
         return userId.equals(senderId);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
     @Override
     public List<MessageEntity> getMsgListByUserId(Integer userId) {
-        List<MessageEntity> list = msgMapper.getMsgListByUserId(userId);
+        String msgListKey = "msg_list_" + userId;
+        ValueOperations<String, List<MessageEntity>> operations = redisTemplate.opsForValue();
+        boolean hasMsgListKey = redisTemplate.hasKey(msgListKey);
+        List<MessageEntity> list = hasMsgListKey ? operations.get(msgListKey) : msgMapper.getMsgListByUserId(userId);
+        if(!hasMsgListKey) {
+            operations.set(msgListKey, list,2, TimeUnit.SECONDS);
+        }
         for (MessageEntity me : list) {
             me.setSenderInfo(userService.getUser(me.getSenderId()));
             me.setListenerInfo(userService.getUser(me.getListenerId()));
@@ -44,6 +57,8 @@ public class BaseMessageServiceImpl implements BaseMessageService {
             if (newMe.getListenerId() > 0 && newMe.getSenderId() > 0) {
                 if (this.checkUserIsSender(userId, newMe.getSenderId())) {
                     msgMapper.saveNewMsg(newMe);
+                    String msgListKey = "msg_list_" + userId;
+                    deleteCache(msgListKey);
                     return true;
                 }
             }
@@ -58,6 +73,8 @@ public class BaseMessageServiceImpl implements BaseMessageService {
             if (this.checkUserIsSender(userId, newMe.getSenderId())) {
                 if (msgMapper.getMsg(newMe.getMsgId()) != null) {
                     msgMapper.updateMsg(newMe);
+                    String key = "msg_list_" + userId;
+                    deleteCache(key);
                     return true;
                 }
             }
@@ -71,8 +88,17 @@ public class BaseMessageServiceImpl implements BaseMessageService {
         MessageEntity me = msgMapper.getMsg(msgId);
         if (me != null && this.checkUserIsSender(userId, me.getSenderId())) {
             msgMapper.deleteMsg(msgId);
+            String key = "msg_list_" + userId;
+            deleteCache(key);
             return true;
         }
         return false;
     }
+
+    private void deleteCache(String key) {
+        if(redisTemplate.hasKey(key)) {
+            redisTemplate.delete(key);
+        }
+    }
+
 }

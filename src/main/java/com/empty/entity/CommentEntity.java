@@ -1,8 +1,11 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CommentEntity {
+public class CommentEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
+
     private Integer commentId;
     private Integer commentParentId;    //0为根评论
     private String commentContent;

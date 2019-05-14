@@ -1,8 +1,11 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class VideoEntity {
+public class VideoEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
+
     private Integer videoId; // 自动增加
     private String videoName; // 最长50
     private String videoSrc; // mp4, m3u8等可以

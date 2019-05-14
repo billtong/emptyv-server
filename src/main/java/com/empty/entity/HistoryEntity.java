@@ -1,8 +1,11 @@
 package com.empty.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HistoryEntity {
+public class HistoryEntity implements Serializable {
+    private static final long serialVersionUID = -1L;
+
     private Integer historyId;
     private Date historyTime;
     private Integer userId;
