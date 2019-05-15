@@ -1,0 +1,10 @@
+ 1.把项目达成war包
+ mvn install
+ 2. 移动到tomcat里
+ mv /home/empty-server/target/empty-server.war /home/apache-tomcat-7.0.91/webapps/
+ 3.对tomcat/bin路径升级权限
+ chmod u+x *.sh
+ 4.启动tomcat
+ ./startup.sh
+ 
+ 

@@ -1,0 +1,38 @@
+#------------------------------------------------------------------------------------------#
+接下来的开发任务（发布之前）
+完成1.添加搜索和筛选功能到视频上去
+#------------------------------------------------------------------------------------------#
+2.完善用户添加视频tag，收藏。写成user的endpoints
+改善user表，添加collection list(直接从前端进行json string读写) - 只记录发生时间和视频id
+改善user表，添加history list(直接从前端进行json string读写) - 只记录发生时间和视频id
+删减都能解决了，一下三个很类似
+在user controller里添加一个新的endpoint，用于patch/del Collection收藏 
+在user controller里添加一个新的endpoint，用于patch/del History收藏
+在video controller里添加一个新的endpoint，用于patch/del tag
+
+3.需要给comment也加上筛选器和页数参数
+
+4.加入弹幕表！！（重要的，好好设计）
+get，post和delete
+
+5."hentaipulse.com"，"javfor.me"里尽可能的爬取资源，下载到服务器上去（关键）
+
+6.购买域名，部署到digital ocean上去
+
+3月20号
+#------------------------------------------------------------------------------------------#
+
+endpoints++
+视频endpoints（三个目前）
+1)筛选多个视频
+GET - http://localhost:8080/empty-server/api/video/getVideoList?currPage=1&filter=&sizes=10&word=
+currPage当前页数int>=1
+filter可以添date，rate和view，其他情况默认是date排序
+sizes一页的个数int>0
+word 所搜的关键字，当写成word=形式时可以编程option的
+
+2)获得一个视频(并且让视频点击量加一)
+GET - http://localhost:8080/empty-server/api/video/getVideo?videoId=1
+
+3)用户点赞等互动视频（还没添加token验证三参数）
+http://localhost:8080/empty-server/api/video/patchVideoData?videoId=1&action=
