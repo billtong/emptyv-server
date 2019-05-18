@@ -77,13 +77,6 @@
             <version>${mysql-connector}</version>
         </dependency>
 
-        <!-- json信息转换模块 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.54</version>
-        </dependency>
-
         <!-- 大文件上传模块依赖开始 -->
         <dependency>
             <groupId>commons-fileupload</groupId>

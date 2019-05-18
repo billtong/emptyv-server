@@ -1,14 +1,13 @@
 package com.empty;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.empty.controller.interceptor.UserTokenInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +30,6 @@ import java.util.List;
 @EnableAspectJAutoProxy
 @MapperScan("com.empty.dao")
 @ServletComponentScan("com.empty.util")
-@EnableConfigurationProperties({ RedisProperties.class })
 public class Application implements WebMvcConfigurer {
 
     @Autowired
@@ -67,42 +65,6 @@ public class Application implements WebMvcConfigurer {
                 .allowedMethods("*")
                 //放行哪些原始域(头部信息)
                 .allowedHeaders("*");
-    }
-
-    //switch on redis transction feature
-    @Bean
-    public RedisTemplate customRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-        template.setEnableTransactionSupport(true);
-        return template;
-    }
-
-    //显示声明CommonsMultipartResolver为mutipartResolver
-    @Bean(name = "multipartResolver")
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("UTF-8");
-        resolver.setResolveLazily(true);//resolveLazily属性启用是为了推迟文件解析，以在在UploadAction中捕获文件大小异常
-        resolver.setMaxInMemorySize(40960);
-        resolver.setMaxUploadSize(31 * 1024 * 1024);//上传文件大小 31M 5*1024*1024
-        return resolver;
-    }
-
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(
-                SerializerFeature.WriteMapNullValue,
-                SerializerFeature.QuoteFieldNames,
-                SerializerFeature.WriteNullNumberAsZero,
-                SerializerFeature.WriteNullStringAsEmpty,
-                SerializerFeature.DisableCircularReferenceDetect
-        );
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        converters.add(fastConverter);
     }
 
     public static void main(String[] args) {
