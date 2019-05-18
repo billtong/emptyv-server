@@ -1,74 +1,71 @@
 package com.empty.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class CommentEntity implements Serializable {
-    private static final long serialVersionUID = -1L;
+public class CommentEntity {
+	private Integer commentId;
+	private Integer commentParentId;	//0为根评论
+	private String commentContent;
+	private Date commentDate;
+	private Integer videoId;
+	private Integer userId;
+	
+	//在返回comment传时注入
+	private UserEntity userInfo;
+	
+	public Integer getCommentId() {
+		return commentId;
+	}
 
-    private Integer commentId;
-    private Integer commentParentId;    //0为根评论
-    private String commentContent;
-    private Date commentDate;
-    private Integer videoId;
-    private Integer userId;
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
+	}
 
-    //在返回comment传时注入
-    private UserEntity userInfo;
+	public Integer getCommentParentId() {
+		return commentParentId;
+	}
 
-    public Integer getCommentId() {
-        return commentId;
-    }
+	public void setCommentParentId(Integer commentParentId) {
+		this.commentParentId = commentParentId;
+	}
 
-    public void setCommentId(Integer commentId) {
-        this.commentId = commentId;
-    }
+	public String getCommentContent() {
+		return commentContent;
+	}
 
-    public Integer getCommentParentId() {
-        return commentParentId;
-    }
+	public void setCommentContent(String commentContent) {
+		this.commentContent = commentContent;
+	}
 
-    public void setCommentParentId(Integer commentParentId) {
-        this.commentParentId = commentParentId;
-    }
+	public Date getCommentDate() {
+		return commentDate;
+	}
 
-    public String getCommentContent() {
-        return commentContent;
-    }
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
+	}
 
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
-    }
+	public Integer getVideoId() {
+		return videoId;
+	}
 
-    public Date getCommentDate() {
-        return commentDate;
-    }
+	public void setVideoId(Integer videoId) {
+		this.videoId = videoId;
+	}
 
-    public void setCommentDate(Date commentDate) {
-        this.commentDate = commentDate;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public Integer getVideoId() {
-        return videoId;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public void setVideoId(Integer videoId) {
-        this.videoId = videoId;
-    }
+	public UserEntity getUserInfo() {
+		return userInfo;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public UserEntity getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(UserEntity userInfo) {
-        this.userInfo = userInfo;
-    }
+	public void setUserInfo(UserEntity userInfo) {
+		this.userInfo = userInfo;
+	}
 }

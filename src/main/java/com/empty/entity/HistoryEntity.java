@@ -1,83 +1,80 @@
 package com.empty.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class HistoryEntity implements Serializable {
-    private static final long serialVersionUID = -1L;
+public class HistoryEntity {
+	private Integer historyId;
+	private Date historyTime;
+	private Integer userId;
+	private Integer videoId;
+	private Integer action; // 1(看) 2(喜欢) 3(不喜欢) 4(收藏) 5(评论)
+	private Integer commentId;
 
-    private Integer historyId;
-    private Date historyTime;
-    private Integer userId;
-    private Integer videoId;
-    private Integer action; // 1(看) 2(喜欢) 3(不喜欢) 4(收藏) 5(评论)
-    private Integer commentId;
+	// 根据id动态生成的
+	private VideoEntity video;
+	private CommentEntity comment;
+	
+	public Integer getHistoryId() {
+		return historyId;
+	}
 
-    // 根据id动态生成的
-    private VideoEntity video;
-    private CommentEntity comment;
+	public void setHistoryId(Integer historyId) {
+		this.historyId = historyId;
+	}
 
-    public Integer getHistoryId() {
-        return historyId;
-    }
+	public Date getHistoryTime() {
+		return historyTime;
+	}
 
-    public void setHistoryId(Integer historyId) {
-        this.historyId = historyId;
-    }
+	public void setHistoryTime(Date historyTime) {
+		this.historyTime = historyTime;
+	}
 
-    public Date getHistoryTime() {
-        return historyTime;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public void setHistoryTime(Date historyTime) {
-        this.historyTime = historyTime;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
+	public Integer getVideoId() {
+		return videoId;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public void setVideoId(Integer videoId) {
+		this.videoId = videoId;
+	}
 
-    public Integer getVideoId() {
-        return videoId;
-    }
+	public Integer getCommentId() {
+		return commentId;
+	}
 
-    public void setVideoId(Integer videoId) {
-        this.videoId = videoId;
-    }
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
+	}
 
-    public Integer getCommentId() {
-        return commentId;
-    }
+	public VideoEntity getVideo() {
+		return video;
+	}
 
-    public void setCommentId(Integer commentId) {
-        this.commentId = commentId;
-    }
+	public void setVideo(VideoEntity video) {
+		this.video = video;
+	}
 
-    public VideoEntity getVideo() {
-        return video;
-    }
+	public CommentEntity getComment() {
+		return comment;
+	}
 
-    public void setVideo(VideoEntity video) {
-        this.video = video;
-    }
+	public void setComment(CommentEntity comment) {
+		this.comment = comment;
+	}
 
-    public CommentEntity getComment() {
-        return comment;
-    }
+	public Integer getAction() {
+		return action;
+	}
 
-    public void setComment(CommentEntity comment) {
-        this.comment = comment;
-    }
-
-    public Integer getAction() {
-        return action;
-    }
-
-    public void setAction(Integer action) {
-        this.action = action;
-    }
+	public void setAction(Integer action) {
+		this.action = action;
+	}
 }

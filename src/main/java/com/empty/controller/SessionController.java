@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.empty.util.MySessionContext;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping(value = "/test/session", produces = "application/json;charset=UTF-8")
 public class SessionController {
-
-
-    @RequestMapping(value = "/getAllSessions", method = RequestMethod.GET)
-    public Map<String, HttpSession> getAllSession() {
-        return MySessionContext.getInstance().getSessionMap();
-    }
+	
+	
+	@RequestMapping(value = "/getAllSessions", method = RequestMethod.GET)
+	public @ResponseBody Map<String,HttpSession> getAllSession () {
+		return MySessionContext.getInstance().getSessionMap();
+	}
 }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.empty.mapper.BaseCommentMapper">
+
+	<select id="selectCommentById" parameterType="int"
+		resultType="commentEntity">
+
+		select
+		comment_id,
+		comment_parent_id,
+		comment_content,
+		comment_date,
+		video_id,
+		user_id
+
+		from
+		comment
+		where
+		comment_id =
+		#{commentId}
+
+	</select>
+
+
+	<select id="selectCommentsByVideoId" parameterType="int"
+		resultType="commentEntity">
+
+		select
+		comment_id,
+		comment_parent_id,
+		comment_content,
+		comment_date,
+		video_id,
+		user_id
+
+		from
+		comment
+		where
+		video_id =
+		#{videoId}
+		order by comment_date asc
+
+	</select>
+
+	<insert id="saveNewComment" parameterType="commentEntity"
+		keyColumn="commentId" keyProperty="commentId" useGeneratedKeys="true">
+
+		insert
+		into comment
+		(
+		comment_parent_id,
+		comment_content,
+		video_id,
+		user_id
+		)
+		values
+		(
+		#{commentParentId},
+		#{commentContent},
+		#{videoId},
+		#{userId}
+		)
+	</insert>
+
+  <update id="updateComment" parameterType="commentEntity">
+    UPDATE empty_db.comment 
+  <set>
+    <if test="commentParentId != null">comment_parent_id = #{commentParentId},</if>
+    <if test="commentContent != null and commentContent != ''">comment_content = #{commentContent}</if>
+  </set>
+  
+  WHERE comment_id = #{commentId} ;
+
+  </update>
+	<delete id="deleteCommentById" parameterType="int">
+		delete from comment
+		where
+		comment_id = #{commentId}
+	</delete>
+	<!-- 对评论点赞后期添加 <update id="updateComment" parameterType="commentEntity"></update> -->
+</mapper>
