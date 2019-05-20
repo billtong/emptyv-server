@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import com.empty.entity.CommentEntity;
 import com.empty.entity.VideoEntity;
 import com.empty.dao.BaseCommentMapper;
-import com.empty.dao.BaseUserMapper;
 import com.empty.dao.BaseVideoMapper;
 import com.empty.service.BaseCommentService;
 import com.empty.service.HistoryService;

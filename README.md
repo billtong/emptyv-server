@@ -24,6 +24,5 @@ mvn clean package
 java -jar target/empty-server-1.3.0.jar
 ```
 
-
 ### Deploy on Server
 docker and jenkins for CI/CD on the way
