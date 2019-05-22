@@ -43,7 +43,6 @@ public class VideoController {
         return "react failed";
     }
 
-    // 需要token验证
     @RequestMapping(value = "/patchOtherNum", method = RequestMethod.PATCH)
     public String reactVideo(@RequestParam Integer videoId, @RequestParam Integer userId,
                              @RequestParam String action, HttpServletResponse res) {
@@ -54,7 +53,6 @@ public class VideoController {
         return "react failed";
     }
 
-    // 需要token验证
     @RequestMapping(value = "/patchTags", method = RequestMethod.PATCH)
     public String patchTags(@RequestParam String tagJsonString, @RequestParam Integer videoId,
                             @RequestParam Integer userId, HttpServletResponse res) {

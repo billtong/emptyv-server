@@ -8,26 +8,17 @@ import java.util.Date;
 
 public class DataTools {
 
-    /*
-     * 获得当前时间并返回恰当时间
-     */
     public static String GetCurrDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aa");
         return sdf.format(new Date());
     }
 
-    /*
-     * 用于字符串+1
-     */
     public static String stringAdder(String ori, long adder) {
         Long num = Long.valueOf(ori);
         num += adder;
         return String.valueOf(num);
     }
 
-    /*
-     * 用于日志记录
-     */
     public static void WriteStringToFile2(String filePath, String str) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
@@ -41,9 +32,6 @@ public class DataTools {
         }
     }
 
-    /*
-     * 用于加密激活信息
-     */
     public static String encode(String str) {
         return Base64.getEncoder().encodeToString(str.getBytes());
     }
@@ -54,8 +42,6 @@ public class DataTools {
 
     public static String decode(String code) {
         byte[] decodedCode = Base64.getDecoder().decode(code);
-        String s = new String(decodedCode);
-        return s;
+        return new String(decodedCode);
     }
-
 }

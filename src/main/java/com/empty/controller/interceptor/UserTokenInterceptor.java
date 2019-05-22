@@ -21,7 +21,7 @@ public class UserTokenInterceptor implements HandlerInterceptor {
         try {
             String token = req.getParameter("token");
             Integer userId = Integer.parseInt(req.getParameter("userId"));
-            if (userId == 0) {    //匿名用户不能通过token check
+            if (userId == 0) {
                 res.setStatus(403);
                 return false;
             }
@@ -33,7 +33,6 @@ public class UserTokenInterceptor implements HandlerInterceptor {
         } catch (Exception e) {
             res.setStatus(403);
         }
-        ;
         return false;
     }
 

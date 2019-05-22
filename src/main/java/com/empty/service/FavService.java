@@ -28,7 +28,6 @@ public class FavService {
     @Autowired
     RedisTemplate redisTemplate;
 
-    // 装载上 videoList发送回去
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public FavEntity getFavByFavId(Integer favId) {
         String favKey = "fav_" + favId;
@@ -38,7 +37,6 @@ public class FavService {
         if(!hasFavKey) {
             operations1.set(favKey, fav,2, TimeUnit.SECONDS);
         }
-
         String[] videoIds = fav.getFavList().split(",");
         List<VideoEntity> videoList = new ArrayList<>();
         for (String str : videoIds) {
@@ -57,7 +55,6 @@ public class FavService {
         return fav;
     }
 
-    // 多个favList
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<FavEntity> getFavsByUserId(Integer userId) {
 
@@ -104,7 +101,6 @@ public class FavService {
 
     @Transactional
     public boolean deleteFavByFavId(Integer favId, Integer userId) {
-
         String favKey = "fav_" + favId;
         Boolean hasFavKey = redisTemplate.hasKey(favKey);
         ValueOperations<String, FavEntity> operations1 = redisTemplate.opsForValue();
@@ -112,7 +108,6 @@ public class FavService {
         if(!hasFavKey) {
             operations1.set(favKey, fav,2, TimeUnit.SECONDS);
         }
-
         if (fav != null && fav.getUserId() == userId) {
             favMapper.deleteFav(favId);
             String favKey2 = "fav_" + favId;

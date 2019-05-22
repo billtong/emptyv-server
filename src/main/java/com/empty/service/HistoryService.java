@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import com.empty.entity.CommentEntity;
 import com.empty.entity.VideoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -44,8 +43,6 @@ public class HistoryService {
         }
         for (int i = 0; i < hists.size(); i++) {
             HistoryEntity his = hists.get(i);
-
-
             String videoKey = "video_" + his.getVideoId();
             ValueOperations<String, VideoEntity> operations2 = redisTemplate.opsForValue();
             Boolean hasVideoKey = redisTemplate.hasKey(videoKey);
@@ -83,5 +80,4 @@ public class HistoryService {
             redisTemplate.delete(historyListKey);
         }
     }
-
 }

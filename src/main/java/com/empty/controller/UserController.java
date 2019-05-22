@@ -23,7 +23,6 @@ public class UserController {
     @Resource(name = "userService")
     BaseUseServiceImpl userService;
 
-    // 注册endpoint 1.Body里要至少有userName userPassword userEmail
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public HashMap<String, String> userSignUp(HttpServletResponse res,
                                               @RequestBody HashMap<String, String> signMap) {
@@ -36,8 +35,6 @@ public class UserController {
         return message;
     }
 
-    // 登陆
-    // 1.Body里要有 userName，userPassword，userEmail 返回session id，用来匹配到相应的sessionid
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public HashMap<String, Object> userLogin(HttpSession session, HttpServletRequest req,
                                              HttpServletResponse res, @RequestBody HashMap<String, String> loginMap) {
@@ -58,14 +55,11 @@ public class UserController {
         return message;
     }
 
-    // 登出，将sessionContext中储存的session删掉
-    // 目前没有考虑一个特殊情况，服务重启的话，可能倒是不同步而出现bug
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public Map<String, String> userLogout(@RequestBody Map<String, String> userJson,
                                           HttpServletResponse res) {
         Map<String, String> message = new HashMap<>();
         try {
-            // System.out.println(MySessionContext.getInstance().sessionMap.toString());
             HttpSession session = MySessionContext.getInstance().getSession(userJson.get("sessionId"));
             String serverToken = (String) session.getAttribute(userJson.get("userName"));
             String userToken = userJson.get("token");
@@ -82,7 +76,6 @@ public class UserController {
         return message;
     }
 
-    //更新用户信息
     @RequestMapping(value = "update", method = RequestMethod.PATCH)
     public String updateUser(@RequestBody UserEntity newUser, HttpServletResponse res) {
         if (userService.updateUserInfo(newUser)) {
@@ -93,7 +86,6 @@ public class UserController {
         }
     }
 
-    // 公开加载用户信息
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     public UserEntity getAllUserInfo(@RequestParam Integer userId, HttpServletResponse res) {
         UserEntity user = userService.getUser(userId);

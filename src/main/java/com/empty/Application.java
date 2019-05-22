@@ -48,7 +48,6 @@ public class Application implements WebMvcConfigurer {
         registry.addInterceptor(userTokenInterceptor).addPathPatterns(loginPath);
     }
 
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -62,7 +61,6 @@ public class Application implements WebMvcConfigurer {
                 .allowedHeaders("*");
     }
 
-    //switch on redis transction feature
     @Bean
     public RedisTemplate customRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
@@ -71,7 +69,6 @@ public class Application implements WebMvcConfigurer {
         return template;
     }
 
-    //显示声明CommonsMultipartResolver为mutipartResolver
     @Bean(name = "multipartResolver")
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();

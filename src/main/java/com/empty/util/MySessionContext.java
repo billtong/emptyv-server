@@ -18,9 +18,6 @@ public class MySessionContext {
         return this.sessionMap;
     }
 
-    /*
-     * 从外部获取这个唯一的MySessionContext
-     */
     public static MySessionContext getInstance() {
         if (instance == null) {
             instance = new MySessionContext();
@@ -28,27 +25,18 @@ public class MySessionContext {
         return instance;
     }
 
-    /*
-     * 给session监听器用的
-     */
     public synchronized void addSession(HttpSession session) {
         if (session != null) {
             sessionMap.put(session.getId(), session);
         }
     }
 
-    /*
-     * 给session监听器用的
-     */
     public synchronized void delSession(HttpSession session) {
         if (session != null) {
             sessionMap.remove(session.getId());
         }
     }
 
-    /*
-     * 给程序员用的，获得相应的session
-     */
     public synchronized HttpSession getSession(String sessionId) {
         if (sessionId == null) {
             return null;
