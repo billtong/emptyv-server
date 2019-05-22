@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableAspectJAutoProxy
 @MapperScan("com.empty.dao")
 @ServletComponentScan("com.empty.util")
-@EnableConfigurationProperties({ RedisProperties.class })
+@EnableConfigurationProperties({RedisProperties.class})
 public class Application implements WebMvcConfigurer {
 
     @Autowired

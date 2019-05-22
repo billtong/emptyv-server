@@ -31,10 +31,10 @@ public class BaseDanServiceImpl implements BaseDanService {
         ValueOperations<String, List<DanEntity>> operations = redisTemplate.opsForValue();
         Boolean hasDanListKey = redisTemplate.hasKey(danListKey);
         List<DanEntity> danList = hasDanListKey ? operations.get(danListKey) : baseDanMapper.selectDanByVideoId(videoId);
-        if(!hasDanListKey) {
-            operations.set(danListKey, danList,2, TimeUnit.SECONDS);
+        if (!hasDanListKey) {
+            operations.set(danListKey, danList, 2, TimeUnit.SECONDS);
         }
-        if(danList.size() == 0) {
+        if (danList.size() == 0) {
             return null;
         }
         return danList;
@@ -49,7 +49,7 @@ public class BaseDanServiceImpl implements BaseDanService {
         baseDanMapper.saveNewDan(newDan);
         String key = "dan_list_" + newDan.getVideoId();
         Boolean hasKey = redisTemplate.hasKey(key);
-        if(hasKey) {
+        if (hasKey) {
             redisTemplate.delete(key);
         }
         return true;

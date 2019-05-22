@@ -39,7 +39,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         ValueOperations<String, UserEntity> operations = redisTemplate.opsForValue();
         boolean hasUserKey = redisTemplate.hasKey(userKey);
         UserEntity user = hasUserKey ? operations.get(userKey) : userMapper.selectUserById(userId);
-        if(!hasUserKey) {
+        if (!hasUserKey) {
             operations.set(userKey, user, 2, TimeUnit.SECONDS);
         }
         if (user != null) {
@@ -103,7 +103,7 @@ public class BaseUseServiceImpl implements BaseUserService {
         userMapper.updateUser(user);
         String key = "user_" + user.getUserId();
         boolean hasKey = redisTemplate.hasKey(key);
-        if(hasKey) {
+        if (hasKey) {
             redisTemplate.delete(key);
         }
         return true;
@@ -117,8 +117,8 @@ public class BaseUseServiceImpl implements BaseUserService {
         boolean hasUserKey = redisTemplate.hasKey(userKey);
 
         UserEntity user = hasUserKey ? operations.get(userKey) : userMapper.selectUserById(userId);
-        if(!hasUserKey) {
-            operations.set(userKey, user,2, TimeUnit.SECONDS);
+        if (!hasUserKey) {
+            operations.set(userKey, user, 2, TimeUnit.SECONDS);
         }
         HttpSession session = MySessionContext.getInstance().getSession(sessionId);
         String tokenCorrect = (String) session.getAttribute(user.getUserName());

@@ -51,8 +51,8 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         ValueOperations<String, List<CommentEntity>> operations = redisTemplate.opsForValue();
         Boolean hasCommentListKey = redisTemplate.hasKey(commentListKey);
         List<CommentEntity> rawList = hasCommentListKey ? operations.get(commentListKey) : baseCommentMapper.selectCommentsByVideoId(videoId);
-        if(!hasCommentListKey) {
-            operations.set(commentListKey, rawList,2, TimeUnit.SECONDS);
+        if (!hasCommentListKey) {
+            operations.set(commentListKey, rawList, 2, TimeUnit.SECONDS);
         }
 
         Iterator<CommentEntity> rawIte = rawList.iterator();
@@ -104,16 +104,16 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         Boolean hasCommentKey = redisTemplate.hasKey(commentKey);
         ValueOperations<String, CommentEntity> operations1 = redisTemplate.opsForValue();
         CommentEntity comment = hasCommentKey ? operations1.get(commentKey) : baseCommentMapper.selectCommentById(commentId);
-        if(!hasCommentKey) {
-            operations1.set(commentKey, comment,2, TimeUnit.SECONDS);
+        if (!hasCommentKey) {
+            operations1.set(commentKey, comment, 2, TimeUnit.SECONDS);
         }
 
         String videoKey = "video_" + comment.getCommentId();
         ValueOperations<String, VideoEntity> operations2 = redisTemplate.opsForValue();
         Boolean hasVideoKey = redisTemplate.hasKey(videoKey);
         VideoEntity video = hasVideoKey ? operations2.get(videoKey) : baseVideoMapper.findVideoById(comment.getVideoId());
-        if(!hasVideoKey) {
-            operations2.set(videoKey, video,2, TimeUnit.SECONDS);
+        if (!hasVideoKey) {
+            operations2.set(videoKey, video, 2, TimeUnit.SECONDS);
         }
 
         if (video != null && video.getUserId().equals(userId)) {
@@ -143,16 +143,16 @@ public class BaseCommentServiceImpl implements BaseCommentService {
         Boolean hasCommentKey = redisTemplate.hasKey(commentKey);
         ValueOperations<String, CommentEntity> operations1 = redisTemplate.opsForValue();
         CommentEntity ce = hasCommentKey ? operations1.get(commentKey) : baseCommentMapper.selectCommentById(commentId);
-        if(!hasCommentKey) {
-            operations1.set(commentKey, ce,2, TimeUnit.SECONDS);
+        if (!hasCommentKey) {
+            operations1.set(commentKey, ce, 2, TimeUnit.SECONDS);
         }
 
         String commentListKey = "comment_list_" + ce.getVideoId();
         Boolean hasCommentListKey = redisTemplate.hasKey(commentListKey);
         ValueOperations<String, List<CommentEntity>> operations2 = redisTemplate.opsForValue();
         List<CommentEntity> celist = hasCommentListKey ? operations2.get(commentListKey) : baseCommentMapper.selectCommentsByVideoId(ce.getVideoId());
-        if(!hasCommentListKey) {
-            operations2.set(commentListKey, celist,2, TimeUnit.SECONDS);
+        if (!hasCommentListKey) {
+            operations2.set(commentListKey, celist, 2, TimeUnit.SECONDS);
         }
 
         if (ce.getCommentParentId().equals(0)) {
@@ -183,7 +183,7 @@ public class BaseCommentServiceImpl implements BaseCommentService {
     }
 
     private void deleteCache(String key) {
-        if(redisTemplate.hasKey(key)) {
+        if (redisTemplate.hasKey(key)) {
             redisTemplate.delete(key);
         }
     }

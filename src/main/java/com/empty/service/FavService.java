@@ -34,8 +34,8 @@ public class FavService {
         Boolean hasFavKey = redisTemplate.hasKey(favKey);
         ValueOperations<String, FavEntity> operations1 = redisTemplate.opsForValue();
         FavEntity fav = hasFavKey ? operations1.get(favKey) : favMapper.getFavByFavId(favId);
-        if(!hasFavKey) {
-            operations1.set(favKey, fav,2, TimeUnit.SECONDS);
+        if (!hasFavKey) {
+            operations1.set(favKey, fav, 2, TimeUnit.SECONDS);
         }
         String[] videoIds = fav.getFavList().split(",");
         List<VideoEntity> videoList = new ArrayList<>();
@@ -46,8 +46,8 @@ public class FavService {
             Boolean hasVideoKey = redisTemplate.hasKey(videoKey);
             ValueOperations<String, VideoEntity> operations2 = redisTemplate.opsForValue();
             VideoEntity video = hasVideoKey ? operations2.get(videoKey) : videoMapper.findVideoById(videoId);
-            if(!hasVideoKey) {
-                operations2.set(videoKey, video,2, TimeUnit.SECONDS);
+            if (!hasVideoKey) {
+                operations2.set(videoKey, video, 2, TimeUnit.SECONDS);
             }
             videoList.add(video);
         }
@@ -58,12 +58,12 @@ public class FavService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<FavEntity> getFavsByUserId(Integer userId) {
 
-        String favListKey = "fav_list_"+userId;
+        String favListKey = "fav_list_" + userId;
         Boolean hasFavListKey = redisTemplate.hasKey(favListKey);
         ValueOperations<String, List<FavEntity>> operations1 = redisTemplate.opsForValue();
-        List<FavEntity> favList = hasFavListKey ? operations1.get(favListKey) :favMapper.selectFavsByUserId(userId);
-        if(!hasFavListKey) {
-            operations1.set(favListKey, favList,2, TimeUnit.SECONDS);
+        List<FavEntity> favList = hasFavListKey ? operations1.get(favListKey) : favMapper.selectFavsByUserId(userId);
+        if (!hasFavListKey) {
+            operations1.set(favListKey, favList, 2, TimeUnit.SECONDS);
         }
         if (favList != null) {
             for (int i = 0; i < favList.size(); i++) {
@@ -79,7 +79,7 @@ public class FavService {
             if (newFav.getFavId() != null && favMapper.getFavByFavId(newFav.getFavId()) != null) {
                 favMapper.updateFav(newFav);
                 String favKey = "fav_" + newFav.getFavId();
-                String favListKey = "fav_list_"+ newFav.getUserId();
+                String favListKey = "fav_list_" + newFav.getUserId();
                 deleteCache(favKey);
                 deleteCache(favListKey);
                 return true;
@@ -92,7 +92,7 @@ public class FavService {
     public boolean saveNewFav(FavEntity newFav) {
         if (newFav != null) {
             favMapper.saveNewFav(newFav);
-            String favListKey = "fav_list_"+ newFav.getUserId();
+            String favListKey = "fav_list_" + newFav.getUserId();
             deleteCache(favListKey);
             return true;
         }
@@ -105,13 +105,13 @@ public class FavService {
         Boolean hasFavKey = redisTemplate.hasKey(favKey);
         ValueOperations<String, FavEntity> operations1 = redisTemplate.opsForValue();
         FavEntity fav = hasFavKey ? operations1.get(favKey) : favMapper.getFavByFavId(favId);
-        if(!hasFavKey) {
-            operations1.set(favKey, fav,2, TimeUnit.SECONDS);
+        if (!hasFavKey) {
+            operations1.set(favKey, fav, 2, TimeUnit.SECONDS);
         }
         if (fav != null && fav.getUserId() == userId) {
             favMapper.deleteFav(favId);
             String favKey2 = "fav_" + favId;
-            String favListKey = "fav_list_"+ userId;
+            String favListKey = "fav_list_" + userId;
             deleteCache(favKey2);
             deleteCache(favListKey);
             return true;
@@ -120,7 +120,7 @@ public class FavService {
     }
 
     private void deleteCache(String key) {
-        if(redisTemplate.hasKey(key)) {
+        if (redisTemplate.hasKey(key)) {
             redisTemplate.delete(key);
         }
     }

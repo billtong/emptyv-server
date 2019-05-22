@@ -42,8 +42,8 @@ public class BaseVideoServiceImpl implements BaseVideoService {
         ValueOperations<String, VideoEntity> operations = redisTemplate.opsForValue();
         Boolean hasVideoKey = redisTemplate.hasKey(videoKey);
         VideoEntity video = hasVideoKey ? operations.get(videoKey) : videoMapper.findVideoById(videoId);
-        if(!hasVideoKey) {
-            operations.set(videoKey, video,2, TimeUnit.SECONDS);
+        if (!hasVideoKey) {
+            operations.set(videoKey, video, 2, TimeUnit.SECONDS);
         }
         video.setUserInfo(userService.getUser(video.getUserId()));
         return video;
@@ -71,9 +71,9 @@ public class BaseVideoServiceImpl implements BaseVideoService {
             String videoKey = "video_" + videoId;
             Boolean hasVideoKey = redisTemplate.hasKey(videoKey);
             ValueOperations<String, VideoEntity> operations = redisTemplate.opsForValue();
-            VideoEntity video = hasVideoKey ? operations.get(videoKey) :  videoMapper.findVideoById(videoId);
-            if(!hasVideoKey) {
-                operations.set(videoKey, video,2, TimeUnit.SECONDS);
+            VideoEntity video = hasVideoKey ? operations.get(videoKey) : videoMapper.findVideoById(videoId);
+            if (!hasVideoKey) {
+                operations.set(videoKey, video, 2, TimeUnit.SECONDS);
             }
 
             if (video != null) {
@@ -107,7 +107,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
                         return false;
                 }
                 videoMapper.updateVideo(video);
-                if(hasVideoKey) {
+                if (hasVideoKey) {
                     redisTemplate.delete(videoKey);
                 }
                 return true;
@@ -125,7 +125,7 @@ public class BaseVideoServiceImpl implements BaseVideoService {
         videoMapper.deleteVideoById(videoId);
         String key = "video_" + videoId;
         Boolean hasKey = redisTemplate.hasKey(key);
-        if(hasKey) {
+        if (hasKey) {
             redisTemplate.delete(key);
         }
     }
@@ -137,14 +137,14 @@ public class BaseVideoServiceImpl implements BaseVideoService {
         Boolean hasVideoKey = redisTemplate.hasKey(videoKey);
         ValueOperations<String, VideoEntity> operations = redisTemplate.opsForValue();
         VideoEntity video = hasVideoKey ? operations.get(videoKey) : videoMapper.findVideoById(videoId);
-        if(!hasVideoKey) {
-            operations.set(videoKey, video,2, TimeUnit.SECONDS);
+        if (!hasVideoKey) {
+            operations.set(videoKey, video, 2, TimeUnit.SECONDS);
         }
 
         if (video != null && tagJsonString != null) {
             video.setVideoTag(tagJsonString);
             videoMapper.updateVideo(video);
-            if(hasVideoKey) {
+            if (hasVideoKey) {
                 redisTemplate.delete(videoKey);
             }
             return true;

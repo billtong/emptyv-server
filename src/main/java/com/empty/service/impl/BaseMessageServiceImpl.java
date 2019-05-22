@@ -40,8 +40,8 @@ public class BaseMessageServiceImpl implements BaseMessageService {
         ValueOperations<String, List<MessageEntity>> operations = redisTemplate.opsForValue();
         boolean hasMsgListKey = redisTemplate.hasKey(msgListKey);
         List<MessageEntity> list = hasMsgListKey ? operations.get(msgListKey) : msgMapper.getMsgListByUserId(userId);
-        if(!hasMsgListKey) {
-            operations.set(msgListKey, list,2, TimeUnit.SECONDS);
+        if (!hasMsgListKey) {
+            operations.set(msgListKey, list, 2, TimeUnit.SECONDS);
         }
         for (MessageEntity me : list) {
             me.setSenderInfo(userService.getUser(me.getSenderId()));
@@ -96,7 +96,7 @@ public class BaseMessageServiceImpl implements BaseMessageService {
     }
 
     private void deleteCache(String key) {
-        if(redisTemplate.hasKey(key)) {
+        if (redisTemplate.hasKey(key)) {
             redisTemplate.delete(key);
         }
     }

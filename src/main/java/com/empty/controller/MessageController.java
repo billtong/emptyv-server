@@ -28,8 +28,7 @@ public class MessageController {
     public void writeNewMsg(@RequestBody MessageEntity newMe, @RequestParam Integer userId, HttpServletResponse res) {
         if (msgService.saveNewMsg(newMe, userId)) {
             res.setStatus(200);
-        }
-        else {
+        } else {
             res.setStatus(401);
         }
     }

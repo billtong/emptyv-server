@@ -34,11 +34,11 @@ public class HistoryService {
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<HistoryEntity> getHistoryList(Integer userId) {
-        String historyListKey = "history_list_"+userId;
+        String historyListKey = "history_list_" + userId;
         Boolean hasHistoryListKey = redisTemplate.hasKey(historyListKey);
         ValueOperations<String, List<HistoryEntity>> operations1 = redisTemplate.opsForValue();
         List<HistoryEntity> hists = hasHistoryListKey ? operations1.get(historyListKey) : historyMapper.findByUserId(userId);
-        if(!hasHistoryListKey) {
+        if (!hasHistoryListKey) {
             operations1.set(historyListKey, hists, 2, TimeUnit.SECONDS);
         }
         for (int i = 0; i < hists.size(); i++) {
@@ -47,17 +47,17 @@ public class HistoryService {
             ValueOperations<String, VideoEntity> operations2 = redisTemplate.opsForValue();
             Boolean hasVideoKey = redisTemplate.hasKey(videoKey);
             VideoEntity video = hasVideoKey ? operations2.get(videoKey) : videoMapper.findVideoById(his.getVideoId());
-            if(!hasVideoKey) {
-                operations2.set(videoKey, video,2, TimeUnit.SECONDS);
+            if (!hasVideoKey) {
+                operations2.set(videoKey, video, 2, TimeUnit.SECONDS);
             }
             his.setVideo(video);
             if (his.getCommentId() != null) {
-                String commentKey = "comment_" +his.getCommentId();
+                String commentKey = "comment_" + his.getCommentId();
                 Boolean hasCommentKey = redisTemplate.hasKey(commentKey);
                 ValueOperations<String, CommentEntity> operations3 = redisTemplate.opsForValue();
                 CommentEntity comment = hasCommentKey ? operations3.get(commentKey) : commentMapper.selectCommentById(his.getCommentId());
-                if(!hasCommentKey) {
-                    operations3.set(commentKey, comment,2, TimeUnit.SECONDS);
+                if (!hasCommentKey) {
+                    operations3.set(commentKey, comment, 2, TimeUnit.SECONDS);
                 }
                 his.setComment(comment);
             }
@@ -74,9 +74,9 @@ public class HistoryService {
         history.setVideoId(videoId);
         history.setCommentId(commentId);
         historyMapper.saveNewHistory(history);
-        String historyListKey = "history_list_"+userId;
+        String historyListKey = "history_list_" + userId;
         Boolean hasHistoryListKey = redisTemplate.hasKey(historyListKey);
-        if(hasHistoryListKey) {
+        if (hasHistoryListKey) {
             redisTemplate.delete(historyListKey);
         }
     }
