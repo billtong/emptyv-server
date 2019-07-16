@@ -15,7 +15,7 @@
 - POST(/api/comment")
 - DELETE(/api/comment/{id})
 - ...
-### consumer-service
+### notification-service
 - GET(/api/notification/{userId})
 - ...
 ## Deploy
