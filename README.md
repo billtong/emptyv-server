@@ -1,43 +1,46 @@
-# empty-server
+# Empty-Video Microservices
+## APIs
+### user-service
+- POST(/auth/login): for user to sign in, and return their public user info
+- GET(/auth/user): for other services to check bearer token, and returns public user info
+- GET(/auth/active/{sessionID}): for new user to activated their account via e-mail 
+- GET(/api/user/{id}): for other services and user to get public info, return public user info
+- POST(/api/user): for new user to register a new account, send email to the account with the activated link.
+- PATCH(/api/user): for other services and user to change their profile or system info.
+- ...
+### asset-service
+- GET(/api/comment/{id})
+- GET(/api/comment/video/{id})
+- PATCH(/api/commment/{id}/like)
+- POST(/api/comment")
+- DELETE(/api/comment/{id})
+- ...
+### consumer-service
+- GET(/api/notification/{userId})
+- ...
 
-EmptyVideo server configuration guide
-
-## MySQL configuration
-
-Download [mysql](https://www.mysql.com/downloads/) DB on the local computer. MySql 5.7 is recommanded.
-You should run scripts below under the filepath `/src` for initialization. 
-
+## how to start this service
+1. install docker
+2. run docker containers (mongodb & admin-mongo/dashboard)
+```bash
+docker-compose up -d
 ```
-mysql -u <yourusername> -p <yourpassword>
-create empty_db;
-\. <absolute filepath to initTables.sql>
-\. <absolute filepath to initData.sql>
-```
+3. - start all spring boot apps
+still writing jenkins pipeline
+4. (option) setup mongodDB dashbaord
+    - for WinOS(old version docker only), first check the default machine IP address, open browser enter `http://docker-machine-ip:8082/`, don't forget to change application.yml file as well.
+    - for other os(macos/linux), open browser enter `http://localhost:8082/`
+    - fill in MongoDB Connections form  
+    
+connName | conStr | connOpt
+--- | --- | ---
+(whatever) | mongodb://mongo:27017 | {}
 
-Set the username and password same as the those in `/src/mesources/db.properties` file. 
+## some learning links
+[Spring Web Flux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html)  
+[Spring Data Mongo Reactive](https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/)  
 
-```
-create user "tong"@"localhost" identified by "tzy990226"；
-grant ALL ON empty_db.* to "tong@localhost";
-flush privileges;
-```
 
-You can manually add/modify data by using [SQLyog](https://github.com/webyog/sqlyog-community/wiki/Downloads). You are all set for DB now.
 
-## Start with MAVEN (suggested)
 
-Download [Maven](https://maven.apache.org/download.cgi). Set the global environment on the local computer.(You can find the tutorial by searching it)  
-Run the script below in the terminal under the root filepath of this project.
 
-```
-mvn clean tomcat7:run
-```
-
-The changes to the files will be reloaded automatically
-Enter the URL `http://localhost:8080` in the browser.
-Now you you can view `The Empty Video Server Author: emptyvideo team>` text on the screen. 
-
-## Start with Tomcat7&Eclipse Jee
-
-Download [tomcat7](https://tomcat.apache.org/download-70.cgi) and [Eclipse Jee](https://www.eclipse.org/downloads/packages/release/kepler/sr2/eclipse-ide-java-ee-developers) on the local computer.
-Setting the tomcat Server on the Eclipse Jee. You can then run this project on local server by clicking 'run as' button and choose the tomcat server.
