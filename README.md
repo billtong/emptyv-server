@@ -25,7 +25,10 @@
 ```bash
 docker-compose up -d
 ```
-3. start all three micro-services manully.
+3. start all three micro-services manully.  
+[empty-video-asset-service](https://github.com/naglfari/empty-video-asset-service.git)  
+[empty-video-user-service](https://github.com/naglfari/empty-video-user-service.git)  
+[empty-video-consumer-service](https://github.com/naglfari/emptyvideo-consumer-service.git)  
 ```
 mvn spring-boot:run
 ```
