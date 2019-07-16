@@ -18,19 +18,23 @@
 ### consumer-service
 - GET(/api/notification/{userId})
 - ...
-
-## how to start this service
-1. install docker
+## Deploy
+### how to start this service （will be replaced by Jenkins）
+1. install docker, maven
 2. run docker containers (mongodb & admin-mongo/dashboard)
 ```bash
 docker-compose up -d
 ```
-3. - start all spring boot apps
+3. start all three micro-services manully.
+```
+mvn spring-boot:run
+```
 still writing jenkins pipeline
-4. (option) setup mongodDB dashbaord
-    - for WinOS(old version docker only), first check the default machine IP address, open browser enter `http://docker-machine-ip:8082/`, don't forget to change application.yml file as well.
-    - for other os(macos/linux), open browser enter `http://localhost:8082/`
-    - fill in MongoDB Connections form  
+
+### how to setup mongodDB dashbaord
+- for WinOS(old version docker only), first check the default machine IP address, open browser enter `http://docker-machine-ip:8082/`, don't forget to change application.yml file as well.
+- for other os(macos/linux), open browser enter `http://localhost:8082/`
+- fill in MongoDB Connections form  
     
 connName | conStr | connOpt
 --- | --- | ---
