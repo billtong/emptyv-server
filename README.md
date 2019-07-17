@@ -21,7 +21,9 @@
 ## 2. Deploy
 ### how to start this service
 1. install docker, maven
-2. run docker containers (mongodb & admin-mongo/dashboard)
+2. run docker containers (includes mongodb & admin-mongo & zookeeper & kafka)   
+If your are using docker toolbox (old docker version) and you want to use `localhost` instead of the `$(docker-machine ip)`, you also need to do the port mapping. click this link to learn  
+[How to Forward Ports to a Virtual Machine](https://www.howtogeek.com/122641/how-to-forward-ports-to-a-virtual-machine-and-use-it-as-a-server/)
 ```bash
 docker-compose up -d
 ```
@@ -55,5 +57,4 @@ connName | conStr | connOpt
 7. send this update info to kafka: notification service → Kafka (produce message)
 8. receive this update from kafka: user service → kafka (consume message)
 9. learning websoket now...
-
-## Developing...  ╮(￣▽￣)╭ 
+## Developing by Bill Tong  ╮(￣▽￣)╭ 
