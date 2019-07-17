@@ -57,4 +57,4 @@ connName | conStr | connOpt
 7. send this update info to kafka: notification service → Kafka (produce message)
 8. receive this update from kafka: user service → kafka (consume message)
 9. learning websoket now...
-## Developing by Bill Tong  ╮(￣▽￣)╭ 
+## Architecture designed by Bill Tong  ╮(￣▽￣)╭ 
