@@ -22,16 +22,16 @@
 ### how to start this service
 1. install docker, maven
 2. run docker containers (includes mongodb & admin-mongo & zookeeper & kafka)   
-If your are using docker toolbox (old docker version) and you want to use `localhost` instead of the `$(your docker-machine ip)`, you also need to do the port mapping. click this link to learn  
-[How to Forward Ports to a Virtual Machine](https://www.howtogeek.com/122641/how-to-forward-ports-to-a-virtual-machine-and-use-it-as-a-server/)
+If your are using docker toolbox (old docker version) and you want to use `localhost` instead of the `$(your docker-machine ip)`, you also need to do the port mapping. click the link below to learn    
+[How to Forward Ports to a Virtual Machine](https://www.howtogeek.com/122641/how-to-forward-ports-to-a-virtual-machine-and-use-it-as-a-server/)  
 If you don't understand the method above your can also change all application.yml files from `localhost` to `$(your docker-machine ip)`
 ```bash
 docker-compose up -d
 ```
 3. start all three micro-services manully (will be included in docker-compose later)  
-[empty-video-asset-service](https://github.com/naglfari/empty-video-asset-service.git)  
-[empty-video-user-service](https://github.com/naglfari/empty-video-user-service.git)  
-[empty-video-notification-service](https://github.com/naglfari/empty-video-notification-service.git)  
+[empty-video-asset-service](https://github.com/naglfari/empty-video-asset-service)  
+[empty-video-user-service](https://github.com/naglfari/empty-video-user-service)  
+[empty-video-notification-service](https://github.com/naglfari/empty-video-notification-service)  
 ```
 mvn spring-boot:run
 ```
