@@ -1,0 +1,16 @@
+#Application Configuration
+server:
+  port: 8001
+
+#Monodb Configuration
+spring:
+  data:
+    mongodb:
+      database: empty_db
+      host: localhost
+      port: 27017
+
+#logging
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG

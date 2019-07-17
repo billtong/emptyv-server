@@ -1,0 +1,22 @@
+#Application Configuration
+server:
+  port: 8002
+
+#Monodb Configuration
+spring:
+  data:
+    mongodb:
+      database: empty_db
+      host: localhost
+      port: 27017
+  datasource:
+    schema:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+#logging
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
+
+
