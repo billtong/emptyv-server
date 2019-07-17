@@ -25,7 +25,7 @@
 ```bash
 docker-compose up -d
 ```
-3. start all three micro-services manully (will be included in docker-compose later)
+3. start all three micro-services manully (will be included in docker-compose later)  
 [empty-video-asset-service](https://github.com/naglfari/empty-video-asset-service.git)  
 [empty-video-user-service](https://github.com/naglfari/empty-video-user-service.git)  
 [empty-video-notification-service](https://github.com/naglfari/empty-video-notification-service.git)  
