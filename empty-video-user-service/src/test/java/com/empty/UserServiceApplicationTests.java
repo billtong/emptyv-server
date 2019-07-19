@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
+
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +50,8 @@ public class UserServiceApplicationTests {
                 .expectStatus().isCreated();
     }
 
-    @Test@Ignore //这里的sessionId目前没有获取的方法，因此暂时无法测试,需要学习reactor test模块
+    @Test
+    @Ignore //这里的sessionId目前没有获取的方法，因此暂时无法测试,需要学习reactor test模块
     public void test2AuthActiveRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.authRouterFunction()).build();
         client.get().uri("/auth/active/".concat(sessionId))
@@ -75,7 +77,8 @@ public class UserServiceApplicationTests {
         });
     }
 
-    @Test@Ignore //user Id 暂时无法获得。。。
+    @Test
+    @Ignore //user Id 暂时无法获得。。。
     public void test4UserPatchRouterFunction() {
         //login -> check token
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.authRouterFunction()).build();
@@ -85,12 +88,12 @@ public class UserServiceApplicationTests {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody().consumeWith(response -> {
-                    String bearToken = response.getResponseHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-                    User u = new User();
-                    client.patch().uri("/api/user")
-                            .body(BodyInserters.fromObject(u))
-                            .header(HttpHeaders.AUTHORIZATION, bearToken)
-                            .exchange().expectStatus().isOk();
+            String bearToken = response.getResponseHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            User u = new User();
+            client.patch().uri("/api/user")
+                    .body(BodyInserters.fromObject(u))
+                    .header(HttpHeaders.AUTHORIZATION, bearToken)
+                    .exchange().expectStatus().isOk();
         });
     }
 

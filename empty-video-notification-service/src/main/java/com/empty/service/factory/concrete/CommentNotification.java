@@ -5,9 +5,7 @@ import com.empty.domain.Notification;
 import com.empty.repository.NotificationRepository;
 import com.empty.service.factory.NotificationProduct;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
