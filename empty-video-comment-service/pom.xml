@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.emptyvideo</groupId>
-    <artifactId>asset-service</artifactId>
+    <artifactId>comment-service</artifactId>
     <version>1</version>
-    <name>empty-video-asset-service</name>
-    <description>asset micro-services of empty video server</description>
+    <name>empty-video-comment-service</name>
+    <description>comment micro-services of empty video server</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

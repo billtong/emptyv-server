@@ -27,9 +27,9 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
-public class AssetServiceApplication {
+public class CommentServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AssetServiceApplication.class, args);
+        SpringApplication.run(CommentServiceApplication.class, args);
     }
 }
 
