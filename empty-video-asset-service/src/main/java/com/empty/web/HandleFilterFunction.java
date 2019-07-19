@@ -17,6 +17,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
@@ -27,7 +28,7 @@ public class HandleFilterFunction {
     UserWebClient userWebClient;
 
     @Autowired
-    private KafkaTemplate<String, Map<String, String>> kafkaTemplate;
+    private KafkaTemplate<String, Map<String,Object>> kafkaTemplate;
 
     public Mono<ServerResponse> authCheckBeforeFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
         Mono<ClientResponse> clientResponseMono = userWebClient.getUserByAuthToken(req);
@@ -63,17 +64,24 @@ public class HandleFilterFunction {
         return Mono.zip(serverRequestMono, Mono.just(req)).flatMap(tuple -> {
             ServerResponse serverResponse = tuple.getT1();
             if (serverResponse.statusCode().is2xxSuccessful()) {
-                Comment comment = (Comment) tuple.getT2().attribute("comment").get();
-                log.info(comment.toString());
-                Map<String, String> map = new HashMap<>();
-                map.put("to", "first one");
+                ServerRequest req2 = tuple.getT2();
 
-                ListenableFuture<SendResult<String, Map<String, String>>> notificationFuture = this.kafkaTemplate.send("notification", map);
-                ListenableFuture<SendResult<String, Map<String, String>>> historyFuture = this.kafkaTemplate.send("history", map);
-                return Mono.zip(
-                        Mono.fromFuture(notificationFuture.completable()),
-                        Mono.fromFuture(historyFuture.completable()))
-                        .then(Mono.just(serverResponse));
+                switch (Objects.requireNonNull(req2.method())) {
+                    case POST:
+                        Comment comment = (Comment) req2.attribute("comment").get();
+                        log.info(comment.toString());
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("field", "comment");
+                        map.put("action", "create");
+                        map.put("comment", comment);
+                        ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("notification", map);
+                        return Mono.fromFuture(notificationFuture.completable()).then(Mono.just(serverResponse));
+                    case PATCH:
+
+                    case DELETE:
+                        default:
+                            return Mono.just(serverResponse);
+                }
             }
             return status(400).build();
         });

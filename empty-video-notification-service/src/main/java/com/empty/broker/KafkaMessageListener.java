@@ -16,14 +16,16 @@ public class KafkaMessageListener {
 
 
     @KafkaListener(groupId = "ev-consumer", topics = {"notification"})
-    public void notificationListen(@Payload Map<String, String> notification, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
+    public void notificationListen(@Payload Map<String, Object> notification, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
         log.info("noti--接收消息: {}，partition：{}", notification, partition);
     }
 
+    /*
     @KafkaListener(groupId = "ev-consumer", topics = {"history"})
     public void historyListen(@Payload Map<String, String> notification, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
         log.info("hist--接收消息: {}，partition：{}", notification, partition);
     }
+    */
 
 
 

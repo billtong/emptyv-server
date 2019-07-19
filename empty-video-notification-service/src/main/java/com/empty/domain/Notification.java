@@ -15,12 +15,12 @@ import java.util.Map;
 @Document(collection = "notification")
 public class Notification implements Serializable {
     private static final long serialVersionUID = 6209167980776428373L;
-
     @Id
     private String id;
     @Indexed
     private String to;  //user_id
     @Indexed
     private Date created = new Date(); //created time
+
     private Map<String, Object> content;  //some id;\
 }

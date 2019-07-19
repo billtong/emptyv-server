@@ -29,9 +29,9 @@ If you don't understand the method above your can also change all application.ym
 docker-compose up -d
 ```
 3. start all three micro-services manully (will be included in docker-compose later)  
-[empty-video-asset-service](https://github.com/naglfari/empty-video-asset-service)  
-[empty-video-user-service](https://github.com/naglfari/empty-video-user-service)  
-[empty-video-notification-service](https://github.com/naglfari/empty-video-notification-service)  
+[empty-video-asset-service](../empty-video-asset-service)  
+[empty-video-user-service](../empty-video-user-service)  
+[empty-video-notification-service](../empty-video-notification-service)  
 ```
 mvn spring-boot:run
 ```
