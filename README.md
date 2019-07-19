@@ -8,15 +8,27 @@
 - POST(/api/user): for new user to register a new account, send email to the account with the activated link.
 - PATCH(/api/user): for other services and user to change their profile or system info.
 - ...
-### asset-service
+### comment-service
 - GET(/api/comment/{id})
 - GET(/api/comment/video/{id})
 - PATCH(/api/commment/{id}/like)
 - POST(/api/comment")
 - DELETE(/api/comment/{id})
 - ...
+### dan-service
+- ...
+### video-service
+- ...
+### favlist-service
+- ...
+### message-service
+- ...
 ### notification-service
 - GET(/api/notification/{userId})
+- ...
+### history-serivce
+- ...
+### point-service
 - ...
 ## 2. Deploy
 ### how to start this service
@@ -29,7 +41,7 @@ If you don't understand the method above your can also change all application.ym
 docker-compose up -d
 ```
 3. start all three micro-services manully (will be included in docker-compose later)  
-[empty-video-asset-service](empty-video-asset-service)  
+[empty-video-comment-service](empty-video-comment-service)  
 [empty-video-user-service](empty-video-user-service)  
 [empty-video-notification-service](empty-video-notification-service)  
 ```
