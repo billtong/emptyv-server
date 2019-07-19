@@ -1,6 +1,6 @@
 package com.empty;
 
-import com.empty.filter.HandleFilterFunction;
+import com.empty.web.HandleFilterFunction;
 import com.empty.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -27,9 +27,9 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
-public class EmptyvideoAssetServiceApplication {
+public class AssetServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EmptyvideoAssetServiceApplication.class, args);
+        SpringApplication.run(AssetServiceApplication.class, args);
     }
 }
 

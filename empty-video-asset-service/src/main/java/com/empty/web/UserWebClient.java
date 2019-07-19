@@ -1,4 +1,4 @@
-package com.empty.client;
+package com.empty.web;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,6 +22,7 @@ public class UserWebClient {
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
+
     public Mono<ClientResponse> getUserByAuthToken(ServerRequest serverRequest) {
         List<String> authList = serverRequest.headers().header(HttpHeaders.AUTHORIZATION);
         String bearerToken = authList.isEmpty() ? null : authList.get(0);

@@ -1,6 +1,6 @@
-package com.empty.filter;
+package com.empty.web;
 
-import com.empty.client.UserWebClient;
+import com.empty.web.UserWebClient;
 import com.empty.domain.Comment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +11,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.server.HandlerFunction;
-import org.springframework.web.reactive.function.server.HandlerStrategies;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.server.ServerWebExchange;
-import org.springframework.web.server.WebFilter;
-import org.springframework.web.server.WebFilterChain;
-import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 import reactor.core.publisher.Mono;
 
-import javax.xml.ws.spi.http.HttpHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
 @Slf4j
