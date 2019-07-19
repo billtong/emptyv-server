@@ -44,7 +44,6 @@ public class CommentService {
             });
         }
         Mono<Comment> savedMono = commentRepository.save(comment);
-
         return Mono.zip(savedMono, Mono.just(serverRequest)).flatMap(tuple -> {
             Comment savedComment = tuple.getT1();
             tuple.getT2().attributes().put("comment", savedComment);
@@ -52,23 +51,27 @@ public class CommentService {
         });
     }
 
-    public Mono<ServerResponse> likeCommentById(ServerRequest serverRequest) {
-        String commentId = serverRequest.pathVariable("id");
-        return commentRepository.findById(commentId).flatMap(comment -> {
+    public Mono<ServerResponse> likeCommentById(ServerRequest req) {
+        String commentId = req.pathVariable("id");
+        Mono<Comment> commentMono = commentRepository.findById(commentId);
+        return Mono.zip(Mono.just(req), commentMono).flatMap(tuple -> {
+            ServerRequest req2 = tuple.getT1();
+            Comment comment = tuple.getT2();
             comment.setLikeNum(comment.getLikeNum() + 1);
-            Mono<Comment> commentMono = commentRepository.save(comment);
-            Mono<ServerResponse> ok = ok().build();
-            return Mono.zip(commentMono, ok).map(Tuple2::getT2);
-        }).switchIfEmpty(notFound().build());
+            req2.attributes().put("comment", comment);
+            return commentRepository.save(comment).then(ok().build());
+        });
     }
 
-    public Mono<ServerResponse> deleteById(ServerRequest serverRequest) {
-        String commentId = serverRequest.pathVariable("id");
-        return commentRepository.findById(commentId).flatMap(comment -> {
+    public Mono<ServerResponse> deleteById(ServerRequest req) {
+        String commentId = req.pathVariable("id");
+        Mono<Comment> commentMono = commentRepository.findById(commentId);
+        return Mono.zip(Mono.just(req), commentMono).flatMap(tuple -> {
+            ServerRequest req2 = tuple.getT1();
+            Comment comment = tuple.getT2();
             comment.setDeleted(true);
-            Mono<Comment> commentMono = commentRepository.save(comment);
-            Mono<ServerResponse> ok = ok().build();
-            return Mono.zip(commentMono, ok).map(Tuple2::getT2);
+            req2.attributes().put("comment", comment);
+            return commentRepository.save(comment).then(ok().build());
         });
     }
 }
