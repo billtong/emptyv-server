@@ -1,6 +1,6 @@
 package com.empty;
 
-import com.empty.filter.HandleCommentFilterFunction;
+import com.empty.web.HandleCommentFilterFunction;
 import com.empty.service.NotificationService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -25,9 +25,9 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
-public class EmptyvideoNotificationServiceApplication {
+public class NotificationServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EmptyvideoNotificationServiceApplication.class, args);
+        SpringApplication.run(NotificationServiceApplication.class, args);
     }
 }
 

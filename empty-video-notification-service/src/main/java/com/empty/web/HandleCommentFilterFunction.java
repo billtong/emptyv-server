@@ -1,6 +1,6 @@
-package com.empty.filter;
+package com.empty.web;
 
-import com.empty.client.UserWebClient;
+import com.empty.web.UserWebClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

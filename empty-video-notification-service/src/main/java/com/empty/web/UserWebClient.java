@@ -1,4 +1,4 @@
-package com.empty.client;
+package com.empty.web;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

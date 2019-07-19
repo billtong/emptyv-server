@@ -8,9 +8,9 @@
         <version>2.1.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.emptyvideo.server</groupId>
-    <artifactId>emptyvideo-user-service</artifactId>
-    <version>0.1</version>
+    <groupId>com.emptyvideo</groupId>
+    <artifactId>user-service</artifactId>
+    <version>1</version>
     <name>empty-video-user-service</name>
     <description>user micro-services of empty video server</description>
 
