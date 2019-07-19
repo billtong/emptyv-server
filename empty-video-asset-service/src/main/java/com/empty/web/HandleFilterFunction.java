@@ -93,7 +93,7 @@ public class HandleFilterFunction {
                 ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("notification", map);
                 return Mono.fromFuture(notificationFuture.completable()).then(Mono.just(serverResponse));
             }
-            return status(400).build();
+            return Mono.just(serverResponse);
         });
     }
 }

@@ -2,6 +2,8 @@ package com.empty.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,12 +29,13 @@ public class Notification implements Serializable {
         this.setTo(to);
         this.setContent(notiContent);
     }
-    /*
+}
+
+/*
     {
         "field": "",
         "subject": "userId",
         "action": "did something",
         "object": "commentId/messageId..."
     }
-     */
-}
+*/

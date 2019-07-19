@@ -22,6 +22,7 @@ public class UserWebClient {
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
+
     public Mono<ClientResponse> getUserByAuthToken(ServerRequest serverRequest) {
         List<String> authList = serverRequest.headers().header(HttpHeaders.AUTHORIZATION);
         String bearerToken = authList.isEmpty() ? null : authList.get(0);

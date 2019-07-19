@@ -4,6 +4,12 @@ server:
 
 #Monodb Configuration
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ev-consumer
+      auto-offset-reset: latest
+      
   data:
     mongodb:
       database: empty_db

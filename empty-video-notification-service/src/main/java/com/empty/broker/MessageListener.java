@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class KafkaMessageListener {
+public class MessageListener {
 
     @Autowired
     NotificationFactory notificationFactory;
@@ -31,7 +31,6 @@ public class KafkaMessageListener {
         log.info("hist--接收消息: {}，partition：{}", notification, partition);
     }
     */
-
 
 
 }

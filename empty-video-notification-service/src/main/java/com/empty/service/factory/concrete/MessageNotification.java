@@ -3,7 +3,6 @@ package com.empty.service.factory.concrete;
 import com.empty.service.factory.NotificationProduct;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Component(value = "message")

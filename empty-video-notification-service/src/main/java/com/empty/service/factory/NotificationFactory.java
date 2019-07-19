@@ -1,6 +1,5 @@
 package com.empty.service.factory;
 
-import com.empty.domain.Notification;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
