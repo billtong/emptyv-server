@@ -1,4 +1,4 @@
-package com.emptyvideo.ums.domain;
+package com.empty.domain;
 
 import lombok.Data;
 

@@ -1,9 +1,9 @@
-package com.emptyvideo.ums.auth.bearer;
+package com.empty.auth.bearer;
 
 
-import com.emptyvideo.ums.auth.jwt.AuthorizationHeaderPayload;
-import com.emptyvideo.ums.auth.jwt.JWTCustomVerifier;
-import com.emptyvideo.ums.auth.jwt.UsernamePasswordAuthenticationBearer;
+import com.empty.auth.jwt.AuthorizationHeaderPayload;
+import com.empty.auth.jwt.JWTCustomVerifier;
+import com.empty.auth.jwt.UsernamePasswordAuthenticationBearer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.web.server.ServerWebExchange;

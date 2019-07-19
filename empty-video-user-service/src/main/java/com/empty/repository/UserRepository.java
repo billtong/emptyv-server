@@ -1,6 +1,6 @@
-package com.emptyvideo.ums.repository;
+package com.empty.repository;
 
-import com.emptyvideo.ums.domain.User;
+import com.empty.domain.User;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;

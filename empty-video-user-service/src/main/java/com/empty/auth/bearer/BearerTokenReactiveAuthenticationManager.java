@@ -1,4 +1,4 @@
-package com.emptyvideo.ums.auth.bearer;
+package com.empty.auth.bearer;
 
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.core.Authentication;

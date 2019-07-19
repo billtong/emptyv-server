@@ -1,8 +1,8 @@
-package com.emptyvideo.ums;
+package com.empty;
 
-import com.emptyvideo.ums.domain.User;
-import com.emptyvideo.ums.repository.SessionRepository;
-import com.emptyvideo.ums.repository.UserRepository;
+import com.empty.domain.User;
+import com.empty.repository.SessionRepository;
+import com.empty.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UmsApplicationTests {
+public class UserServiceApplicationTests {
     @Autowired
     private UserRepository userRepository;
     @Autowired

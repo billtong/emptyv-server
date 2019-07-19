@@ -1,12 +1,12 @@
-package com.emptyvideo.ums;
+package com.empty;
 
-import com.emptyvideo.ums.auth.basic.BasicAuthenticationSuccessHandler;
-import com.emptyvideo.ums.auth.bearer.BearerTokenReactiveAuthenticationManager;
-import com.emptyvideo.ums.auth.bearer.ServerHttpBearerAuthenticationConverter;
-import com.emptyvideo.ums.repository.UserRepository;
-import com.emptyvideo.ums.service.AuthService;
-import com.emptyvideo.ums.service.SessionService;
-import com.emptyvideo.ums.service.UserService;
+import com.empty.auth.basic.BasicAuthenticationSuccessHandler;
+import com.empty.auth.bearer.BearerTokenReactiveAuthenticationManager;
+import com.empty.auth.bearer.ServerHttpBearerAuthenticationConverter;
+import com.empty.repository.UserRepository;
+import com.empty.service.AuthService;
+import com.empty.service.SessionService;
+import com.empty.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,9 +40,9 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @SpringBootApplication
 @EnableReactiveMongoRepositories
-public class UmsApplication {
+public class UserServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UmsApplication.class, args);
+        SpringApplication.run(UserServiceApplication.class, args);
     }
 
     @Bean

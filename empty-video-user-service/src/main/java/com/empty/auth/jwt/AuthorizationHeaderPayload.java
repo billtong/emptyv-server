@@ -1,4 +1,4 @@
-package com.emptyvideo.ums.auth.jwt;
+package com.empty.auth.jwt;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.server.ServerWebExchange;

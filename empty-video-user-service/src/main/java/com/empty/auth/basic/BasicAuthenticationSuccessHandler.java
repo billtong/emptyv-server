@@ -1,6 +1,6 @@
-package com.emptyvideo.ums.auth.basic;
+package com.empty.auth.basic;
 
-import com.emptyvideo.ums.auth.jwt.JWTTokenService;
+import com.empty.auth.jwt.JWTTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;

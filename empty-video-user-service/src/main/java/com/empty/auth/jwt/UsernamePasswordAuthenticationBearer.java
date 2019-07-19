@@ -1,4 +1,4 @@
-package com.emptyvideo.ums.auth.jwt;
+package com.empty.auth.jwt;
 
 import com.nimbusds.jwt.SignedJWT;
 import lombok.extern.slf4j.Slf4j;
