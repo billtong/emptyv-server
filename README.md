@@ -53,7 +53,11 @@ docker-compose up -d
 3. start all three micro-services manully (will be included in docker-compose later)  
 [empty-video-comment-service](empty-video-comment-service)  
 [empty-video-user-service](empty-video-user-service)  
-[empty-video-notification-service](empty-video-notification-service)  
+[empty-video-notification-service](empty-video-notification-service)
+[empty-video-dan-service](empty-video-dan-service)
+[empty-video-fav-list-service](empty-video-fav-list-service)
+[empty-video-tag-service](empty-video-tag-service)
+[empty-video-video-service](empty-video-video-service)  
 ```
 mvn spring-boot:run
 ```
