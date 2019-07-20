@@ -50,7 +50,7 @@ If you don't understand the method above your can also change all application.ym
 ```bash
 docker-compose up -d
 ```
-3. start all three micro-services manully (will be included in docker-compose later)  
+3. start all micro-services manully (will be included in docker-compose later)  
 [empty-video-comment-service](empty-video-comment-service)  
 [empty-video-user-service](empty-video-user-service)  
 [empty-video-notification-service](empty-video-notification-service)  
