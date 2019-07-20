@@ -28,6 +28,7 @@ class RouterFunctionConfig {
     DanService danService;
     @Autowired
     HandleFilterFunction handleFilterFunction;
+
     @Bean
     public RouterFunction<ServerResponse> getDanRouterFunction() {
         return route(GET("/api/dan/{videoId}"), danService::getDanFluxByVideoId);

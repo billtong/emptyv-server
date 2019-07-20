@@ -37,6 +37,7 @@ public class EmptyVideoTagServiceApplication {
 class RouterFunctionConfig {
     @Autowired
     TagService tagService;
+
     @Bean
     public RouterFunction<ServerResponse> getTagRouterFunction() {
         return route(GET("/api/tag/{name}"), tagService::getTagByName)

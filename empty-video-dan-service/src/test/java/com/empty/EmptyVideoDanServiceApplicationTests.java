@@ -12,7 +12,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
-import reactor.core.publisher.Mono;
 
 import java.util.Random;
 
@@ -21,15 +20,15 @@ import java.util.Random;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmptyVideoDanServiceApplicationTests {
-    @Autowired
-    private RouterFunctionConfig routerFunctionConfig;
     // get token manually
     private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE1NjM2MDg5OTB9.1WKQvsfrNEEdVgKpfs9wzVuC_q6TQz_4WWYmlPL__B0";
+    @Autowired
+    private RouterFunctionConfig routerFunctionConfig;
 
     @Test
     public void test1writeDanRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.postDanRouterFunction()).build();
-        for (int i=0; i<100; i++) {
+        for (int i = 0; i < 100; i++) {
             Dan dan = new Dan();
             dan.setStyle("normal");
             dan.setText("test dan");

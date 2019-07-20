@@ -24,7 +24,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -42,6 +41,7 @@ class RouterFunctionConfig {
 
     @Autowired
     HandleFilterFunction handleFilterFunction;
+
     @Bean
     public RouterFunction<ServerResponse> getVideoRouterFunction() {
         return route(GET("/api/video/{id}"), videoService::getVideoById)

@@ -1,7 +1,6 @@
 package com.empty;
 
 import com.empty.domain.Video;
-import com.sun.xml.internal.ws.api.pipe.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -16,8 +15,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 @Slf4j
@@ -26,12 +23,12 @@ import java.util.Random;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmptyVideoVideoServiceApplicationTests {
 
-    @Autowired
-    RouterFunctionConfig routerFunctionConfig;
-
     //add it manully
     private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE1NjM2MjA3Nzl9.K5YBQQ9hYCo607B6Gxh4zWsgX7n8Kq0DrtCZzqVsA2U";
     private final String testId = String.valueOf(new Random().nextInt());
+    @Autowired
+    RouterFunctionConfig routerFunctionConfig;
+
     @Test
     public void test1postVideo() {
         Video video = new Video();

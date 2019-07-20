@@ -26,9 +26,9 @@ services:
   kafka:
     image: confluentinc/cp-kafka:latest
     depends_on:
-      - zookeeper
+    - zookeeper
     ports:
-      - 9092:9092
+    - 9092:9092
     container_name: kafka
     environment:
       KAFKA_BROKER_ID: 1

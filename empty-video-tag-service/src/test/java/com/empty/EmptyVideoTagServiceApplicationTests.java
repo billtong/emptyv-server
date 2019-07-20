@@ -16,9 +16,9 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmptyVideoTagServiceApplicationTests {
 
+    private final String name = "test";
     @Autowired
     private RouterFunctionConfig routerFunctionConfig;
-    private final String name = "test";
 
     @Test
     public void test2GetVideoById() {

@@ -40,6 +40,7 @@ class RouterFunctionConfig {
     FavListService favListService;
     @Autowired
     HandleFilterFunction handleFilterFunction;
+
     @Bean
     public RouterFunction<ServerResponse> getFavListRouterFunction() {
         return route(GET("/api/favlist"), favListService::getUsersFavList)
