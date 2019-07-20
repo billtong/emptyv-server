@@ -56,6 +56,8 @@ public class VideoService {
                 case "unlike":
                     video.setUnlikeCount(video.getUnlikeCount() + 1);
                     break;
+                case "view":
+                    video.setViewCount(video.getViewCount() + 1);
             }
             return videoRepository.save(video).then(ok().build());
         });
