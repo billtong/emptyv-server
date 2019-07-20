@@ -35,10 +35,10 @@ public class VideoService {
 
     public Mono<ServerResponse> search(ServerRequest serverRequest) {
         /*
-            need elacstic search engine and real date to actually implement this method.
+            need elacstic search engine and real data to actually implement this method.
             wait for it.
          */
-        return null;
+        return ok().build();
     }
 
     public Mono<ServerResponse> updateVideo(ServerRequest serverRequest) {

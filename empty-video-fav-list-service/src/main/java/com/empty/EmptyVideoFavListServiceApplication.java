@@ -1,9 +1,12 @@
 package com.empty;
 
+import com.empty.service.FavListService;
+import com.empty.web.HandleFilterFunction;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,14 +18,42 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
 public class EmptyVideoFavListServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(EmptyVideoFavListServiceApplication.class, args);
+    }
+}
+
+@Configuration
+class RouterFunctionConfig {
+    @Autowired
+    FavListService favListService;
+    @Autowired
+    HandleFilterFunction handleFilterFunction;
+    @Bean
+    public RouterFunction<ServerResponse> getFavListRouterFunction() {
+        return route(GET("/api/favlist"), favListService::getUsersFavList)
+                .andRoute(GET("/api/favlist/{id}"), favListService::getById)
+                .andRoute(GET("/api/favlist/search"), favListService::search);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> authFavListRouterFunction() {
+        return route(POST("/api/favlist"), favListService::create)
+                .andRoute(PATCH("/api/favlist/{id}"), favListService::update)
+                .andRoute(DELETE("/api/favlist/{id}"), favListService::delete)
+                .filter(handleFilterFunction::authCheckBeforeFilterFunction)
+                .filter(handleFilterFunction::msgProduceAfterFilterFunction);
     }
 }
 

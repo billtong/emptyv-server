@@ -22,10 +22,11 @@
 - GET(/api/video/search)
 - PATCH(/api/video/{id})
 - POST(/api/video)
-### favlist-service [8005:]
+### fav-list-service [8005:]
 - ...
 ### tag-service [8006:]
-- ...
+- GET(/api/tag/{name})
+- GET(/api/tag/all)
 ### message-service [8007:]
 - ...
 ### notification-service [8008:]

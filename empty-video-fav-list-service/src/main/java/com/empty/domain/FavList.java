@@ -1,12 +1,16 @@
 package com.empty.domain;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "video_list")
+@Data
+@NoArgsConstructor
+@Document(collection = "fav_list")
 public class FavList {
     @Id
     private String id;
@@ -24,4 +28,6 @@ public class FavList {
     private String description;
 
     private List<String> videoIds;
+
+    private boolean deleted = false;
 }

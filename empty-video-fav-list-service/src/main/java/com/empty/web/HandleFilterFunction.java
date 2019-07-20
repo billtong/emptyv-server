@@ -1,5 +1,6 @@
 package com.empty.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
+@Slf4j
 @Component
 public class HandleFilterFunction {
     @Autowired
@@ -37,7 +39,11 @@ public class HandleFilterFunction {
                 return status(HttpStatus.FORBIDDEN).build();
             }
         });
-
     }
 
+    public Mono<ServerResponse> msgProduceAfterFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
+        Mono<ServerResponse> res = next.handle(req);
+        log.info("produce messaage to notification");
+        return res;
+    }
 }
