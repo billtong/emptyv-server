@@ -1,6 +1,6 @@
 package com.empty.web;
 
-import com.empty.domain.Dan;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
+@Slf4j
 @Component
 public class HandleFilterFunction {
     @Autowired
@@ -38,7 +39,14 @@ public class HandleFilterFunction {
                 return status(HttpStatus.FORBIDDEN).build();
             }
         });
-
     }
 
+
+    public Mono<ServerResponse> msgProduceAfterFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
+        log.info("send message to kafka");
+        /*
+            add notification topic
+         */
+        return next.handle(req);
+    }
 }

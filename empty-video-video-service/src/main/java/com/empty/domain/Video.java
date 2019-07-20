@@ -24,15 +24,13 @@ public class Video {
     private String thumbnailSrc;
     private String description;
 
-
     private List<String> tags; //<tag name>
-    private List<String> hasLists ; //<video_list id>the videoLists that have this video
 
     //count
-    private long viewCount;
-    private long likeCount;
-    private long unlikeCount;
-    private long favCount;
-    private long danCount;
-    private long commentCount;
+    private long viewCount = 0;
+    private long likeCount = 0;
+    private long unlikeCount = 0;
+    private long favCount = 0;
+    private long danCount = 0;
+    private long commentCount = 0;
 }

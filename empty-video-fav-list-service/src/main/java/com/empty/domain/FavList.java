@@ -10,10 +10,18 @@ import java.util.List;
 public class FavList {
     @Id
     private String id;
+
     private String name;
+
     private String userId;
+
     private Date created = new Date();
+
+    private Date updated;   //last update time
+
     private boolean isPublic = true;
+
     private String description;
+
     private List<String> videoIds;
 }

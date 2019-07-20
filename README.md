@@ -7,19 +7,21 @@
 - POST(/auth/login)
 - GET(/auth/user)
 - GET(/auth/active/{sessionID})
-- ...
 ### comment-service [8002:]
 - GET(/api/comment/{id})
 - GET(/api/comment/video/{id})
 - PATCH(/api/commment/{id}/like)
 - POST(/api/comment")
 - DELETE(/api/comment/{id})
-- ...
 ### dan-service [8003:]
 - GET(/api/dan/{videoId})
 - POST(/api/dan)
 ### video-service [8004:]
-- ...
+- GET(/api/video/{id})
+- GET(/api/video/random)
+- GET(/api/video/search)
+- PATCH(/api/video/{id})
+- POST(/api/video)
 ### favlist-service [8005:]
 - ...
 ### tag-service [8006:]
@@ -28,7 +30,6 @@
 - ...
 ### notification-service [8008:]
 - GET(/api/notification/{userId})
-- ...
 ### history-serivce [8009:]
 - ...
 ### point-service [8010:]
