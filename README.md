@@ -23,7 +23,12 @@
 - PATCH(/api/video/{id})
 - POST(/api/video)
 ### fav-list-service [8005:]
-- ...
+- GET(/api/favlist)
+- GET(/api/favlist/{id})
+- GET(/api/favlist/search)
+- POST(/api/favlist)
+- PATCH(/api/favlist/{id})
+- DELETE(/api/favlist/{id})
 ### tag-service [8006:]
 - GET(/api/tag/{name})
 - GET(/api/tag/all)
