@@ -1,9 +1,11 @@
 package com.empty;
 
+import com.empty.service.TagService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,9 +17,14 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
 public class EmptyVideoTagServiceApplication {
@@ -26,6 +33,16 @@ public class EmptyVideoTagServiceApplication {
     }
 }
 
+@Configuration
+class RouterFunctionConfig {
+    @Autowired
+    TagService tagService;
+    @Bean
+    public RouterFunction<ServerResponse> getTagRouterFunction() {
+        return route(GET("/api/tag/{name}"), tagService::getTagByName)
+                .andRoute(GET("/api/tag/all"), tagService::getAllTags);
+    }
+}
 
 @Configuration
 class WebConfig implements WebFluxConfigurer {
