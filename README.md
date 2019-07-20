@@ -1,34 +1,34 @@
 # Empty-Video Microservices
 ## 1. APIs
-### user-service
-- POST(/auth/login): for user to sign in, and return their public user info
-- GET(/auth/user): for other services to check bearer token, and returns public user info
-- GET(/auth/active/{sessionID}): for new user to activated their account via e-mail 
-- GET(/api/user/{id}): for other services and user to get public info, return public user info
-- POST(/api/user): for new user to register a new account, send email to the account with the activated link.
-- PATCH(/api/user): for other services and user to change their profile or system info.
+### user-service [8001:]
+- GET(/api/user/{id})
+- POST(/api/user)
+- PATCH(/api/user)
+- POST(/auth/login)
+- GET(/auth/user)
+- GET(/auth/active/{sessionID})
 - ...
-### comment-service
+### comment-service [8002:]
 - GET(/api/comment/{id})
 - GET(/api/comment/video/{id})
 - PATCH(/api/commment/{id}/like)
 - POST(/api/comment")
 - DELETE(/api/comment/{id})
 - ...
-### dan-service
+### dan-service [8003:]
 - ...
-### video-service
+### video-service [8004:]
 - ...
-### favlist-service
+### favlist-service [8005:]
 - ...
-### message-service
+### message-service [8006:]
 - ...
-### notification-service
+### notification-service [8007:]
 - GET(/api/notification/{userId})
 - ...
-### history-serivce
+### history-serivce [8009:]
 - ...
-### point-service
+### point-service [8010:]
 - ...
 ## 2. Deploy
 ### how to start this service
