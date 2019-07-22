@@ -55,7 +55,6 @@ class RouterFunctionConfig {
                 .andRoute(DELETE("/api/comment/{id}"), commentService::deleteById)
                 .filter(handleFilterFunction::authCheckBeforeFilterFunction)
                 .filter(handleFilterFunction::commentAfterFilterFunction);
-
     }
 }
 

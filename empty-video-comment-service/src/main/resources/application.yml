@@ -19,4 +19,3 @@ logging:
   level:
     org.springframework.data.mongodb: DEBUG
 
-

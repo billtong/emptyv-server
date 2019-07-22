@@ -67,10 +67,8 @@ public class UserServiceApplication {
 class RouterFunctionConfig {
     @Autowired
     UserService userService;
-
     @Autowired
     AuthService authService;
-
     @Autowired
     SessionService sessionService;
 
@@ -176,7 +174,6 @@ class KafkaConfig {
     public KafkaTemplate<String, Map<String, Object>> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-
 
     @Bean
     public Map<String, Object> consumerConfigs() {

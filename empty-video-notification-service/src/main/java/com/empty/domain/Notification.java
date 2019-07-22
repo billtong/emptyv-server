@@ -18,22 +18,20 @@ public class Notification implements Serializable {
     @Id
     private String id;
     @Indexed
-    private String to;  //user_id
+    private String to;
     @Indexed
-    private Date created = new Date(); //created time
-    private Map<String, String> content;  //some id;\
+    private Date created = new Date();
+    private Map<String, String> content;
+
+    /*
+    userId:         who
+    operation:      did
+    commentId:      what
+     */
+
 
     public Notification(String to, Map<String, String> notiContent) {
         this.setTo(to);
         this.setContent(notiContent);
     }
 }
-
-/*
-    {
-        "field": "",
-        "subject": "userId",
-        "action": "did something",
-        "object": "commentId/messageId..."
-    }
-*/

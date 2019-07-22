@@ -1,8 +1,10 @@
 package com.empty.web;
 
 import com.empty.domain.Comment;
+import com.empty.domain.OperationEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -18,6 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.PATCH;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
 @Slf4j
@@ -74,23 +79,17 @@ public class HandleFilterFunction {
                 String authId = String.valueOf(req2.attribute("authId").get());
                 Comment comment = (Comment) req2.attribute("comment").get();
                 Map<String, Object> map = new HashMap<>();
-                map.put("field", "comment");
-                map.put("subject", authId);
+                map.put("userId", authId);
                 map.put("object", comment);
-                switch (Objects.requireNonNull(req2.method())) {
-                    case POST:
-                        map.put("action", "create");
-                        break;
-                    case PATCH:
-                        map.put("action", "like");
-                        break;
-                    case DELETE:
-                        map.put("action", "delete");
-                        break;
-                    default:
-                        break;
+                if (Objects.requireNonNull(req2.method()).equals(POST) && req2.path().equals("/api/comment")) {
+                    map.put("operation", OperationEnum.WRITE_A_COMMENT);
+                } else if (Objects.requireNonNull(req2.method()).equals(PATCH) && req2.path().equals("/api/comment/".concat(comment.getId()).concat("/like"))) {
+                    map.put("operation", OperationEnum.LIKE_A_COMMENT);
+                } else if (Objects.requireNonNull(req2.method()).equals(DELETE) && req2.path().equals("/api/comment/".concat(comment.getId()))) {
+                    map.put("operation", OperationEnum.DELETE_A_COMMENT);
+                } else {
                 }
-                ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("notification", map);
+                ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("operation", map);
                 return Mono.fromFuture(notificationFuture.completable()).then(Mono.just(serverResponse));
             }
             return Mono.just(serverResponse);

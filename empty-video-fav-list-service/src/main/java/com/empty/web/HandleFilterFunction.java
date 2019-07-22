@@ -2,7 +2,9 @@ package com.empty.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.server.HandlerFunction;
@@ -11,6 +13,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
@@ -19,6 +22,9 @@ import static org.springframework.web.reactive.function.server.ServerResponse.st
 public class HandleFilterFunction {
     @Autowired
     UserWebClient userWebClient;
+
+    @Autowired
+    KafkaTemplate<String, Map<String, Object>> kafkaTemplate;
 
     public Mono<ServerResponse> authCheckBeforeFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
         Mono<ClientResponse> clientResponseMono = userWebClient.getUserByAuthToken(req);
@@ -43,7 +49,15 @@ public class HandleFilterFunction {
 
     public Mono<ServerResponse> msgProduceAfterFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
         Mono<ServerResponse> res = next.handle(req);
-        log.info("produce messaage to notification");
+        HttpMethod httpMethod = req.method();
+        switch (Objects.requireNonNull(httpMethod)) {
+            case POST:
+
+            case PATCH:
+
+            case DELETE:
+
+        }
         return res;
     }
 }

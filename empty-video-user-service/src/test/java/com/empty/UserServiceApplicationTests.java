@@ -42,7 +42,6 @@ public class UserServiceApplicationTests {
         newUserForm.put("name", "billtong");
         newUserForm.put("pwd", "123456");
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.userRouterFunction()).build();
-
         client.post()
                 .uri("/api/user")
                 .body(BodyInserters.fromObject(newUserForm))
