@@ -43,7 +43,7 @@ public class CommentServiceApplicationTests {
     @Test
     public void test1PostRouterWithoutAtFunction() {
         Comment comment = new Comment();
-        comment.setId(testId+"1");
+        comment.setId(testId + "1");
         comment.setText("test comment");
         comment.setVideoId("1");
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.commentWithAuthRouterFunction()).build();

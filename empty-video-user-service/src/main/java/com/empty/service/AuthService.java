@@ -12,7 +12,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
-import java.security.Principal;
 import java.util.Map;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -31,7 +30,7 @@ public class AuthService {
         return serverRequest.principal().zipWith(Mono.just(serverRequest)).flatMap(tuple -> {
             tuple.getT2().attributes().put("userId", tuple.getT1().getName());
             return userRepository.findById(tuple.getT1().getName()).flatMap(User::getPublicUserMapMono)
-                   .flatMap(map -> ok().body(Mono.just(map), Map.class));
+                    .flatMap(map -> ok().body(Mono.just(map), Map.class));
         });
     }
 

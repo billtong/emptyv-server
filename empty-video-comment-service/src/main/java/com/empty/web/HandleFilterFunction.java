@@ -4,7 +4,6 @@ import com.empty.domain.Comment;
 import com.empty.domain.OperationEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -20,9 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.PATCH;
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
 @Slf4j

@@ -5,7 +5,6 @@ import com.empty.auth.bearer.BearerTokenReactiveAuthenticationManager;
 import com.empty.auth.bearer.ServerHttpBearerAuthenticationConverter;
 import com.empty.repository.UserRepository;
 import com.empty.service.AuthService;
-import com.empty.service.SessionService;
 import com.empty.service.UserService;
 import com.empty.web.HandleFilterFunction;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -81,17 +80,20 @@ class RouterFunctionConfig {
         return route(GET("/api/user/{id}"), userService::getUser)
                 .andRoute(POST("/api/user"), userService::register);
     }
+
     @Bean
     RouterFunction<ServerResponse> userPatchUserFunction() {
         return route(PATCH("/api/user"), userService::updateProfile)
                 .filter(handleFilterFunction::userAfterFilterHandle);
     }
+
     @Bean
     RouterFunction<ServerResponse> authRouterFunction() {
         return route(POST("/auth/login"), authService::getMapAuthMono)
                 .andRoute(GET("/auth/active/{sessionId}"), authService::activeAccount)
                 .filter(handleFilterFunction::userAfterFilterHandle);
     }
+
     @Bean
     RouterFunction<ServerResponse> authMiddlewareRouterFunction() {
         return route(GET("/auth/user"), authService::getMapAuthMono);
