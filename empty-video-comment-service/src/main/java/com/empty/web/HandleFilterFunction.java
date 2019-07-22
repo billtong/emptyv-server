@@ -88,6 +88,7 @@ public class HandleFilterFunction {
                 } else if (Objects.requireNonNull(req2.method()).equals(DELETE) && req2.path().equals("/api/comment/".concat(comment.getId()))) {
                     map.put("operation", OperationEnum.DELETE_A_COMMENT);
                 } else {
+
                 }
                 ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("operation", map);
                 return Mono.fromFuture(notificationFuture.completable()).then(Mono.just(serverResponse));

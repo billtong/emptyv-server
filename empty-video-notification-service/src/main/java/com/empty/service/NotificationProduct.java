@@ -1,16 +1,14 @@
-package com.empty.service.product.impl;
+package com.empty.service;
 
 import com.empty.domain.Notification;
-import com.empty.service.product.NotificationProduct;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Component(value = "comment-notification-product")
-public class CommentNotificationProduct implements NotificationProduct {
-    @Override
+@Component
+public class NotificationProduct {
     public Mono<Notification> createCommentNotification(String userId, String operation, Map objectMap) {
         Map commentMap = objectMap;
         String commentId = (String) commentMap.get("id");
@@ -26,16 +24,22 @@ public class CommentNotificationProduct implements NotificationProduct {
         return Mono.empty();
     }
 
-    @Override
     public Mono<Notification> likeCommentNotification(String userId, String operation, Map objectMap) {
-        Map commentMap = objectMap;
-        String commentId = (String) commentMap.get("id");
-        String to = (String) commentMap.get("userId");
+        String commentId = (String) objectMap.get("id");
+        String to = (String) objectMap.get("userId");
         Map<String, String> content = new HashMap<>();
         content.put("userId", userId);
         content.put("operation", operation);
         content.put("commentId", commentId);
         Notification notification = new Notification(to, content);
+        return Mono.just(notification);
+    }
+
+    public Mono<Notification> userUpdateOrActivateNotification(String userId, String operation) {
+        Map<String, String> content = new HashMap<>();
+        content.put("userId", userId);
+        content.put("operation", operation);
+        Notification notification = new Notification(userId, content);
         return Mono.just(notification);
     }
 }

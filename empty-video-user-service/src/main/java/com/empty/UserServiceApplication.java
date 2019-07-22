@@ -7,6 +7,7 @@ import com.empty.repository.UserRepository;
 import com.empty.service.AuthService;
 import com.empty.service.SessionService;
 import com.empty.service.UserService;
+import com.empty.web.HandleFilterFunction;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -65,26 +66,37 @@ public class UserServiceApplication {
 
 @Configuration
 class RouterFunctionConfig {
+
     @Autowired
     UserService userService;
+
     @Autowired
     AuthService authService;
+
     @Autowired
-    SessionService sessionService;
+    HandleFilterFunction handleFilterFunction;
 
     @Bean
     RouterFunction<ServerResponse> userRouterFunction() {
         return route(GET("/api/user/{id}"), userService::getUser)
-                .andRoute(POST("/api/user"), userService::register)
-                .andRoute(PATCH("/api/user"), userService::updateProfile);
+                .andRoute(POST("/api/user"), userService::register);
     }
-
+    @Bean
+    RouterFunction<ServerResponse> userPatchUserFunction() {
+        return route(PATCH("/api/user"), userService::updateProfile)
+                .filter(handleFilterFunction::userAfterFilterHandle);
+    }
     @Bean
     RouterFunction<ServerResponse> authRouterFunction() {
         return route(POST("/auth/login"), authService::getMapAuthMono)
-                .andRoute(GET("/auth/user"), authService::getMapAuthMono)
-                .andRoute(GET("/auth/active/{sessionId}"), authService::activeAccount);
+                .andRoute(GET("/auth/active/{sessionId}"), authService::activeAccount)
+                .filter(handleFilterFunction::userAfterFilterHandle);
     }
+    @Bean
+    RouterFunction<ServerResponse> authMiddlewareRouterFunction() {
+        return route(GET("/auth/user"), authService::getMapAuthMono);
+    }
+
 }
 
 @Configuration

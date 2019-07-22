@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
+import java.security.Principal;
 import java.util.Map;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -27,23 +28,29 @@ public class AuthService {
     private SessionRepository sessionRepository;
 
     public Mono<ServerResponse> getMapAuthMono(ServerRequest serverRequest) {
-        return serverRequest.principal().flatMap(principal -> userRepository.findById(principal.getName())
-                .flatMap(User::getPublicUserMapMono)).flatMap(map -> ok().body(Mono.just(map), Map.class));
+        return serverRequest.principal().zipWith(Mono.just(serverRequest)).flatMap(tuple -> {
+            tuple.getT2().attributes().put("userId", tuple.getT1().getName());
+            return userRepository.findById(tuple.getT1().getName()).flatMap(User::getPublicUserMapMono)
+                   .flatMap(map -> ok().body(Mono.just(map), Map.class));
+        });
     }
 
     public Mono<ServerResponse> activeAccount(ServerRequest serverRequest) {
         String sessionId = serverRequest.pathVariable("sessionId");
-        return sessionRepository.findById(sessionId).flatMap(session -> {
+        return sessionRepository.findById(sessionId).zipWith(Mono.just(serverRequest)).flatMap(tuple -> {
+            Session session = tuple.getT1();
             Mono<User> userMono = userRepository.findById(session.getUserId());
             Mono<Session> sessionMono = Mono.justOrEmpty(session);
-            return Mono.zip(userMono, sessionMono).flatMap(tuple1 -> {
+            return Mono.zip(userMono, sessionMono, Mono.just(tuple.getT2())).flatMap(tuple1 -> {
                 User user = tuple1.getT1();
                 Session session1 = tuple1.getT2();
+                ServerRequest serverRequest1 = tuple1.getT3();
+                serverRequest1.attributes().put("userId", user.getId());
                 user.getSystem().setActive(true);
                 Mono<User> activeUser = userRepository.save(user);
                 Mono<ServerResponse> serverResponseMono = ok().build();
-                Mono<Void> voidMono = sessionRepository.deleteById(session1.getId());
-                return Mono.zip(activeUser, serverResponseMono, voidMono).map(Tuple2::getT2);
+                //Mono<Void> voidMono = sessionRepository.deleteById(session1.getId());
+                return Mono.zip(activeUser, serverResponseMono).map(Tuple2::getT2);
             });
         });
     }

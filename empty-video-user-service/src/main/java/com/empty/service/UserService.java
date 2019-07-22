@@ -63,7 +63,11 @@ public class UserService {
     }
 
     public Mono<ServerResponse> updateProfile(ServerRequest serverRequest) {
-        Mono<User> userMono = serverRequest.principal().flatMap(user -> userRepository.findById(user.getName()));
+        Mono<User> userMono = serverRequest.principal().zipWith(Mono.just(serverRequest))
+                .flatMap(tuple -> {
+                    tuple.getT2().attributes().put("userId", tuple.getT1().getName());
+                    return userRepository.findById(tuple.getT1().getName());
+                });
         Mono<Map> mapMono = serverRequest.bodyToMono(Map.class);
         return Mono.zip(userMono, mapMono).flatMap(t -> {
             User finalUser = t.getT1();

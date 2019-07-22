@@ -1,6 +1,7 @@
 package com.empty.domain;
 
-public enum Operations {
+public enum OperationEnum {
+    LOGIN,
     ACTIVATE_A_USER,
     UPDATE_A_USER,
 

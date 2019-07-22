@@ -55,6 +55,10 @@
 ![ad](img/ev-service-flow1.png)
 
 ### 以下列出全部的资源操作描述，以及相关操作
+- login
+消息服务: n/a  
+历史服务: 记录该操作  
+积分服务: 增加分数  
 - activate a user
 消息服务: 发给改user  
 历史服务: 记录该操作  
