@@ -65,13 +65,10 @@ public class UserServiceApplication {
 
 @Configuration
 class RouterFunctionConfig {
-
     @Autowired
     UserService userService;
-
     @Autowired
     AuthService authService;
-
     @Autowired
     HandleFilterFunction handleFilterFunction;
 
@@ -80,20 +77,17 @@ class RouterFunctionConfig {
         return route(GET("/api/user/{id}"), userService::getUser)
                 .andRoute(POST("/api/user"), userService::register);
     }
-
     @Bean
     RouterFunction<ServerResponse> userPatchUserFunction() {
         return route(PATCH("/api/user"), userService::updateProfile)
                 .filter(handleFilterFunction::userAfterFilterHandle);
     }
-
     @Bean
     RouterFunction<ServerResponse> authRouterFunction() {
         return route(POST("/auth/login"), authService::getMapAuthMono)
                 .andRoute(GET("/auth/active/{sessionId}"), authService::activeAccount)
                 .filter(handleFilterFunction::userAfterFilterHandle);
     }
-
     @Bean
     RouterFunction<ServerResponse> authMiddlewareRouterFunction() {
         return route(GET("/auth/user"), authService::getMapAuthMono);
@@ -112,7 +106,6 @@ class WebConfig implements WebFluxConfigurer {
 @Configuration
 @EnableWebFluxSecurity
 class SecurityConfig {
-
     @Autowired
     UserRepository userRepository;
 
@@ -131,7 +124,6 @@ class SecurityConfig {
                 .anyExchange().permitAll();
         return http.csrf().disable().build();
     }
-
     private AuthenticationWebFilter basicAuthenticationFilter() {
         UserDetailsRepositoryReactiveAuthenticationManager authManager = new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService());
         ServerAuthenticationSuccessHandler successHandler = new BasicAuthenticationSuccessHandler();
@@ -141,7 +133,6 @@ class SecurityConfig {
         basicAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, "/auth/login"));
         return basicAuthenticationFilter;
     }
-
     private AuthenticationWebFilter bearerAuthenticationFilter() {
         ServerAuthenticationConverter bearerConverter = new ServerHttpBearerAuthenticationConverter();
         ReactiveAuthenticationManager authManager = new BearerTokenReactiveAuthenticationManager();
@@ -151,8 +142,6 @@ class SecurityConfig {
         bearerAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers("/auth/user", "/api/user"));
         return bearerAuthenticationFilter;
     }
-
-
     @Bean
     public ReactiveUserDetailsService userDetailsService() {
         return username -> userRepository.findUserByEmail(username).switchIfEmpty(Mono.empty())
@@ -183,12 +172,10 @@ class KafkaConfig {
                 JsonSerializer.class);
         return new DefaultKafkaProducerFactory<>(configProps);
     }
-
     @Bean
     public KafkaTemplate<String, Map<String, Object>> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-
     @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();
@@ -199,7 +186,6 @@ class KafkaConfig {
         //props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         return props;
     }
-
     @Bean
     public ConsumerFactory<String, Map<String, Object>> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(
@@ -207,7 +193,6 @@ class KafkaConfig {
                 new StringDeserializer(),
                 new JsonDeserializer<>(Map.class));
     }
-
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Map<String, Object>> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Map<String, Object>> factory =

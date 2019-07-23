@@ -1,5 +1,6 @@
 package com.empty.service;
 
+import com.empty.domain.OperationEnum;
 import com.empty.domain.Video;
 import com.empty.repository.VideoRepository;
 import com.empty.util.ListTools;
@@ -10,6 +11,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
@@ -44,22 +46,40 @@ public class VideoService {
 
     public Mono<ServerResponse> updateVideo(ServerRequest serverRequest) {
         String videoId = serverRequest.pathVariable("id");
-        String action = String.valueOf(serverRequest.queryParam("action"));
+        String operation = String.valueOf(serverRequest.queryParam("operation"));
         Mono<Video> videoMono = videoRepository.findById(videoId);
-        return Mono.zip(Mono.just(action), videoMono).flatMap(tuple -> {
-            String action1 = tuple.getT1();
+        return Mono.zip(Mono.just(operation), videoMono, Mono.just(serverRequest)).flatMap(tuple -> {
+            String operation2 = tuple.getT1();
             Video video = tuple.getT2();
-            switch (action1) {
-                case "like":
+            ServerRequest serverRequest1 = tuple.getT3();
+            switch (OperationEnum.valueOf(operation2)) {
+                case LIKE_A_VIDEO:
                     video.setLikeCount(video.getLikeCount() + 1);
                     break;
-                case "unlike":
+                case CANCEL_LIKE_A_VIDEO:
+                    video.setLikeCount(video.getLikeCount() - 1);
+                    break;
+                case UNLIKE_A_VIDEO:
                     video.setUnlikeCount(video.getUnlikeCount() + 1);
                     break;
-                case "view":
+                case CANCEL_UNLIKE_A_VIDEO:
+                    video.setUnlikeCount(video.getUnlikeCount() - 1);
+                    break;
+                case VIEW_A_VIDEO:
                     video.setViewCount(video.getViewCount() + 1);
+                    break;
+                case TAG_A_VIDEO:
+                    String tag = String.valueOf(serverRequest1.queryParam("tag"));
+                    video.getTags().add(tag);
+                    video.setTags(video.getTags());
+                    break;
             }
-            return videoRepository.save(video).then(ok().build());
+            return videoRepository.save(video).zipWith(Mono.just(serverRequest1)).flatMap(tuple2 -> {
+                Video video1 = tuple2.getT1();
+                ServerRequest serverRequest2 = tuple2.getT2();
+                serverRequest2.attributes().put("video", video1);
+                return Mono.just(video1);
+            }).then(ok().build());
         });
     }
 
@@ -69,7 +89,12 @@ public class VideoService {
             String userId = String.valueOf(tuple1.getT1().attributes().get("authId"));
             Video newVideo = tuple1.getT2();
             newVideo.setUserId(userId);
-            return videoRepository.save(newVideo).then(status(201).build());
+            return videoRepository.save(newVideo).zipWith(Mono.just(tuple1.getT1())).flatMap(tuple2 -> {
+                Video videoSaved = tuple2.getT1();
+                ServerRequest serverRequest1 = tuple2.getT2();
+                serverRequest1.attributes().put("video", videoSaved);
+                return Mono.just(videoSaved);
+            }).then(status(201).build());
         });
     }
 }
