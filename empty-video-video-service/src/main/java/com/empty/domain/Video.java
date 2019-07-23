@@ -30,6 +30,7 @@ public class Video {
     private long viewCount = 0;
     private long likeCount = 0;
     private long unlikeCount = 0;
+
     private long favCount = 0;
     private long danCount = 0;
     private long commentCount = 0;
