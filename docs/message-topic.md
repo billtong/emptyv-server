@@ -1,76 +1,72 @@
-# 消息队列
-- 消息服务订阅 notification topic  
-- 历史服务订阅 history topic
-- 积分服务订阅 point topic
-- 视频服务订阅 video-count topic
-- 标签服务订阅 video-tag topic
-## 以下为全部的资源操作消息，以及相关操作
-- login  （auth login）  
-消息服务: n/a  
-历史服务: 记录该操作  
-积分服务: 增加分数  
+# Message Broker Summary
+all the topics list below
+- "notification" -> notification service  
+- "history" -> history service
+- "point" -> point service
+- "video-count" -> video-service
+- "video-tag" -> tag service
+## operations as well as service subscriber
+- login  （auth login）   
+history service: record this operation  
+point service: add to user's point  
 - activate a user （auth activate）  
-消息服务: 发给改user  
-历史服务: 记录该操作  
-积分服务: 初始化分数信息  
+notifi service: send to this user  
+history service: record this operation  
+point service: initialize user's point  
 - update a user  （patch user）  
-消息服务: 发给改user  
-历史服务: 记录该操作  
-积分服务: 增加分数  
+notifi service: send to this user  
+history service: record this operation  
+point service: add to user's point  
 - create a comment  （post comment）  
-消息服务: 发给@的人, 没有@的人不做处理  
-历史服务: 记录该操作两次，创造的人和被@的人  
-积分服务: 增加分数(判断单日上限)  
+notifi service: send to @user, or do nothing  
+history service: record this operation  
+point service: add to user's point(upder daily poinnt limit)  
+video-service： comment count++  
 - like a comment  （patch comment）  
-消息服务: 发给被喜欢的人  
-历史服务: 记录该操作两次，主动方和被动方  
-积分服务: 双方增加分数  
+notifi service: send to that user  
+history service: record this operation  
+point service: add to users' point  
 - delete a comment   （delete comment）  
-消息服务: n/a  
-历史服务: 记录该操作  
-积分服务: n/a  
-- like a video  （patch video）  
-消息服务: n/a   
-历史服务: 记录该操作  
-积分服务: 增加分数(判断单日上限)
+history service: record this operation  
+- like a video  （patch video）   
+history service: record this operation  
+point service: add to user's point(upder daily poinnt limit)
 - unlike a video  （patch video）  
-消息服务: n/a  
-历史服务: 记录该操作   
-积分服务: 增加分数(判断单日上限) 
+history service: record this operation   
+point service: add to user's point(upder daily poinnt limit) 
 - cancel unlike a video  （patch video）    
-消息服务: n/a 
-历史服务: 记录该操作  
-积分服务: n/a   
+history service: record this operation    
 - fav a video  （post favlist，patch favlist）    
-消息服务: n/a 
-历史服务: 记录该操作  
-积分服务: 增加分数(判断单日上限)  
+history service: record this operation  
+point service: add to user's point(upder daily poinnt limit)  
+video-service：fav count++    
+- tag a video (post video, patch video)  
+history service: record this operation   
+tag service： add this video to the tag, or create a new tag pojo    
 - send a message  （post message）  
-消息服务: 发给被发送者   
-历史服务: n/a  
-积分服务: n/a
+notifi service: send to message receiver   
 - get X point  （post point）  
-消息服务: 发给获得积分者   
-历史服务: 记录该操作  
-积分服务: n/a  
+notifi service: send to point reciever   
+history service: record this operation  
 - cancel like a video  （patch video）  
-消息服务: n/a 
-历史服务: 记录该操作  
-积分服务: n/a   
-- cancel like a comment  （patch comment）  
-消息服务: n/a  
-历史服务: 记录该操作两次，主动方和被动方  
-积分服务: n/a  
-- post a video(未来添加)   
-消息服务: n/a   
-历史服务: n/a  
-积分服务: n/a  
-## topic:"video-count"-视频数据统计消息，以及相关操作
+history service: record this operation    
+- cancel like a comment  （patch comment）   
+history service: record operations  
+- post a dan (post dan)  
+video-service：dan count++    
+- post a video   
+tag service：add this video to the tag, or create a new tag pojo
+## summary by topics
+### topic: "notification", subscriber: notification-service
+### topic: "history", subscriber: history service
+### topic: "point", subscriber: point service
+### topic:"video-count", subscriber: video-service
 - add a comment （post comment）   
-视频服务：评论数加一
+comment count++
 - add to favlist  （post favlist，patch favlist）  
-视频服务  收藏数加一
+fav count++
 - add a dan  （post dan）  
-视频服务：收藏数加一
-## topic:"tag"-标签操作消息，以及相关操作
-- add video to tag （post video，patch video） 
+danmu count++
+### topic:"tag", subscriber: tag service
+- tag a video （post video，patch video） 
+- post a video

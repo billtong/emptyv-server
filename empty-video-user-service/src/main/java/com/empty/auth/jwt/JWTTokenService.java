@@ -46,8 +46,8 @@ public class JWTTokenService {
     private static long getExpiration() {
         long expiration = 5;
         return new Date().toInstant()
-                //.plus(Duration.ofHours(expiration))   //for production
-                .plus(Period.ofDays(1000))                //for testing purpose
+                .plus(Duration.ofHours(expiration))   //for production
+                //.plus(Period.ofDays(1000))                //for testing purpose
                 .toEpochMilli();
     }
 }

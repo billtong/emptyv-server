@@ -1,7 +1,10 @@
 # empty-video-microService Structure
-### 资源操作与相关服务监听该操作关系图.
-消息服务，历史记录服务和积分服务都使用了下图的结构。
-资源操作请求成功后，该操作会抽象成一个message，结构如下。
+### asset CRUD with the message listerner in services
+all the services are using the diagram below.
+
+![ad](img/asset-operation-diagram.png)  
+
+Every Asset Operations are "abstracted" as below json template.
 ```javascript
 {
   "userId": "xxx",                  //操作请求用户
@@ -9,7 +12,6 @@
   "object": comment                 //操作的资源实例
 }
 ```
-![ad](img/asset-operation-diagram.png)
 ### 视频数据统计(弹幕，评论和收藏数)
 在用户进行完comment，dan，favlist服务的添加，或favlist的改变值操作后，需要通过消息队列向video服务发布数据改变的消息，而video会做出相应的改动
 ![flow](img/video-count-diagram.png)

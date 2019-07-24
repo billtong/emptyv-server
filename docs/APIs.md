@@ -10,7 +10,7 @@
 - GET(/api/comment/{id})
 - GET(/api/comment/video/{id})
 - PATCH(/api/commment/{id}/like)
-- POST(/api/comment")
+- POST(/api/comment)
 - DELETE(/api/comment/{id})
 ## dan-service [8003:]
 - GET(/api/dan/{videoId})
@@ -18,13 +18,13 @@
 ## video-service [8004:]
 - GET(/api/video/{id})
 - GET(/api/video/random)
-- GET(/api/video/search)
+- GET(/api/video/search) `(future)`
 - PATCH(/api/video/{id}/{operation})
 - POST(/api/video)
 ## fav-list-servic[8005:]
 - GET(/api/favlist)
 - GET(/api/favlist/{id})
-- GET(/api/favlist/search)
+- GET(/api/favlist/search) `(future)`
 - POST(/api/favlist)
 - PATCH(/api/favlist/{id})
 - DELETE(/api/favlist/{id})
