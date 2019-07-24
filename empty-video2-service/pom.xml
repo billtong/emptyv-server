@@ -11,7 +11,7 @@
     <groupId>com.emptyvideo</groupId>
     <artifactId>video-service</artifactId>
     <version>1.0</version>
-    <name>empty-video-video-service</name>
+    <name>empty-video2-service</name>
     <description>video service for empty video</description>
 
     <properties>

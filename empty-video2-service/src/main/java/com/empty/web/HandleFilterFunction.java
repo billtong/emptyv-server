@@ -60,7 +60,6 @@ public class HandleFilterFunction {
     public Mono<ServerResponse> msgProduceAfterFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
         log.info("send message to kafka");
         Mono<ServerResponse> result = next.handle(req);
-
         return Mono.zip(Mono.just(req), Mono.just(next), result).flatMap(tuple1 -> {
             ServerResponse response = tuple1.getT3();
             if (response.statusCode().is2xxSuccessful()) {
@@ -73,17 +72,21 @@ public class HandleFilterFunction {
                 HttpMethod method = Objects.requireNonNull(req2.method());
                 if (method.equals(POST) && req2.path().equals("/api/video")) {
                     map.put("operation", OperationEnum.POST_A_VIDEO);
-                    /*
-                        might add in the future
-                     */
-                    return Mono.just(response);
+                    ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
+                    ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("video-tag", map);
+                    return Mono.zip(Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
+                            .then(Mono.just(response));
                 } else if (method.equals(PATCH)) {
                     OperationEnum operation = OperationEnum.valueOf(req2.pathVariable("notification"));
                     map.put("operation", operation);
                     ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
                     if (operation.equals(CANCEL_LIKE_A_VIDEO) || operation.equals(CANCEL_UNLIKE_A_VIDEO)) {
                         return Mono.fromFuture(historyFuture.completable()).then(Mono.just(response));
-                    } else if(operation.equals(TAG_A_VIDEO))
+                    } else if(operation.equals(TAG_A_VIDEO)) {
+                        ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("video-tag", map);
+                        return Mono.zip(Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
+                                .then(Mono.just(response));
+                    }
                     ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("point", map);
                     return Mono.zip(Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
                             .then(Mono.just(response));

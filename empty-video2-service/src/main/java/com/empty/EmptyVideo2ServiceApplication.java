@@ -28,9 +28,9 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
-public class EmptyVideoVideoServiceApplication {
+public class EmptyVideo2ServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EmptyVideoVideoServiceApplication.class, args);
+        SpringApplication.run(EmptyVideo2ServiceApplication.class, args);
     }
 }
 

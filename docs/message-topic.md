@@ -55,6 +55,7 @@ history service: record this operation
 #### post a dan (post dan)  
 - video-service：dan count++    
 #### post a video   
+- history service: record this operation   
 - tag service：add this video to the tag, or create a new tag pojo
 ## summary by topics
 ### topic: "notification", subscriber: notification-service
