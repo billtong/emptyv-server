@@ -1,5 +1,10 @@
 # 消息队列
-## Topic:"operation" - 以下为全部的资源操作消息，以及相关操作
+- 消息服务订阅 notification topic  
+- 历史服务订阅 history topic
+- 积分服务订阅 point topic
+- 视频服务订阅 video-count topic
+- 标签服务订阅 video-tag topic
+## 以下为全部的资源操作消息，以及相关操作
 - login  （auth login）  
 消息服务: n/a  
 历史服务: 记录该操作  
@@ -55,6 +60,10 @@
 - cancel like a comment  （patch comment）  
 消息服务: n/a  
 历史服务: 记录该操作两次，主动方和被动方  
+积分服务: n/a  
+- post a video(未来添加)   
+消息服务: n/a   
+历史服务: n/a  
 积分服务: n/a  
 ## topic:"video-count"-视频数据统计消息，以及相关操作
 - add a comment （post comment）   

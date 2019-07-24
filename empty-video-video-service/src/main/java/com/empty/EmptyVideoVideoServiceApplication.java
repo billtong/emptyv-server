@@ -50,8 +50,8 @@ class RouterFunctionConfig {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> patchVideoRouterFunction() {
-        return route(PATCH("/api/video/{id}"), videoService::updateVideo)//like, unlike
+    public RouterFunction<ServerResponse> patchAndPostVideoRouterFunction() {
+        return route(PATCH("/api/video/{id}/{operation}"), videoService::updateVideo)//like, unlike
                 .andRoute(POST("/api/video"), videoService::postNewVideo)
                 .filter(handleFilterFunction::authCheckBeforeFilterFunction)
                 .filter(handleFilterFunction::msgProduceAfterFilterFunction);

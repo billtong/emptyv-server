@@ -46,7 +46,7 @@ public class VideoService {
 
     public Mono<ServerResponse> updateVideo(ServerRequest serverRequest) {
         String videoId = serverRequest.pathVariable("id");
-        String operation = String.valueOf(serverRequest.queryParam("operation"));
+        String operation = serverRequest.pathVariable("operation");
         Mono<Video> videoMono = videoRepository.findById(videoId);
         return Mono.zip(Mono.just(operation), videoMono, Mono.just(serverRequest)).flatMap(tuple -> {
             String operation2 = tuple.getT1();
@@ -69,7 +69,7 @@ public class VideoService {
                     video.setViewCount(video.getViewCount() + 1);
                     break;
                 case TAG_A_VIDEO:
-                    String tag = String.valueOf(serverRequest1.queryParam("tag"));
+                    String tag = serverRequest1.queryParam("tag").get();
                     video.getTags().add(tag);
                     video.setTags(video.getTags());
                     break;

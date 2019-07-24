@@ -36,13 +36,20 @@ public class HandleFilterFunction {
                 map.put("userId", userId);
                 if (Objects.requireNonNull(req2.method()).equals(GET)) {    //matches not working here
                     map.put("operation", OperationEnum.ACTIVATE_A_USER);
-                } else if (Objects.requireNonNull(req2.method()).equals(POST) && req2.path().equals("/auth/login")) {
-                    map.put("operation", OperationEnum.LOGIN);
                 } else if (Objects.requireNonNull(req2.method()).equals(PATCH) && req2.path().equals("/api/user")) {
                     map.put("operation", OperationEnum.UPDATE_A_USER);
+                } else if (Objects.requireNonNull(req2.method()).equals(POST) && req2.path().equals("/auth/login")) {
+                map.put("operation", OperationEnum.LOGIN);
+                ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
+                ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("point", map);
+                return Mono.zip(Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
+                        .then(Mono.just(serverResponse));
                 }
-                ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("operation", map);
-                return Mono.fromFuture(notificationFuture.completable()).then(Mono.just(serverResponse));
+                ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("notification", map);
+                ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
+                ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("point", map);
+                return Mono.zip(Mono.fromFuture(notificationFuture.completable()), Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
+                        .then(Mono.just(serverResponse));
             } else {
                 return Mono.just(serverResponse);
             }

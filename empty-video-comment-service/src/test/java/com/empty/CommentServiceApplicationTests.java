@@ -20,7 +20,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 public class CommentServiceApplicationTests {
 
     //change it manually
-    private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE1NjM3ODI4MDV9.Gb1cLGgt3d2Akuf7Olj6IvKxerH4_XnZhdQ-1RQX2R4";
+    private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE2NTAzMjE1OTN9.oB63ETAIlBRmk8xGMoAJqObvHey4IBcdNT1YXtKP1z0";
     private final String testId = "test";//String.valueOf(new Random().nextInt());
 
     @Autowired

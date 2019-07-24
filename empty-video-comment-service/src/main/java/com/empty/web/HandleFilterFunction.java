@@ -84,12 +84,17 @@ public class HandleFilterFunction {
                     map.put("operation", OperationEnum.LIKE_A_COMMENT);
                 } else if (Objects.requireNonNull(req2.method()).equals(DELETE) && req2.path().equals("/api/comment/".concat(comment.getId()))) {
                     map.put("operation", OperationEnum.DELETE_A_COMMENT);
+                    ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
+                    return Mono.fromFuture(historyFuture.completable()).then(Mono.just(serverResponse));
                 } else {
-
+                    return Mono.just(serverResponse);
                 }
-                ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("operation", map);
-                return Mono.fromFuture(notificationFuture.completable()).then(Mono.just(serverResponse));
-            }
+                ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("notification", map);
+                ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
+                ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("point", map);
+                return Mono.zip(Mono.fromFuture(notificationFuture.completable()), Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
+                        .then(Mono.just(serverResponse));
+        }
             return Mono.just(serverResponse);
         });
     }

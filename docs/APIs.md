@@ -19,7 +19,7 @@
 - GET(/api/video/{id})
 - GET(/api/video/random)
 - GET(/api/video/search)
-- PATCH(/api/video/{id})
+- PATCH(/api/video/{id}/{operation})
 - POST(/api/video)
 ## fav-list-servic[8005:]
 - GET(/api/favlist)

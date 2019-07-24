@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.time.Period;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -45,7 +46,8 @@ public class JWTTokenService {
     private static long getExpiration() {
         long expiration = 5;
         return new Date().toInstant()
-                .plus(Duration.ofHours(expiration))
+                //.plus(Duration.ofHours(expiration))   //for production
+                .plus(Period.ofDays(1000))                //for testing purpose
                 .toEpochMilli();
     }
 }

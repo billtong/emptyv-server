@@ -18,8 +18,6 @@ public class NotificationFactory {
         String operation = String.valueOf(operationMessage.get("operation"));
         Map objectMap = (Map) operationMessage.get("object");
         switch (OperationEnum.valueOf(operation)) {
-            case LOGIN:
-                break;
             case UPDATE_A_USER:
                 return notificationProduct.userUpdateOrActivateNotification(userId, operation);
             case ACTIVATE_A_USER:
@@ -28,8 +26,6 @@ public class NotificationFactory {
                 return notificationProduct.createCommentNotification(userId, operation, objectMap);
             case LIKE_A_COMMENT:
                 return notificationProduct.likeCommentNotification(userId, operation, objectMap);
-            case DELETE_A_COMMENT:
-                break;
         }
         return Mono.empty();
     }

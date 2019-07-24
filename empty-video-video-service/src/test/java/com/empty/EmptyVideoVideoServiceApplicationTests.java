@@ -1,8 +1,10 @@
 package com.empty;
 
+import com.empty.domain.OperationEnum;
 import com.empty.domain.Video;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -24,8 +26,8 @@ import java.util.Random;
 public class EmptyVideoVideoServiceApplicationTests {
 
     //add it manully
-    private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE1NjM2MjA3Nzl9.K5YBQQ9hYCo607B6Gxh4zWsgX7n8Kq0DrtCZzqVsA2U";
-    private final String testId = String.valueOf(new Random().nextInt());
+    private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE2NTAzMjE1OTN9.oB63ETAIlBRmk8xGMoAJqObvHey4IBcdNT1YXtKP1z0";
+    private final String testId = "test";
     @Autowired
     RouterFunctionConfig routerFunctionConfig;
 
@@ -38,7 +40,7 @@ public class EmptyVideoVideoServiceApplicationTests {
         video.setThumbnailSrc("teste thumbnail src");
         video.setName("test video name");
         video.setId(testId);
-        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.postVideoRouterFunction()).build();
+        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
         client.post().uri("/api/video")
                 .body(BodyInserters.fromObject(video))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
@@ -63,8 +65,8 @@ public class EmptyVideoVideoServiceApplicationTests {
 
     @Test
     public void test3likeVideo() {
-        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchVideoRouterFunction()).build();
-        client.patch().uri("/api/video/".concat(testId))
+        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
+        client.patch().uri("/api/video/".concat(testId).concat("/").concat(OperationEnum.LIKE_A_VIDEO.toString()))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
@@ -73,11 +75,45 @@ public class EmptyVideoVideoServiceApplicationTests {
 
     @Test
     public void test4unlikeVideo() {
-        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchVideoRouterFunction()).build();
-        client.patch().uri("/api/video/".concat(testId))
+        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
+        client.patch().uri("/api/video/".concat(testId).concat("/").concat(OperationEnum.UNLIKE_A_VIDEO.toString()))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
                 .expectStatus().isOk();
     }
+
+    @Test
+    public void test5CancelLikeVideo() {
+        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
+        client.patch().uri("/api/video/".concat(testId).concat("/").concat(OperationEnum.CANCEL_LIKE_A_VIDEO.toString()))
+                .header(HttpHeaders.AUTHORIZATION, bearToken)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .exchange()
+                .expectStatus().isOk();
+    }
+
+    @Test
+    public void test6CancleUnlikeVideo() {
+        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
+        client.patch().uri("/api/video/".concat(testId).concat("/").concat(OperationEnum.CANCEL_UNLIKE_A_VIDEO.toString()))
+                .header(HttpHeaders.AUTHORIZATION, bearToken)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .exchange()
+                .expectStatus().isOk();
+    }
+
+    @Test
+    public void test7TagVideo() {
+        String param = "?tag=testtag";
+        WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
+        client.patch()
+                .uri("/api/video/".concat(testId).concat("/").concat(OperationEnum.TAG_A_VIDEO.toString()).concat(param))
+                .header(HttpHeaders.AUTHORIZATION, bearToken)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .exchange()
+                .expectStatus().isOk();
+    }
+
+
 }

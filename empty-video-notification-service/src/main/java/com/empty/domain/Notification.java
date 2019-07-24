@@ -26,7 +26,7 @@ public class Notification implements Serializable {
     /*
     userId:         who
     operation:      did
-    commentId:      what
+    object:      what
      */
 
 

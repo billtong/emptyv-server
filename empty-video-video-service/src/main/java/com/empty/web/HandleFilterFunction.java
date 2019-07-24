@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.empty.domain.OperationEnum.CANCEL_LIKE_A_VIDEO;
+import static com.empty.domain.OperationEnum.CANCEL_UNLIKE_A_VIDEO;
 import static org.springframework.http.HttpMethod.PATCH;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
@@ -54,7 +56,6 @@ public class HandleFilterFunction {
         });
     }
 
-
     public Mono<ServerResponse> msgProduceAfterFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
         log.info("send message to kafka");
         Mono<ServerResponse> result = next.handle(req);
@@ -71,12 +72,22 @@ public class HandleFilterFunction {
                 HttpMethod method = Objects.requireNonNull(req2.method());
                 if (method.equals(POST) && req2.path().equals("/api/video")) {
                     map.put("operation", OperationEnum.POST_A_VIDEO);
+                    /*
+                        might add in the future
+                     */
+                    return Mono.just(response);
                 } else if (method.equals(PATCH)) {
-                    String operation = String.valueOf(req2.queryParam("operation"));
-                    map.put("operation", OperationEnum.valueOf(operation));
+                    OperationEnum operation = OperationEnum.valueOf(req2.pathVariable("notification"));
+                    map.put("operation", operation);
+                    ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
+                    if (operation.equals(CANCEL_LIKE_A_VIDEO) || operation.equals(CANCEL_UNLIKE_A_VIDEO)) {
+                        return Mono.fromFuture(historyFuture.completable()).then(Mono.just(response));
+                    }
+                    ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("point", map);
+                    return Mono.zip(Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
+                            .then(Mono.just(response));
                 }
-                ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("operation", map);
-                return Mono.fromFuture(notificationFuture.completable()).then(Mono.just(response));
+                return Mono.just(response);
             } else {
                 return Mono.just(response);
             }
