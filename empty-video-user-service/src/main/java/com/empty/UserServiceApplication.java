@@ -92,7 +92,6 @@ class RouterFunctionConfig {
     RouterFunction<ServerResponse> authMiddlewareRouterFunction() {
         return route(GET("/auth/user"), authService::getMapAuthMono);
     }
-
 }
 
 @Configuration

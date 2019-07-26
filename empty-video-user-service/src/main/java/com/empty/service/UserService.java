@@ -57,7 +57,7 @@ public class UserService {
                 //send this info to kafka message breaker start
                 //code
                 //send this info to kafka message breaker end
-                return Mono.zip(savedSession, responseMono).map(Tuple2::getT2).switchIfEmpty(status(400).build());
+                return Mono.zip(savedSession, responseMono).map(Tuple2::getT2);
             });
         });
     }
@@ -77,6 +77,6 @@ public class UserService {
             Mono<ServerResponse> serverResponseMono = ok().body(Mono.just(msg), Map.class);
             msg.put("message", "success");
             return Mono.zip(userMono1, serverResponseMono).map(Tuple2::getT2);
-        }).switchIfEmpty(status(400).build());
+        })
     }
 }

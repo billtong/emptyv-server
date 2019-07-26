@@ -37,37 +37,37 @@ all the topics list below
 #### cancel unlike a video  （patch video）    
 - history service: record this operation    
 #### fav a video  （post favlist，patch favlist）    
-history service: record this operation  
-- point service: add to user's point(upder daily poinnt limit)  
-- video-service：fav count++    
-#### tag a video (post video, patch video)  
-- history service: record this operation   
-- tag service： add this video to the tag, or create a new tag pojo    
-#### send a message  （post message）  
-- notifi service: send to message receiver   
-#### get X point  （post point）  
-- notifi service: send to point reciever   
-- history service: record this operation  
-#### cancel like a video  （patch video）  
-- history service: record this operation    
-#### cancel like a comment  （patch comment）   
-- history service: record operations  
-#### post a dan (post dan)  
-- video-service：dan count++    
-#### post a video   
-- history service: record this operation   
+- history service: record this operation
+- point service: add to user's point(upder daily poinnt limit)
+- video-service：fav count++
+#### tag a video (post video, patch video)
+- history service: record this operation
+- tag service： add this video to the tag, or create a new tag pojo
+#### send a message  （post message)
+- notifi service: send to message receiver
+#### get X point  （post point)
+- notifi service: send to point reciever
+- history service: record this operation
+#### cancel like a video  （patch video)
+- history service: record this operation
+#### cancel like a comment  （patch comment)
+- history service: record operations
+#### post a dan (post dan)
+- video-service：dan count++
+#### post a video
+- history service: record this operation
 - tag service：add this video to the tag, or create a new tag pojo
 ## summary by topics
 ### topic: "notification", subscriber: notification-service
 ### topic: "history", subscriber: history service
 ### topic: "point", subscriber: point service
 ### topic:"video-count", subscriber: video-service
-- add a comment （post comment）   
+- add a comment(post comment)
 comment count++
-- add to favlist  （post favlist，patch favlist）  
+- add to favlist(post favlist，patch favlist) 
 fav count++
-- add a dan  （post dan）  
+- add a dan（post dan)
 danmu count++
 ### topic:"tag", subscriber: tag service
-- tag a video （post video，patch video） 
+- tag a video （post video，patch video)
 - post a video
