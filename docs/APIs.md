@@ -25,12 +25,12 @@
 - GET(/api/favlist)
 - GET(/api/favlist/{id})
 - GET(/api/favlist/search) `(future)`
-- POST(/api/favlist)
-- PATCH(/api/favlist/{id})
+- POST(/api/favlist) 
+- PATCH(/api/favlist/{id}/?operation=""&videoId="")
 - DELETE(/api/favlist/{id})
 ## tag-service [8006:]
 - GET(/api/tag/{name})
-- GET(/api/tag/all)
+- GET(/api/tags/all)
 ## message-service [8007:]
 - ...
 ## notification-service [8008:]

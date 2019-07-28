@@ -1,0 +1,21 @@
+#Application Configuration
+server:
+  port: 8006
+
+#Monodb Configuration
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ev-consumer
+      auto-offset-reset: latest
+  data:
+    mongodb:
+      database: empty_db
+      host: localhost
+      port: 27017
+
+#logging
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
