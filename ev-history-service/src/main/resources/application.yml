@@ -1,6 +1,6 @@
 #Application Configuration
 server:
-  port: 8008
+  port: 8009
 
 #Monodb Configuration
 spring:
@@ -9,7 +9,6 @@ spring:
     consumer:
       group-id: ev-consumer
       auto-offset-reset: latest
-
   data:
     mongodb:
       database: empty_db
