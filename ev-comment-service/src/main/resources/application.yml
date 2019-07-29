@@ -1,9 +1,11 @@
 #Application Configuration
 server:
-  port: 8002
+  port: 0
 
 #Monodb Configuration
 spring:
+  application:
+    name: comment-service
   data:
     mongodb:
       database: empty_db
@@ -13,6 +15,11 @@ spring:
     schema:
   kafka:
     bootstrap-servers: localhost:9092
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 #logging
 logging:

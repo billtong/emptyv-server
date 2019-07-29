@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -26,6 +27,7 @@ import java.util.Map;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class CommentServiceApplication {
     public static void main(String[] args) {
@@ -44,15 +46,15 @@ class RouterFunctionConfig {
 
     @Bean
     RouterFunction<ServerResponse> commentRouterFunction() {
-        return route(GET("/api/comment/{id}"), commentService::getById)
-                .andRoute(GET("/api/comment/video/{id}"), commentService::getByVideoId);
+        return route(GET("/comment/{id}"), commentService::getById)
+                .andRoute(GET("/comment/video/{id}"), commentService::getByVideoId);
     }
 
     @Bean
     RouterFunction<ServerResponse> commentWithAuthRouterFunction() {
-        return route(POST("/api/comment"), commentService::write)
-                .andRoute(PATCH("/api/comment/{id}/like"), commentService::likeCommentById)
-                .andRoute(DELETE("/api/comment/{id}"), commentService::deleteById)
+        return route(POST("/comment"), commentService::write)
+                .andRoute(PATCH("/comment/{id}/like"), commentService::likeCommentById)
+                .andRoute(DELETE("/comment/{id}"), commentService::deleteById)
                 .filter(handleFilterFunction::authCheckBeforeFilterFunction)
                 .filter(handleFilterFunction::commentAfterFilterFunction);
     }

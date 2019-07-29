@@ -34,7 +34,7 @@ public class EmailService {
             helper.setFrom(MessageFormat.format("EmptyVideo <{0}>", this.username));
             helper.setSubject("Email Verification of your new EmptyVideo account");
             helper.setText(text, true);
-        } catch (MessagingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         javaMailSender.send(message);

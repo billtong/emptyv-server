@@ -44,12 +44,12 @@ class RouterFunctionConfig {
 
     @Bean
     public RouterFunction<ServerResponse> getDanRouterFunction() {
-        return route(GET("/api/dan/{videoId}"), danService::getDanFluxByVideoId);
+        return route(GET("/dan/{videoId}"), danService::getDanFluxByVideoId);
     }
 
     @Bean
     public RouterFunction<ServerResponse> postDanRouterFunction() {
-        return route(POST("/api/dan"), danService::write)
+        return route(POST("/dan"), danService::write)
                 .filter(handleFilterFunction::authCheckBeforeFilterFunction)
                 .filter(handleFilterFunction::messageProvideAfterFilterFunction);
     }

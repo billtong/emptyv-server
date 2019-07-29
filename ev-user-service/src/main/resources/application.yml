@@ -1,9 +1,11 @@
 #Application Configuration
 server:
-  port: 8001
+  port: 0
 
 #Monodb Configuration
 spring:
+  application:
+    name: user-service
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -23,6 +25,11 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 #logging
 logging:

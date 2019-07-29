@@ -1,41 +1,42 @@
 # APIs
-## user-service [8001:]
-- GET(/api/user/{id})
-- POST(/api/user)
-- PATCH(/api/user)
+## api-gateway [:8000]
+## user-service
+- GET(/user/{id})
+- POST(/user)
+- PATCH(/user)
 - POST(/auth/login)
 - GET(/auth/user)
 - GET(/auth/active/{sessionID})
-## comment-service [8002:]
-- GET(/api/comment/{id})
-- GET(/api/comment/video/{id})
-- PATCH(/api/commment/{id}/like)
-- POST(/api/comment)
-- DELETE(/api/comment/{id})
-## dan-service [8003:]
+## comment-service
+- GET(/comment/{id})
+- GET(/comment/video/{id})
+- PATCH(/commment/{id}/like)
+- POST(/comment)
+- DELETE(/comment/{id})
+## dan-service
 - GET(/api/dan/{videoId})
 - POST(/api/dan)
-## video-service [8004:]
+## video-service
 - GET(/api/video/{id})
 - GET(/api/video/random)
 - GET(/api/video/search) `(future)`
 - PATCH(/api/video/{id}/{operation})
 - POST(/api/video)
-## fav-list-servic[8005:]
+## fav-list-servic
 - GET(/api/favlist)
 - GET(/api/favlist/{id})
 - GET(/api/favlist/search) `(future)`
 - POST(/api/favlist) 
 - PATCH(/api/favlist/{id}/?operation=""&videoId="")
 - DELETE(/api/favlist/{id})
-## tag-service [8006:]
+## tag-service
 - GET(/api/tag/{name})
 - GET(/api/tags/all)
-## message-service [8007:]
+## message-service
 - ...
-## notification-service [8008:]
+## notification-service
 - GET(/api/notification/{userId})
-## history-serivce [8009:]
+## history-serivce
 - ...
-## point-service [8010:]
+## point-service
 - ...

@@ -4,6 +4,8 @@ import com.empty.domain.Session;
 import com.empty.domain.User;
 import com.empty.repository.SessionRepository;
 import com.empty.repository.UserRepository;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +19,7 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
 import javax.mail.internet.MimeMessage;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,13 +32,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
     private final EmailService emailService;
+    private final EurekaClient eurekaClient;
 
     @Autowired
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, SessionRepository sessionRepository, EmailService emailService) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, SessionRepository sessionRepository, EmailService emailService, EurekaClient eurekaClient) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
         this.emailService = emailService;
+        this.eurekaClient = eurekaClient;
     }
 
     public Mono<ServerResponse> getUser(ServerRequest serverRequest) {
@@ -57,10 +62,16 @@ public class UserService {
                 WebSession webSession = tuple2.getT2();
                 Mono<Session> savedSession = sessionRepository.insert(new Session(webSession, savedUser.getId()));
                 Mono<ServerResponse> responseMono = status(201).build();
-                String activeUrl = "http://localhost:8001/auth/active/".concat(webSession.getId());
+
+                InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("api-gateway", false);
+                String baseUrl = instanceInfo.getHomePageUrl();
+                String activeUrl = MessageFormat.format( "{0}user-service/auth/active/{1}", baseUrl, webSession.getId());
+                log.info(activeUrl);
                 String to = savedUser.getEmail();
                 String username = savedUser.getProfile().getName();
+                /*
                 emailService.sendActivateEmail(to, activeUrl, username);
+                */
                 return Mono.zip(savedSession, responseMono).map(Tuple2::getT2);
             });
         });

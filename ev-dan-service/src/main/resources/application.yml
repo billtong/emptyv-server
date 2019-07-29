@@ -1,9 +1,11 @@
 #Application Configuration
 server:
-  port: 8003
+  port: 0
 
 #Monodb Configuration
 spring:
+  application:
+    name: dan-service
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -14,6 +16,11 @@ spring:
       database: empty_db
       host: localhost
       port: 27017
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 #logging
 logging:

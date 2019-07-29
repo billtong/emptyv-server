@@ -32,7 +32,7 @@ public class CommentServiceApplicationTests {
         comment.setVideoId(testId);
         comment.setAt("atsomeone");
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.commentWithAuthRouterFunction()).build();
-        client.post().uri("/api/comment").body(BodyInserters.fromObject(comment))
+        client.post().uri("/comment").body(BodyInserters.fromObject(comment))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .exchange()
                 .expectStatus().isCreated();
@@ -45,7 +45,7 @@ public class CommentServiceApplicationTests {
         comment.setText("test comment");
         comment.setVideoId(testId);
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.commentWithAuthRouterFunction()).build();
-        client.post().uri("/api/comment").body(BodyInserters.fromObject(comment))
+        client.post().uri("/comment").body(BodyInserters.fromObject(comment))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .exchange()
                 .expectStatus().isCreated();
@@ -54,7 +54,7 @@ public class CommentServiceApplicationTests {
     @Test
     public void test2PatchRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.commentWithAuthRouterFunction()).build();
-        client.patch().uri("/api/comment/".concat(testId).concat("/like"))
+        client.patch().uri("/comment/".concat(testId).concat("/like"))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .exchange()
                 .expectStatus().isOk();
@@ -63,7 +63,7 @@ public class CommentServiceApplicationTests {
     @Test
     public void test3DeleteRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.commentWithAuthRouterFunction()).build();
-        client.delete().uri("/api/comment/".concat(testId))
+        client.delete().uri("/comment/".concat(testId))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .exchange()
                 .expectStatus().isOk();

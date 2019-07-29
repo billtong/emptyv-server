@@ -35,7 +35,7 @@ public class EmptyVideoDanServiceApplicationTests {
         dan.setText("test dan");
         dan.setVideoId("test");
         dan.setVideoTime(1l);
-        client.post().uri("/api/dan")
+        client.post().uri("/dan")
                 .body(BodyInserters.fromObject(dan))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .exchange()
@@ -51,7 +51,7 @@ public class EmptyVideoDanServiceApplicationTests {
             dan.setText("test dan");
             dan.setVideoId("test");
             dan.setVideoTime(new Random().nextLong());
-            client.post().uri("/api/dan")
+            client.post().uri("/dan")
                     .body(BodyInserters.fromObject(dan))
                     .header(HttpHeaders.AUTHORIZATION, bearToken)
                     .exchange()
@@ -67,7 +67,7 @@ public class EmptyVideoDanServiceApplicationTests {
         dan.setText("test dan");
         dan.setVideoId("ev1");
         dan.setVideoTime(new Random().nextLong());
-        client.post().uri("/api/dan")
+        client.post().uri("/dan")
                 .body(BodyInserters.fromObject(dan))
                 .header(HttpHeaders.AUTHORIZATION, "Bearer asdfasdfasdfasdfs")
                 .exchange()
@@ -77,7 +77,7 @@ public class EmptyVideoDanServiceApplicationTests {
     @Test
     public void test3getDanByVideoIdRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getDanRouterFunction()).build();
-        client.get().uri("/api/dan/test").exchange().returnResult(Dan.class).getResponseBody().subscribe(dan -> {
+        client.get().uri("/dan/test").exchange().returnResult(Dan.class).getResponseBody().subscribe(dan -> {
             log.info("dan time: {}", dan.getVideoTime());
         });
     }

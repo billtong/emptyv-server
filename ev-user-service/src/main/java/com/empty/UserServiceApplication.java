@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
@@ -51,6 +52,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableReactiveMongoRepositories
 public class UserServiceApplication {
     public static void main(String[] args) {
@@ -74,13 +76,13 @@ class RouterFunctionConfig {
 
     @Bean
     RouterFunction<ServerResponse> userRouterFunction() {
-        return route(GET("/api/user/{id}"), userService::getUser)
-                .andRoute(POST("/api/user"), userService::register);
+        return route(GET("/user/{id}"), userService::getUser)
+                .andRoute(POST("/user"), userService::register);
     }
 
     @Bean
     RouterFunction<ServerResponse> userPatchUserFunction() {
-        return route(PATCH("/api/user"), userService::updateProfile)
+        return route(PATCH("/user"), userService::updateProfile)
                 .filter(handleFilterFunction::userAfterFilterHandle);
     }
 
@@ -120,7 +122,7 @@ class SecurityConfig {
                 .pathMatchers(HttpMethod.GET, "/auth/user").authenticated()
                 .and().addFilterAt(bearerAuthenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
                 .authorizeExchange()
-                .pathMatchers(HttpMethod.PATCH, "/api/user").authenticated()
+                .pathMatchers(HttpMethod.PATCH, "/user").authenticated()
                 .and().addFilterAt(bearerAuthenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
                 .authorizeExchange()
                 .anyExchange().permitAll();
@@ -143,7 +145,7 @@ class SecurityConfig {
         AuthenticationWebFilter bearerAuthenticationFilter = new AuthenticationWebFilter(authManager);
 
         bearerAuthenticationFilter.setServerAuthenticationConverter(bearerConverter);
-        bearerAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers("/auth/user", "/api/user"));
+        bearerAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers("/auth/user", "/user"));
         return bearerAuthenticationFilter;
     }
 
