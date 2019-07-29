@@ -6,6 +6,8 @@ import com.empty.repository.SessionRepository;
 import com.empty.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
+import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,12 +28,14 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
+    private final EmailService emailService;
 
     @Autowired
-    public UserService(UserRepository userRepository, SessionRepository sessionRepository, PasswordEncoder passwordEncoder) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, SessionRepository sessionRepository, EmailService emailService) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     public Mono<ServerResponse> getUser(ServerRequest serverRequest) {
@@ -53,12 +58,9 @@ public class UserService {
                 Mono<Session> savedSession = sessionRepository.insert(new Session(webSession, savedUser.getId()));
                 Mono<ServerResponse> responseMono = status(201).build();
                 String activeUrl = "http://localhost:8001/auth/active/".concat(webSession.getId());
-                log.info(activeUrl);
-
-                //send this info to kafka message breaker start
-                //code
-                //send this info to kafka message breaker end
-
+                String to = savedUser.getEmail();
+                String username = savedUser.getProfile().getName();
+                emailService.sendActivateEmail(to, activeUrl, username);
                 return Mono.zip(savedSession, responseMono).map(Tuple2::getT2);
             });
         });

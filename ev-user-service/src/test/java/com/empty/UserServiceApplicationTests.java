@@ -38,7 +38,7 @@ public class UserServiceApplicationTests {
     @Test
     public void test1UserRouterFunction() {
         Map<String, String> newUserForm = new HashMap<>();
-        newUserForm.put("email", "test");
+        newUserForm.put("email", "zhiyuantongbill@gmail.com");
         newUserForm.put("name", "billtong");
         newUserForm.put("pwd", "123456");
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.userRouterFunction()).build();
@@ -54,7 +54,7 @@ public class UserServiceApplicationTests {
     public void test2AuthActiveRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.authRouterFunction()).build();
         client.get().uri("/auth/active/".concat(sessionId))
-                .header(HttpHeaders.AUTHORIZATION, "Basic " + Base64.getEncoder().encodeToString(("test:123456").getBytes()))
+                .header(HttpHeaders.AUTHORIZATION, "Basic " + Base64.getEncoder().encodeToString(("zhiyuantongbill@gamil.com:123456").getBytes()))
                 .exchange()
                 .expectStatus().isOk();
     }
@@ -94,10 +94,5 @@ public class UserServiceApplicationTests {
                     .header(HttpHeaders.AUTHORIZATION, bearToken)
                     .exchange().expectStatus().isOk();
         });
-    }
-
-    @Test
-    public void test4DeleteUserData() {
-        userRepository.findUserByEmail("test").subscribe(user -> userRepository.deleteById(user.getId()).subscribe());
     }
 }

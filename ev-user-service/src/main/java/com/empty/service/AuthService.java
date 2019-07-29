@@ -19,10 +19,14 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 @Service
 @Slf4j
 public class AuthService {
+    private final UserRepository userRepository;
+    private final SessionRepository sessionRepository;
+
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private SessionRepository sessionRepository;
+    public AuthService(UserRepository userRepository, SessionRepository sessionRepository) {
+        this.userRepository = userRepository;
+        this.sessionRepository = sessionRepository;
+    }
 
     public Mono<ServerResponse> getMapAuthMono(ServerRequest serverRequest) {
         return serverRequest.principal().zipWith(Mono.just(serverRequest)).flatMap(tuple -> {

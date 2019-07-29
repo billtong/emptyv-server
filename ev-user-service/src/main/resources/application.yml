@@ -9,12 +9,20 @@ spring:
     consumer:
       group-id: ev-consumer
       auto-offset-reset: latest
-
   data:
     mongodb:
       database: empty_db
       host: localhost
       port: 27017
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: email account
+    password: email password
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
 
 #logging
 logging:
