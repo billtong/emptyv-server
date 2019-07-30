@@ -1,8 +1,7 @@
 #Application Configuration
 server:
-  port: 0
+  port: 8003
 
-#Monodb Configuration
 spring:
   application:
     name: dan-service
@@ -11,12 +10,14 @@ spring:
     consumer:
       group-id: ev-consumer
       auto-offset-reset: latest
+#Monodb Configuration
   data:
     mongodb:
       database: empty_db
       host: localhost
       port: 27017
 
+#Service Discovery Client
 eureka:
   client:
     service-url:

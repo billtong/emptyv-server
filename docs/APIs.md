@@ -1,42 +1,41 @@
-# APIs
-## api-gateway [:8000]
+# API Gateway [8000]
 ## user-service
-- GET(/user/{id})
-- POST(/user)
-- PATCH(/user)
-- POST(/auth/login)
-- GET(/auth/user)
-- GET(/auth/active/{sessionID})
+- GET(/user-service/user/{id})
+- POST(/user-service/user)
+- PATCH(/user-service/user)
+- POST(/user-service/auth/login)
+- GET(/user-service/auth/user)
+- GET(/user-service/auth/active/{sessionID})
 ## comment-service
-- GET(/comment/{id})
-- GET(/comment/video/{id})
-- PATCH(/commment/{id}/like)
-- POST(/comment)
-- DELETE(/comment/{id})
+- GET(/comment-service/comment/{id})
+- GET(/comment-service/comment/video/{id})
+- PATCH(/comment-service/commment/{id}/like)
+- POST(/comment-service/comment)
+- DELETE(/comment-service/comment/{id})
 ## dan-service
-- GET(/api/dan/{videoId})
-- POST(/api/dan)
+- GET(/dan-service/api/dan/{videoId})
+- POST(/dan-service/api/dan)
 ## video-service
-- GET(/api/video/{id})
-- GET(/api/video/random)
-- GET(/api/video/search) `(future)`
-- PATCH(/api/video/{id}/{operation})
-- POST(/api/video)
+- GET(/video-service/video/{id})
+- GET(/video-service/videos/random)
+- GET(/video-service/videos/search) `(future)`
+- PATCH(/video-service/video/{id}/{operation})
+- POST(/video-service/video)
 ## fav-list-servic
-- GET(/api/favlist)
-- GET(/api/favlist/{id})
-- GET(/api/favlist/search) `(future)`
-- POST(/api/favlist) 
-- PATCH(/api/favlist/{id}/?operation=""&videoId="")
-- DELETE(/api/favlist/{id})
+- GET(/fav-list-servic/favlist)
+- GET(/fav-list-servic/favlist/{id})
+- GET(/fav-list-servic/favlist/search) `(future)`
+- POST(/fav-list-servic/favlist) 
+- PATCH(/fav-list-servic/favlist/{id})
+- DELETE(/fav-list-servic/favlist/{id})
 ## tag-service
-- GET(/api/tag/{name})
-- GET(/api/tags/all)
+- GET(/tag-service/tag/{name})
+- GET(/tag-servic/tags/all)
 ## message-service
 - ...
 ## notification-service
-- GET(/api/notification/{userId})
+- GET(/notification-service/notification/{userId})
 ## history-serivce
-- ...
+- GET(/notification-service/history)
 ## point-service
 - ...

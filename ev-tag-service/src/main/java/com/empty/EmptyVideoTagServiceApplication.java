@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -26,6 +27,7 @@ import java.util.Map;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class EmptyVideoTagServiceApplication {
     public static void main(String[] args) {
@@ -40,8 +42,8 @@ class RouterFunctionConfig {
 
     @Bean
     public RouterFunction<ServerResponse> getTagRouterFunction() {
-        return route(GET("/api/tag/{name}"), tagService::getTagByName)
-                .andRoute(GET("/api/tags/all"), tagService::getAllTags);
+        return route(GET("/tag/{name}"), tagService::getTagByName)
+                .andRoute(GET("/tags/all"), tagService::getAllTags);
     }
 }
 

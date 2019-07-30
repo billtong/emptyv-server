@@ -37,7 +37,7 @@ public class EmptyVideo2ServiceApplicationTests {
         video.setName("test video name");
         video.setId(testId);
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
-        client.post().uri("/api/video")
+        client.post().uri("/video")
                 .body(BodyInserters.fromObject(video))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -48,21 +48,21 @@ public class EmptyVideo2ServiceApplicationTests {
     @Test
     public void test2GetVideoById() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getVideoRouterFunction()).build();
-        client.get().uri("/api/video/".concat(testId))
+        client.get().uri("/video/".concat(testId))
                 .exchange().expectStatus().isOk();
     }
 
     @Test
     public void test2GetRandomVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getVideoRouterFunction()).build();
-        client.get().uri("/api/video/random")
+        client.get().uri("/videos/random")
                 .exchange().expectStatus().isOk();
     }
 
     @Test
     public void test3likeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
-        client.patch().uri("/api/video/".concat(testId).concat("/?operation=").concat(OperationEnum.LIKE_A_VIDEO.toString()))
+        client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.LIKE_A_VIDEO.toString()))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
@@ -72,7 +72,7 @@ public class EmptyVideo2ServiceApplicationTests {
     @Test
     public void test4unlikeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
-        client.patch().uri("/api/video/".concat(testId).concat("/?operation=").concat(OperationEnum.UNLIKE_A_VIDEO.toString()))
+        client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.UNLIKE_A_VIDEO.toString()))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
@@ -82,7 +82,7 @@ public class EmptyVideo2ServiceApplicationTests {
     @Test
     public void test5CancelLikeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
-        client.patch().uri("/api/video/".concat(testId).concat("/?operation=").concat(OperationEnum.CANCEL_LIKE_A_VIDEO.toString()))
+        client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.CANCEL_LIKE_A_VIDEO.toString()))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
@@ -92,7 +92,7 @@ public class EmptyVideo2ServiceApplicationTests {
     @Test
     public void test6CancelUnlikeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
-        client.patch().uri("/api/video/".concat(testId).concat("/?operation=").concat(OperationEnum.CANCEL_UNLIKE_A_VIDEO.toString()))
+        client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.CANCEL_UNLIKE_A_VIDEO.toString()))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
@@ -104,7 +104,7 @@ public class EmptyVideo2ServiceApplicationTests {
         String param = "&tag=aaa";
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
         client.patch()
-                .uri("/api/video/".concat(testId).concat("/?operation=").concat(OperationEnum.TAG_A_VIDEO.toString()).concat(param))
+                .uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.TAG_A_VIDEO.toString()).concat(param))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()

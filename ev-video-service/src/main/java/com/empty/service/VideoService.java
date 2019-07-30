@@ -30,7 +30,7 @@ public class VideoService {
 
     public Mono<ServerResponse> getRandomVideos(ServerRequest serverRequest) {
         return videoRepository.findAll().collectList().flatMap(videos -> {
-            listTools.shuffle(videos);
+            //listTools.shuffle(videos);
             return ok().body(Mono.just(videos), List.class);
         });
     }

@@ -31,7 +31,7 @@ public class DanService {
             String userId = tuple.getT1();
             Dan dan = tuple.getT2();
             dan.setUserId(userId);
-            return danRepository.save(dan).flatMap(dan1 -> {
+            return danRepository.insert(dan).flatMap(dan1 -> {
                 serverRequest.attributes().put("dan", dan1);
                 return Mono.just(dan1);
             }).then(status(201).build());

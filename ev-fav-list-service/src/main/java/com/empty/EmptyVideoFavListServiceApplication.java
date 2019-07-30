@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -27,6 +28,7 @@ import java.util.Map;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class EmptyVideoFavListServiceApplication {
     public static void main(String[] args) {
@@ -43,16 +45,16 @@ class RouterFunctionConfig {
 
     @Bean
     public RouterFunction<ServerResponse> getFavListRouterFunction() {
-        return route(GET("/api/favlist"), favListService::getUsersFavList)
-                .andRoute(GET("/api/favlist/{id}"), favListService::getById)
-                .andRoute(GET("/api/favlist/search"), favListService::search);
+        return route(GET("/favlist"), favListService::getUsersFavList)
+                .andRoute(GET("/favlist/{id}"), favListService::getById)
+                .andRoute(GET("/favlist/search"), favListService::search);
     }
 
     @Bean
     public RouterFunction<ServerResponse> authFavListRouterFunction() {
-        return route(POST("/api/favlist"), favListService::create)
-                .andRoute(PATCH("/api/favlist/{id}"), favListService::update)
-                .andRoute(DELETE("/api/favlist/{id}"), favListService::delete)
+        return route(POST("/favlist"), favListService::create)
+                .andRoute(PATCH("/favlist/{id}"), favListService::update)
+                .andRoute(DELETE("/favlist/{id}"), favListService::delete)
                 .filter(handleFilterFunction::authCheckBeforeFilterFunction)
                 .filter(handleFilterFunction::msgProduceAfterFilterFunction);
     }

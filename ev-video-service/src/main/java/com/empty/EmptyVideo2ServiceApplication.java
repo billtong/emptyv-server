@@ -2,6 +2,7 @@ package com.empty;
 
 import com.empty.service.VideoService;
 import com.empty.web.HandleFilterFunction;
+import com.netflix.discovery.EurekaNamespace;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -27,6 +29,7 @@ import java.util.Map;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class EmptyVideo2ServiceApplication {
     public static void main(String[] args) {
@@ -43,15 +46,15 @@ class RouterFunctionConfig {
 
     @Bean
     public RouterFunction<ServerResponse> getVideoRouterFunction() {
-        return route(GET("/api/video/{id}"), videoService::getVideoById)
-                .andRoute(GET("/api/video/random"), videoService::getRandomVideos)
-                .andRoute(GET("/api/video/search"), videoService::search);
+        return route(GET("/video/{id}"), videoService::getVideoById)
+                .andRoute(GET("/videos/random"), videoService::getRandomVideos)
+                .andRoute(GET("/videos/search"), videoService::search);
     }
 
     @Bean
     public RouterFunction<ServerResponse> patchAndPostVideoRouterFunction() {
-        return route(PATCH("/api/video/{id}"), videoService::updateVideo)//like, unlike
-                .andRoute(POST("/api/video"), videoService::postNewVideo)
+        return route(PATCH("/video/{id}"), videoService::updateVideo)//like, unlike
+                .andRoute(POST("/video"), videoService::postNewVideo)
                 .filter(handleFilterFunction::authCheckBeforeFilterFunction)
                 .filter(handleFilterFunction::msgProduceAfterFilterFunction);
     }

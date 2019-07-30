@@ -2,19 +2,26 @@
 server:
   port: 8005
 
-#Monodb Configuration
 spring:
+  application:
+    name: fav-list-service
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: ev-consumer
       auto-offset-reset: latest
-
+#Monodb Configuration
   data:
     mongodb:
       database: empty_db
       host: localhost
       port: 27017
+
+#Service Discovery Client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 #logging
 logging:

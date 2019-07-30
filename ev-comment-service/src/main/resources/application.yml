@@ -1,6 +1,6 @@
 #Application Configuration
 server:
-  port: 0
+  port: 8002
 
 #Monodb Configuration
 spring:

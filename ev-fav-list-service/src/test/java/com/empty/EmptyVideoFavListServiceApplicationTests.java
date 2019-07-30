@@ -34,7 +34,7 @@ public class EmptyVideoFavListServiceApplicationTests {
         favList.setId(testId);
         favList.setVideoIds(Arrays.asList("test"));
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.authFavListRouterFunction()).build();
-        client.post().uri("/api/favlist")
+        client.post().uri("/favlist")
                 .body(BodyInserters.fromObject(favList))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -46,7 +46,7 @@ public class EmptyVideoFavListServiceApplicationTests {
     public void test2PatchRouterFunction() {
         String param = "/?operation=".concat(OperationEnum.FAV_A_VIDEO.toString()).concat("&videoId=test");
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.authFavListRouterFunction()).build();
-        client.patch().uri("/api/favlist/".concat(testId).concat(param))
+        client.patch().uri("/favlist/".concat(testId).concat(param))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
@@ -56,7 +56,7 @@ public class EmptyVideoFavListServiceApplicationTests {
     @Test
     public void test4GetFavList() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getFavListRouterFunction()).build();
-        client.get().uri("/api/favlist/".concat(testId))
+        client.get().uri("/favlist/".concat(testId))
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
                 .expectStatus().isOk();
@@ -65,7 +65,7 @@ public class EmptyVideoFavListServiceApplicationTests {
     @Test
     public void test3DeleteFavListRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.authFavListRouterFunction()).build();
-        client.delete().uri("/api/favlist/".concat(testId))
+        client.delete().uri("/favlist/".concat(testId))
                 .header(HttpHeaders.AUTHORIZATION, bearToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchange()
