@@ -7,7 +7,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.text.MessageFormat;
 
@@ -15,10 +14,9 @@ import java.text.MessageFormat;
 @Service
 public class EmailService {
 
+    private final JavaMailSender javaMailSender;
     @Value("${spring.mail.username}")
     private String username;
-
-    private final JavaMailSender javaMailSender;
 
     @Autowired
     public EmailService(JavaMailSender javaMailSender) {

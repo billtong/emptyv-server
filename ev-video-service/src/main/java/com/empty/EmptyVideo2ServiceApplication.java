@@ -2,7 +2,6 @@ package com.empty;
 
 import com.empty.service.VideoService;
 import com.empty.web.HandleFilterFunction;
-import com.netflix.discovery.EurekaNamespace;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

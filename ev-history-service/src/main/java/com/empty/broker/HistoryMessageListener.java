@@ -24,7 +24,7 @@ public class HistoryMessageListener {
     public void notificationListen(@Payload Map<String, Object> operationMap, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
         log.info(operationMap.toString());
         historyFactory.process(operationMap).subscribe(history -> {
-            if (history!=null) {
+            if (history != null) {
                 historyRepository.save(history).subscribe();
             }
         });

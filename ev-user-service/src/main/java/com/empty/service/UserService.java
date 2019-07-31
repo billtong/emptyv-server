@@ -8,8 +8,6 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -18,7 +16,6 @@ import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
-import javax.mail.internet.MimeMessage;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +62,7 @@ public class UserService {
 
                 InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("api-gateway", false);
                 String baseUrl = instanceInfo.getHomePageUrl();
-                String activeUrl = MessageFormat.format( "{0}user-service/auth/active/{1}", baseUrl, webSession.getId());
+                String activeUrl = MessageFormat.format("{0}user-service/auth/active/{1}", baseUrl, webSession.getId());
                 log.info(activeUrl);
                 String to = savedUser.getEmail();
                 String username = savedUser.getProfile().getName();

@@ -5,13 +5,13 @@ server:
 spring:
   application:
     name: tag-service
-#Kafka Config
+  #Kafka Config
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: ev-consumer
       auto-offset-reset: latest
-#Monodb Config
+  #Monodb Config
   data:
     mongodb:
       database: empty_db

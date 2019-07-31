@@ -1,10 +1,7 @@
 package com.empty;
 
 import com.empty.domain.User;
-import com.empty.repository.SessionRepository;
-import com.empty.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,13 +23,13 @@ import java.util.Map;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceApplicationTests {
+    private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE2NTAzMjE1OTN9.oB63ETAIlBRmk8xGMoAJqObvHey4IBcdNT1YXtKP1z0";
+    private final String testId = "test";//String.valueOf(new Random().nextInt());
     @Autowired
     private RouterFunctionConfig routerFunctionConfig;
 
-    private final String bearToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZDMxMTNmZmU0MmNjOTJmNDA3YWVkYTYiLCJyb2xlcyI6ImFkbWluIiwiaXNzIjoiZW1wdHl2aWRlby5jb20iLCJleHAiOjE2NTAzMjE1OTN9.oB63ETAIlBRmk8xGMoAJqObvHey4IBcdNT1YXtKP1z0";
-    private final String testId = "test";//String.valueOf(new Random().nextInt());
-
-    @Test @Ignore
+    @Test
+    @Ignore
     public void test1UserRouterFunction() {
         Map<String, String> newUserForm = new HashMap<>();
         newUserForm.put("email", "zhiyuantongbill@gmail.com");

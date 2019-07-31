@@ -4,18 +4,18 @@ services:
     image: mongo
     container_name: mongo
     ports:
-    - "27017:27017"
+      - "27017:27017"
   admin-mongo:
     image: 0x59/admin-mongo:latest
     ports:
-    - "8082:8082"
+      - "8082:8082"
     container_name: admin-mongo
     environment:
-    - PORT=8082
-    - CONN_NAME=mongo
-    - DB_HOST=mongo
+      - PORT=8082
+      - CONN_NAME=mongo
+      - DB_HOST=mongo
     links:
-    - mongo
+      - mongo
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -26,9 +26,9 @@ services:
   kafka:
     image: confluentinc/cp-kafka:latest
     depends_on:
-    - zookeeper
+      - zookeeper
     ports:
-    - 9092:9092
+      - 9092:9092
     container_name: kafka
     environment:
       KAFKA_BROKER_ID: 1

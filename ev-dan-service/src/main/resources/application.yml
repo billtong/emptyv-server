@@ -10,7 +10,7 @@ spring:
     consumer:
       group-id: ev-consumer
       auto-offset-reset: latest
-#Monodb Configuration
+  #Monodb Configuration
   data:
     mongodb:
       database: empty_db
