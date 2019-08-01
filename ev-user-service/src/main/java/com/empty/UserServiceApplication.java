@@ -39,6 +39,7 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
 import org.springframework.web.reactive.config.CorsRegistry;
+import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -96,14 +97,6 @@ class RouterFunctionConfig {
     @Bean
     RouterFunction<ServerResponse> authMiddlewareRouterFunction() {
         return route(GET("/auth/user"), authService::getMapAuthMono);
-    }
-}
-
-@Configuration
-class WebConfig implements WebFluxConfigurer {
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
     }
 }
 
