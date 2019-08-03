@@ -8,12 +8,11 @@ If you don't understand the method above your can also change all application.ym
 docker-compose up -d
 ```
 ### 3. start multiple micro-services via IntelliJ
-- after a little import and setup in the running configuration, you can boost all the services eazily
+- import the project of `ev-eureka-server` into your InteliJ, you can then boost all the services eazily
 - boost squence:
     1. ev-eureka-server
-    2. ev-api-gateway
-    3. user-service
-    4. others
+    2. user-service
+    3. others
 ```
 mvn spring-boot:run
 ```
