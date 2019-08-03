@@ -8,7 +8,8 @@ If you don't understand the method above your can also change all application.ym
 docker-compose up -d
 ```
 ### 3. start multiple micro-services via IntelliJ
-- import the project of `ev-eureka-server` into your InteliJ, you can then boost all the services eazily
+- download lombok plugin on your IntelliJ
+- import the project of `ev-eureka-server` into your IntelliJ, you can then boost all the services eazily
 - boost squence:
     1. ev-eureka-server
     2. user-service
