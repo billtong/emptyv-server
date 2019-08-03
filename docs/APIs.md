@@ -2,8 +2,10 @@
 ## user-service
 - GET(/user-service/user/{id})
 - POST(/user-service/user)
+    - basic auth
 - PATCH(/user-service/user)
 - POST(/user-service/auth/login)
+    - body: user(json)
 - GET(/user-service/auth/user)
 - GET(/user-service/auth/active/{sessionID})
 ## comment-service
@@ -20,13 +22,17 @@
 - GET(/video-service/videos/random)
 - GET(/video-service/videos/search) `(future)`
 - PATCH(/video-service/video/{id}/{operation})
+    - queryparam: operation, tag
 - POST(/video-service/video)
+    - body: video(json)
 ## fav-list-servic
 - GET(/fav-list-servic/favlist)
 - GET(/fav-list-servic/favlist/{id})
-- GET(/fav-list-servic/favlist/search) `(future)`
+- GET(/fav-list-servic/favlist/search)
 - POST(/fav-list-servic/favlist) 
+    - body: favlist(json)
 - PATCH(/fav-list-servic/favlist/{id})
+    -queryparam: operation, videoId
 - DELETE(/fav-list-servic/favlist/{id})
 ## tag-service
 - GET(/tag-service/tag/{name})
