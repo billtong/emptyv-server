@@ -43,17 +43,13 @@ class CorsConfig {
             ServerHttpRequest request = exchange.getRequest();
             if (CorsUtils.isCorsRequest(request)) {
                 ServerHttpResponse response = exchange.getResponse();
-                HttpHeaders requestHeaders = request.getHeaders();
                 HttpHeaders responseHeaders = response.getHeaders();
-                HttpMethod requestMethod = request.getMethod();
                 responseHeaders.setAccessControlAllowCredentials(true);
                 responseHeaders.setAccessControlAllowOrigin("http://localhost:3000");
                 responseHeaders.setAccessControlExposeHeaders(Collections.singletonList("Authorization"));
                 responseHeaders.setAccessControlMaxAge(MAX_AGE);
                 responseHeaders.setAccessControlAllowHeaders(Arrays.asList("authorization", "content-type"));
-                if (requestMethod != null) {
-                    responseHeaders.setAccessControlAllowMethods(Collections.singletonList(requestMethod));
-                }
+                responseHeaders.setAccessControlAllowMethods(Arrays.asList(HttpMethod.GET, HttpMethod.PATCH, HttpMethod.POST, HttpMethod.DELETE, HttpMethod.OPTIONS));
             }
             return chain.filter(exchange);
         };

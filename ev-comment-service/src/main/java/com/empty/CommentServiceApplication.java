@@ -61,14 +61,6 @@ class RouterFunctionConfig {
 }
 
 @Configuration
-class WebConfig implements WebFluxConfigurer {
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
-    }
-}
-
-@Configuration
 class KafkaProducerConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")

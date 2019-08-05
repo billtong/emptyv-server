@@ -83,7 +83,8 @@ public class UserService {
         Mono<Map> mapMono = serverRequest.bodyToMono(Map.class);
         return Mono.zip(userMono, mapMono).flatMap(t -> {
             User finalUser = t.getT1();
-            finalUser.updateUserProfile(t.getT2());
+            Map updateMap = t.getT2();
+            finalUser.updateUserProfile((Map) updateMap.get("profile"));
             Map<String, String> msg = new HashMap<>();
             Mono<User> userMono1 = userRepository.save(finalUser);
             Mono<ServerResponse> serverResponseMono = ok().body(Mono.just(msg), Map.class);

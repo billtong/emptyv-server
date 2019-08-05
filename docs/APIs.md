@@ -4,6 +4,8 @@
 - POST(/user-service/user)
     - basic auth
 - PATCH(/user-service/user)
+    - bearer token
+    - body user(json), 只能改变profile部分
 - POST(/user-service/auth/login)
     - body: user(json)
 - GET(/user-service/auth/user)
