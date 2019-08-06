@@ -37,14 +37,6 @@ public class HistoryServiceApplication {
 }
 
 @Configuration
-class WebConfig implements WebFluxConfigurer {
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
-    }
-}
-
-@Configuration
 class RouterFunctionConfg {
     @Autowired
     HistoryService historyService;

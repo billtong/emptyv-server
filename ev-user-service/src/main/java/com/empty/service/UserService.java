@@ -17,7 +17,9 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.*;
@@ -44,7 +46,14 @@ public class UserService {
         String id = serverRequest.pathVariable("id");
         return userRepository.findById(id).flatMap(
                 user -> ok().body(user.getPublicUserMapMono(), Map.class)
-        ).switchIfEmpty(notFound().build());
+        );
+    }
+
+    public Mono<ServerResponse> getUsersByIdList(ServerRequest serverRequest) {
+        String ids = serverRequest.queryParam("ids").get();
+        List<String> idList = Arrays.asList(ids.split(","));
+        return userRepository.findAllById(idList).collectList().flatMap(
+                users -> ok().body(Mono.just(users), List.class));
     }
 
     public Mono<ServerResponse> register(ServerRequest serverRequest) {
@@ -63,7 +72,7 @@ public class UserService {
                 InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("api-gateway", false);
                 String baseUrl = instanceInfo.getHomePageUrl();
                 String activeUrl = MessageFormat.format("{0}user-service/auth/active/{1}", baseUrl, webSession.getId());
-                log.info(activeUrl);
+                //log.info(activeUrl);
                 String to = savedUser.getEmail();
                 String username = savedUser.getProfile().getName();
                 /*

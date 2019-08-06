@@ -1,6 +1,8 @@
 # API Gateway [8000]
 ## user-service
 - GET(/user-service/user/{id})
+- GET(/user-service/users)
+    - queryparam: ids(id1,id2,id3)
 - POST(/user-service/user)
     - basic auth
 - PATCH(/user-service/user)

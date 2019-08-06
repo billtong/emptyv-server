@@ -78,6 +78,7 @@ class RouterFunctionConfig {
     @Bean
     RouterFunction<ServerResponse> userRouterFunction() {
         return route(GET("/user/{id}"), userService::getUser)
+                .andRoute(GET("/users"), userService::getUsersByIdList)
                 .andRoute(POST("/user"), userService::register);
     }
 
