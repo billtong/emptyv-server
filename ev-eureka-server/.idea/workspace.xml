@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1462b5c2-8d27-4c13-9ce9-2c2e9a728791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ev-comment-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-comment-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-dan-service/src/main/java/com/empty/EmptyVideoDanServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-dan-service/src/main/java/com/empty/EmptyVideoDanServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/controller/OAuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/repository/OAuthClientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/service/OAuthClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/web/UserWebClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/resources/rescources/static/css/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/APIs.md" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/APIs.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/EmptyVideoFavListServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/EmptyVideoFavListServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-history-service/src/main/java/com/empty/HistoryServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-history-service/src/main/java/com/empty/HistoryServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-notification-service/src/main/java/com/empty/NotificationServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-notification-service/src/main/java/com/empty/NotificationServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-tag-service/src/main/java/com/empty/EmptyVideoTagServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-tag-service/src/main/java/com/empty/EmptyVideoTagServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ev-user-service/src/main/java/com/empty/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-user-service/src/main/java/com/empty/UserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-user-service/src/main/java/com/empty/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-user-service/src/main/java/com/empty/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ev-user-service/src/main/java/com/empty/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-user-service/src/main/java/com/empty/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/EmptyVideo2ServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/EmptyVideo2ServiceApplication.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -69,7 +68,56 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="emptyvideo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
@@ -91,7 +139,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.api-gateway[spring-boot:run]">
+  <component name="RunManager" selected="Maven.eureka-server [spring-boot:run]">
     <configuration name="api-gateway[spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven" singleton="false">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -267,6 +315,31 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="oauth-service[spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven" singleton="false">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="spring-boot:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/../ev-oauth2-service" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <configuration name="tag-service[spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -347,6 +420,7 @@
       <item itemvalue="Maven.comment-service[spring-boot:run]" />
       <item itemvalue="Maven.eureka-server [spring-boot:run]" />
       <item itemvalue="Maven.api-gateway[spring-boot:run]" />
+      <item itemvalue="Maven.oauth-service[spring-boot:run]" />
       <item itemvalue="Maven.dan-service[spring-boot]" />
       <item itemvalue="Maven.favlist-server[spring-boot:run]" />
       <item itemvalue="Maven.history-service[spring-boot:run]" />
@@ -370,8 +444,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="23" width="1680" height="944" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -380,7 +455,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" visible="true" weight="0.78286386" />
+      <window_info anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" visible="true" weight="0.38497654" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />

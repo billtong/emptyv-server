@@ -38,9 +38,6 @@ import org.springframework.security.web.server.authentication.AuthenticationWebF
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
-import org.springframework.web.reactive.config.CorsRegistry;
-import org.springframework.web.reactive.config.EnableWebFlux;
-import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -77,7 +74,7 @@ class RouterFunctionConfig {
 
     @Bean
     RouterFunction<ServerResponse> userRouterFunction() {
-        return route(GET("/user/{id}"), userService::getUser)
+        return route(GET("/user/{id}"), userService::getUserById)
                 .andRoute(GET("/users"), userService::getUsersByIdList)
                 .andRoute(POST("/user"), userService::register);
     }

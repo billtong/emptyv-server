@@ -42,7 +42,7 @@ public class UserService {
         this.eurekaClient = eurekaClient;
     }
 
-    public Mono<ServerResponse> getUser(ServerRequest serverRequest) {
+    public Mono<ServerResponse> getUserById(ServerRequest serverRequest) {
         String id = serverRequest.pathVariable("id");
         return userRepository.findById(id).flatMap(
                 user -> ok().body(user.getPublicUserMapMono(), Map.class)
