@@ -19,7 +19,7 @@ Every Asset Operations are "abstracted" as below json template.
 在用户进行完video服务的添加或更改操作后，需要把把这个操作通过消息队列发布给tag服务。
 ![flow](img/video-tag-diagram.png)
 ### OAuth Service
-1. 客户需要现在emptyvideo OAuth平台注册（redirectURI）
+1. 客户需要先在emptyvideo OAuth平台注册（redirectURI）
 2. 向（“/”）请求获得登陆html页面，需要提交验证用户的emptyvideo账号信息
 3. 表单提交会转发到POST(/oauth/code)
     1. 先验证客户端信息，成功后获得客户端code
