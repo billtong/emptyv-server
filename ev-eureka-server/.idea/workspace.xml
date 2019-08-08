@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1462b5c2-8d27-4c13-9ce9-2c2e9a728791" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/EvOAuth2ServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/EvOAuth2ServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/auth/jwt/JWTTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/auth/jwt/JWTTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/domain/OAuthClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/domain/OAuthClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/service/OAuthClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/service/OAuthClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/web/UserWebClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/web/UserWebClient.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -16,17 +20,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/agateram/emptyvideo/EvEurekaServerApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -58,8 +52,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="23" />
+    <option name="x" value="-1770" />
+    <option name="y" value="90" />
     <option name="width" value="1680" />
     <option name="height" value="944" />
   </component>
@@ -444,7 +438,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="23" width="1680" height="944" extended-state="0" />
+    <frame x="-1770" y="90" width="1680" height="944" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
@@ -502,8 +496,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/agateram/emptyvideo/EvEurekaServerApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="243">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>

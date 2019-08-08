@@ -23,7 +23,4 @@ public class OAuthClient {
     //(optional) might add these feature in the future
     private String responseType = "code";
     private Collection<String> scope = Collections.singletonList("user-service");
-
-    // won't expose to the client.
-    private String userBearerToken;
 }

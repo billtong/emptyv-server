@@ -22,7 +22,7 @@ Every Asset Operations are "abstracted" as below json template.
 1. 客户需要先在emptyvideo OAuth平台注册（redirectURI）
 2. 向（“/”）请求获得登陆html页面，需要提交验证用户的emptyvideo账号信息
 3. 表单提交会转发到POST(/oauth/code)
-    1. 先验证客户端信息，成功后获得客户端code
+    1. 先验证客户端信息，成功后获得客户端code,(code里有userId，客户端最好保存它，方便之后再用)
     2. 在验证用户信息，成功获得该用户token
     3. 1，2都正确的话，将code返回到客户端设置到redirect路径
 4. 该redirect路径会向GET(/oauth/userInfo)发送请求with code, 返回用户信息

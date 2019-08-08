@@ -59,4 +59,4 @@
 - GET(/oauth/userInfo) OAuth客户端需要callback请求的路径
     - bearer token
 - POST(/oauth/client)
-    - body: OAuthCient(json)
+    - queryparam: redirectURL

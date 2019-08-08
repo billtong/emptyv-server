@@ -32,12 +32,11 @@ public class UserWebClient {
                 .build();
     }
 
-    public Mono<ClientResponse> getUserByAuthToken(String bearerToken) {
+    public Mono<ClientResponse> getUserById(String userId) {
         return this.webClient.get()
-                .uri("/auth/user")
+                .uri("/user/".concat(userId))
                 .accept(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, bearerToken)
-                .exchange().log();
+                .exchange();
     }
 
     public Mono<ClientResponse> getAuthTokenByLogin(String email, String pwd) {
@@ -45,7 +44,7 @@ public class UserWebClient {
                 .uri("/auth/login")
                 .header(HttpHeaders.AUTHORIZATION, "Basic " + Base64Utils
                         .encodeToString((email + ":" + pwd).getBytes(UTF_8)))
-                .exchange().log();
+                .exchange();
     }
 
 }

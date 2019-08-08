@@ -43,10 +43,9 @@ public class EvOAuth2ServiceApplication {
 class RouterFunctionConfig {
 	@Autowired
 	OAuthClientService oAuthClientService;
-
 	@Bean
 	RouterFunction<ServerResponse> oauth2RouterFunctions() {
-		return route(POST("/oauth/code"), oAuthClientService::getOauthCode)
+		return route(POST("/oauth/code"), oAuthClientService::generateOauthCode)
 				.andRoute(GET("/oauth/userInfo"), oAuthClientService::getUserInfo)
 				.andRoute(POST("/oauth/client"), oAuthClientService::createNewClient);
 	}
