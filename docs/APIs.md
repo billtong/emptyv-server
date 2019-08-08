@@ -51,7 +51,7 @@
 ## point-service [8010]
 - ...
 
-#outside of the EVAG
+# Outside of the EVAG
 ## oauth2-service [8011] 
 - GET(/) OAuth主页
     - queryparams: clientId=1&secret=1&error=
