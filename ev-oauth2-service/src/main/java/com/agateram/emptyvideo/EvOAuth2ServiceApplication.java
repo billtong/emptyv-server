@@ -22,6 +22,7 @@ import org.springframework.security.web.server.util.matcher.ServerWebExchangeMat
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -46,7 +47,7 @@ class RouterFunctionConfig {
 	@Bean
 	RouterFunction<ServerResponse> oauth2RouterFunctions() {
 		return route(POST("/oauth/code"), oAuthClientService::getOauthCode)
-				.andRoute(POST("/oauth/user"), oAuthClientService::getUserInfo)
+				.andRoute(GET("/oauth/userInfo"), oAuthClientService::getUserInfo)
 				.andRoute(POST("/oauth/client"), oAuthClientService::createNewClient);
 	}
 }
@@ -57,7 +58,7 @@ class SecurityConfig {
 	@Bean
 	SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) throws Exception {
 		http.authorizeExchange()
-				.pathMatchers(HttpMethod.POST, "/oauth/user").authenticated()
+				.pathMatchers(HttpMethod.GET, "/oauth/userInfo").authenticated()
 				.and().addFilterAt(bearerAuthenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
 				.authorizeExchange()
 				.anyExchange().permitAll();
@@ -70,7 +71,7 @@ class SecurityConfig {
 		AuthenticationWebFilter bearerAuthenticationFilter = new AuthenticationWebFilter(authManager);
 
 		bearerAuthenticationFilter.setServerAuthenticationConverter(bearerConverter);
-		bearerAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, "/oauth/user"));
+		bearerAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.GET, "/oauth/userInfo"));
 		return bearerAuthenticationFilter;
 	}
 }

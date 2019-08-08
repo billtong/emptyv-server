@@ -1,4 +1,4 @@
-# API Gateway [8000]
+# EVAG (Empty Video API Gateway)[8000]
 ## user-service [8001]
 - GET(/user-service/user/{id})
 - GET(/user-service/user/email/{email})
@@ -37,7 +37,7 @@
 - POST(/fav-list-servic/favlist) 
     - body: favlist(json)
 - PATCH(/fav-list-servic/favlist/{id})
-    -queryparam: operation, videoId
+    - queryparam: operation, videoId
 - DELETE(/fav-list-servic/favlist/{id})
 ## tag-service [8006]
 - GET(/tag-service/tag/{name})
@@ -50,4 +50,13 @@
 - GET(/notification-service/history)
 ## point-service [8010]
 - ...
-## oauth2-service [8011]
+
+#outside of the EVAG
+## oauth2-service [8011] 
+- GET(/) OAuth主页
+    - queryparams: clientId=1&secret=1&error=
+- POST(/oauth/code) OAuth主页提交后处理endpoint
+- GET(/oauth/userInfo) OAuth客户端需要callback请求的路径
+    - bearer token
+- POST(/oauth/client)
+    - body: OAuthCient(json)
