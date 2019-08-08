@@ -19,7 +19,10 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
@@ -28,22 +31,22 @@ import static org.springframework.web.reactive.function.server.ServerResponse.st
 @Slf4j
 public class OAuthClientService {
     @Autowired
+    UserWebClient userWebClient;
+    @Autowired
     private OAuthClientRepository oAuthClientRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    UserWebClient userWebClient;
 
     public Mono<ServerResponse> getUserInfo(ServerRequest serverRequest) {
         return serverRequest.principal().flatMap(principal -> {
             String userId = principal.getName();
             return userWebClient.getUserById(userId)
-                            .flatMap(clientResponse -> {
-                                if (clientResponse.statusCode().is2xxSuccessful()) {
-                                    return ok().body(clientResponse.bodyToMono(Map.class), Map.class);
-                                }
-                                return status(401).build();
-                            });
+                    .flatMap(clientResponse -> {
+                        if (clientResponse.statusCode().is2xxSuccessful()) {
+                            return ok().body(clientResponse.bodyToMono(Map.class), Map.class);
+                        }
+                        return status(401).build();
+                    });
         });
     }
 
@@ -67,33 +70,33 @@ public class OAuthClientService {
 
         return Mono.zip(formDataMono, oAuthClientMono, Mono.just(secret))
                 .flatMap(tuple -> {
-            MultiValueMap<String, String> formData = tuple.getT1();
-            final OAuthClient oAuthClient = tuple.getT2();
-            if (oAuthClient != null && oAuthClient.getSecret().equals(tuple.getT3())) {
-                String email = formData.getFirst("userEmail");
-                String pwd = formData.getFirst("userPassword");
-                return userWebClient.getAuthTokenByLogin(email, pwd).flatMap(clientResponse -> {
-                    log.info(clientResponse.statusCode().toString());
-                    log.info(clientResponse.toString());
-                    if (clientResponse.statusCode().is2xxSuccessful()) {
-                        return clientResponse.bodyToMono(Map.class).flatMap(map -> {
-                            String userId = String.valueOf(map.get("id"));
-                            List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-                            for (String scope : oAuthClient.getScope()) {
-                                grantedAuthorities.add(new SimpleGrantedAuthority(scope));
+                    MultiValueMap<String, String> formData = tuple.getT1();
+                    final OAuthClient oAuthClient = tuple.getT2();
+                    if (oAuthClient != null && oAuthClient.getSecret().equals(tuple.getT3())) {
+                        String email = formData.getFirst("userEmail");
+                        String pwd = formData.getFirst("userPassword");
+                        return userWebClient.getAuthTokenByLogin(email, pwd).flatMap(clientResponse -> {
+                            log.info(clientResponse.statusCode().toString());
+                            log.info(clientResponse.toString());
+                            if (clientResponse.statusCode().is2xxSuccessful()) {
+                                return clientResponse.bodyToMono(Map.class).flatMap(map -> {
+                                    String userId = String.valueOf(map.get("id"));
+                                    List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+                                    for (String scope : oAuthClient.getScope()) {
+                                        grantedAuthorities.add(new SimpleGrantedAuthority(scope));
+                                    }
+                                    String code = JWTTokenService.generateToken(userId, oAuthClient.getSecret(), grantedAuthorities);
+                                    return ServerResponse.temporaryRedirect(URI.create(oAuthClient.getRedirectUri()))
+                                            .header(HttpHeaders.AUTHORIZATION, String.join(" ", "Bearer", code))
+                                            .build();
+                                });
+                            } else {
+                                String path = MessageFormat.format("/?clientId={0}&secret={1}&error={2}", oAuthClient.getId(), oAuthClient.getSecret(), "failed");
+                                return ServerResponse.temporaryRedirect(URI.create(path)).build();
                             }
-                            String code = JWTTokenService.generateToken(userId, oAuthClient.getSecret(), grantedAuthorities);
-                            return  ServerResponse.temporaryRedirect(URI.create(oAuthClient.getRedirectUri()))
-                                    .header(HttpHeaders.AUTHORIZATION, String.join(" ", "Bearer", code))
-                                    .build();
                         });
-                    } else {
-                        String path = MessageFormat.format("/?clientId={0}&secret={1}&error={2}",oAuthClient.getId(), oAuthClient.getSecret(), "failed");
-                        return ServerResponse.temporaryRedirect(URI.create(path)).build();
                     }
+                    return status(401).build();
                 });
-            }
-            return status(401).build();
-        });
     }
 }

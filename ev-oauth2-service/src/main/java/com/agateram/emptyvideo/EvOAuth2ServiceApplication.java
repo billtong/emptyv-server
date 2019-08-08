@@ -29,50 +29,51 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @EnableDiscoveryClient
 @SpringBootApplication
 public class EvOAuth2ServiceApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(EvOAuth2ServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EvOAuth2ServiceApplication.class, args);
+    }
 
-	@Bean
-	public static PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
+    @Bean
+    public static PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 }
 
 @Configuration
 class RouterFunctionConfig {
-	@Autowired
-	OAuthClientService oAuthClientService;
-	@Bean
-	RouterFunction<ServerResponse> oauth2RouterFunctions() {
-		return route(POST("/oauth/code"), oAuthClientService::generateOauthCode)
-				.andRoute(GET("/oauth/userInfo"), oAuthClientService::getUserInfo)
-				.andRoute(POST("/oauth/client"), oAuthClientService::createNewClient);
-	}
+    @Autowired
+    OAuthClientService oAuthClientService;
+
+    @Bean
+    RouterFunction<ServerResponse> oauth2RouterFunctions() {
+        return route(POST("/oauth/code"), oAuthClientService::generateOauthCode)
+                .andRoute(GET("/oauth/userInfo"), oAuthClientService::getUserInfo)
+                .andRoute(POST("/oauth/client"), oAuthClientService::createNewClient);
+    }
 }
 
 @Configuration
 class SecurityConfig {
 
-	@Bean
-	SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) throws Exception {
-		http.authorizeExchange()
-				.pathMatchers(HttpMethod.GET, "/oauth/userInfo").authenticated()
-				.and().addFilterAt(bearerAuthenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
-				.authorizeExchange()
-				.anyExchange().permitAll();
-		return http.csrf().disable().build();
-	}
+    @Bean
+    SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) throws Exception {
+        http.authorizeExchange()
+                .pathMatchers(HttpMethod.GET, "/oauth/userInfo").authenticated()
+                .and().addFilterAt(bearerAuthenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
+                .authorizeExchange()
+                .anyExchange().permitAll();
+        return http.csrf().disable().build();
+    }
 
-	private AuthenticationWebFilter bearerAuthenticationFilter() {
-		ServerAuthenticationConverter bearerConverter = new ServerHttpBearerAuthenticationConverter();
-		ReactiveAuthenticationManager authManager = new BearerTokenReactiveAuthenticationManager();
-		AuthenticationWebFilter bearerAuthenticationFilter = new AuthenticationWebFilter(authManager);
+    private AuthenticationWebFilter bearerAuthenticationFilter() {
+        ServerAuthenticationConverter bearerConverter = new ServerHttpBearerAuthenticationConverter();
+        ReactiveAuthenticationManager authManager = new BearerTokenReactiveAuthenticationManager();
+        AuthenticationWebFilter bearerAuthenticationFilter = new AuthenticationWebFilter(authManager);
 
-		bearerAuthenticationFilter.setServerAuthenticationConverter(bearerConverter);
-		bearerAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.GET, "/oauth/userInfo"));
-		return bearerAuthenticationFilter;
-	}
+        bearerAuthenticationFilter.setServerAuthenticationConverter(bearerConverter);
+        bearerAuthenticationFilter.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.GET, "/oauth/userInfo"));
+        return bearerAuthenticationFilter;
+    }
 }
 
 

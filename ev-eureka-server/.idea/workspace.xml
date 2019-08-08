@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1462b5c2-8d27-4c13-9ce9-2c2e9a728791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/EvOAuth2ServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/EvOAuth2ServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/auth/jwt/JWTTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/auth/jwt/JWTTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/domain/OAuthClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/domain/OAuthClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/service/OAuthClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/service/OAuthClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/web/UserWebClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-oauth2-service/src/main/java/com/agateram/emptyvideo/web/UserWebClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -52,8 +48,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1770" />
-    <option name="y" value="90" />
+    <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="944" />
   </component>
@@ -63,6 +58,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -75,46 +72,10 @@
               <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="emptyvideo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -438,10 +399,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1770" y="90" width="1680" height="944" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1680" height="944" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18559219" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -450,7 +410,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" visible="true" weight="0.38497654" />
+      <window_info anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" weight="0.4976526" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
