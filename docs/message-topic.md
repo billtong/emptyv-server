@@ -40,6 +40,9 @@ all the topics list below
 - history service: record this operation
 - point service: add to user's point(upder daily poinnt limit)
 - video-service：fav count++
+#### cancel fav a video (patch favlist)
+- history service: delete last add operation record
+- video-service: fav coutn--
 #### tag a video (post video, patch video)
 - history service: record this operation
 - tag service： add this video to the tag, or create a new tag pojo

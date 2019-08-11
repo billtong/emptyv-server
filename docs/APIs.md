@@ -22,8 +22,11 @@
 ## dan-service [8003]
 - GET(/dan-service/api/dan/{videoId})
 - POST(/dan-service/api/dan)
+    - body: dan(json)
 ## video-service [8004]
 - GET(/video-service/video/{id})
+- GET(/video-service/videos)
+    - queryparam: ids(,)
 - GET(/video-service/videos/random)
 - GET(/video-service/videos/search) `(future)`
 - PATCH(/video-service/video/{id}/{operation})
@@ -31,12 +34,13 @@
 - POST(/video-service/video)
     - body: video(json)
 ## fav-list-servic [8005]
-- GET(/fav-list-servic/favlist)
-- GET(/fav-list-servic/favlist/{id})
-- GET(/fav-list-servic/favlist/search)
-- POST(/fav-list-servic/favlist) 
+- GET(/fav-list-service/favlist/{id})
+- GET(/fav-list-service/favlist)
+    - queryparam: userId
+- GET(/fav-list-service/favlist/search)
+- POST(/fav-list-service/favlist) 
     - body: favlist(json)
-- PATCH(/fav-list-servic/favlist/{id})
+- PATCH(/fav-list-service/favlist/{id})
     - queryparam: operation, videoId
 - DELETE(/fav-list-servic/favlist/{id})
 ## tag-service [8006]
