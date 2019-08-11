@@ -22,7 +22,7 @@ public class Dan {
     private String videoId;
 
     @Indexed
-    private Long videoTime;
+    private double videoTime;
     private String text;
     private String style;
     private String userId;
