@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1462b5c2-8d27-4c13-9ce9-2c2e9a728791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ev-dan-service/src/main/java/com/empty/domain/Dan.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-dan-service/src/main/java/com/empty/domain/Dan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/web/HandleFilterFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/web/HandleFilterFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/domain/FavList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/domain/FavList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/domain/OperationEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/domain/OperationEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/repository/FavListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/repository/FavListRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/service/FavListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/service/FavListService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/web/HandleFilterFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-fav-list-service/src/main/java/com/empty/web/HandleFilterFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/EmptyVideo2ServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/EmptyVideo2ServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -18,17 +23,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -95,6 +90,21 @@
               <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="emptyvideo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eureka-server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ev-eureka-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -126,7 +136,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.dan-service[spring-boot]">
+  <component name="RunManager" selected="Maven.favlist-server[spring-boot:run]">
     <configuration name="api-gateway[spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven" singleton="false">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -441,7 +451,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" visible="true" weight="0.592723" />
+      <window_info active="true" anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" visible="true" weight="0.7253521" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -478,17 +488,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/agateram/emptyvideo/EvEurekaServerApplication.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/agateram/emptyvideo/EvEurekaServerApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        <state relative-caret-position="162">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>

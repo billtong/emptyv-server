@@ -3,6 +3,7 @@ package com.empty.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -15,9 +16,12 @@ import java.util.List;
 public class FavList {
     @Id
     private String id;
-    private String name;
+    @Indexed
     private String userId;
+    @Indexed
     private Date created = new Date();
+
+    private String name;
     private Date updated;   //last update time
     private boolean isPublic = true;
     private String description;

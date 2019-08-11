@@ -71,9 +71,8 @@ public class HandleFilterFunction {
                     map.put("operation", OperationEnum.FAV_A_VIDEO);
                     map.put("videoId", videoId);
                 } else if (method.equals(PATCH)) {
-                    String videoId = req2.queryParam("videoId").get();
-                    map.put("operation", OperationEnum.FAV_A_VIDEO);
-                    map.put("videoId", videoId);
+                    map.put("operation", req2.queryParam("operation").get());
+                    map.put("videoId", req2.queryParam("videoId").get());
                 } else {
                     return Mono.just(result);
                 }
