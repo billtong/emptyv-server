@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -95,5 +96,13 @@ public class VideoService {
                 return Mono.just(videoSaved);
             }).then(status(201).build());
         });
+    }
+
+    public Mono<ServerResponse> getVideosByIds(ServerRequest serverRequest) {
+        String ids = serverRequest.queryParam("ids").get();
+        List<String> idList = Arrays.asList(ids.split(","));
+        return videoRepository.findAllById(idList).collectList().flatMap(
+                videos -> ok().body(Mono.just(videos), List.class)
+        );
     }
 }

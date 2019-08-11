@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -27,8 +28,8 @@ public class FavListService {
     }
 
     public Mono<ServerResponse> getUsersFavList(ServerRequest serverRequest) {
-        String userId = String.valueOf(serverRequest.queryParam("userId"));
-        return favListRepository.findAllByUserIdOrderByCreatedAsc(userId).collectList()
+        String userId = String.valueOf(serverRequest.queryParam("userId").get());
+        return favListRepository.findAllByUserId(userId).collectList()
                 .flatMap(favLists -> ok().body(Mono.just(favLists), List.class));
     }
 
@@ -41,10 +42,16 @@ public class FavListService {
             String authId = String.valueOf(req2.attributes().get("authId"));
             String operation = req2.queryParam("operation").get();
             if (find != null && find.getUserId().equals(authId)) {
+                String videoId = req2.queryParam("videoId").get();
                 switch (OperationEnum.valueOf(operation)) {
                     case FAV_A_VIDEO:
-                        String videoId = req2.queryParam("videoId").get();
+                        find.setUpdated(new Date());
                         find.getVideoIds().add(videoId);
+                        break;
+                    case CANCEL_FAV_A_VIDEO:
+                        find.setUpdated(new Date());
+                        find.getVideoIds().remove(videoId);
+                        break;
                 }
                 req2.attributes().put("favList", find);
                 return favListRepository.save(find).then(ok().build());

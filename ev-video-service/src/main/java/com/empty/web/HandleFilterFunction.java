@@ -40,6 +40,7 @@ public class HandleFilterFunction {
             ServerRequest req2 = tuple1.getT1();
             HandlerFunction<ServerResponse> next2 = tuple1.getT2();
             ClientResponse clientResponse = tuple1.getT3();
+            String operation = req2.queryParam("operation").get();
             if (clientResponse.statusCode().is2xxSuccessful()) {
                 Mono<Map> userMapMono = clientResponse.bodyToMono(Map.class);
                 return Mono.zip(userMapMono, Mono.just(req2), Mono.just(next2)).flatMap(tuple2 -> {
@@ -49,19 +50,24 @@ public class HandleFilterFunction {
                     req3.attributes().put("authId", userMap.get("id"));
                     return next3.handle(req3);
                 });
-            } else {
+            } else if (OperationEnum.valueOf(operation).equals(VIEW_A_VIDEO)) {
+                return tuple1.getT2().handle(req2);
+            }
+            else {
                 return status(HttpStatus.FORBIDDEN).build();
             }
         });
     }
 
     public Mono<ServerResponse> msgProduceAfterFilterFunction(ServerRequest req, HandlerFunction<ServerResponse> next) {
-        log.info("send message to kafka");
         Mono<ServerResponse> result = next.handle(req);
         return Mono.zip(Mono.just(req), Mono.just(next), result).flatMap(tuple1 -> {
             ServerResponse response = tuple1.getT3();
             if (response.statusCode().is2xxSuccessful()) {
                 ServerRequest req2 = tuple1.getT1();
+                if (!req2.attribute("authId").isPresent()) {    //匿名浏览视频无需产生消息
+                    return Mono.just(response);
+                }
                 String userId = String.valueOf(req2.attribute("authId").get());
                 Video video = (Video) req2.attributes().get("video");
                 Map<String, Object> map = new HashMap<>();

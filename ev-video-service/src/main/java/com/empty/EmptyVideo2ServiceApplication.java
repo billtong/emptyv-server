@@ -46,6 +46,7 @@ class RouterFunctionConfig {
     @Bean
     public RouterFunction<ServerResponse> getVideoRouterFunction() {
         return route(GET("/video/{id}"), videoService::getVideoById)
+                .andRoute(GET("/videos"), videoService::getVideosByIds)
                 .andRoute(GET("/videos/random"), videoService::getRandomVideos)
                 .andRoute(GET("/videos/search"), videoService::search);
     }
