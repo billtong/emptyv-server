@@ -1,10 +1,13 @@
-version: "2"
+version: "3"
 services:
   mongo:
     image: mongo
     container_name: mongo
     ports:
       - "27017:27017"
+    networks:
+      - mongo-network
+
   admin-mongo:
     image: 0x59/admin-mongo:latest
     ports:
@@ -14,8 +17,8 @@ services:
       - PORT=8082
       - CONN_NAME=mongo
       - DB_HOST=mongo
-    links:
-      - mongo
+    networks:
+      - mongo-network
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -23,10 +26,12 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - kafka-network
   kafka:
     image: confluentinc/cp-kafka:latest
-    depends_on:
-      - zookeeper
+    networks:
+      - kafka-network
     ports:
       - 9092:9092
     container_name: kafka
@@ -40,8 +45,5 @@ services:
 
 networks:
   proxy-network:
-    name: proxy-net
   mongo-network:
-    name: mongo-net
   kafka-network:
-    name: kafka-net
