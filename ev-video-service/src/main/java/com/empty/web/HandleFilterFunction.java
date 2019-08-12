@@ -52,8 +52,7 @@ public class HandleFilterFunction {
                 });
             } else if (OperationEnum.valueOf(operation).equals(VIEW_A_VIDEO)) {
                 return tuple1.getT2().handle(req2);
-            }
-            else {
+            } else {
                 return status(HttpStatus.FORBIDDEN).build();
             }
         });

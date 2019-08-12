@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1462b5c2-8d27-4c13-9ce9-2c2e9a728791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ev-comment-service/src/main/java/com/empty/web/HandleFilterFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-comment-service/src/main/java/com/empty/web/HandleFilterFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountProduct.java" afterDir="false" />
-    </list>
+    <list default="true" id="1462b5c2-8d27-4c13-9ce9-2c2e9a728791" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,8 +45,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-34" />
+    <option name="y" value="186" />
     <option name="width" value="1680" />
     <option name="height" value="944" />
   </component>
@@ -408,17 +405,17 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Maven.video-service[spring-boot:run]" />
-      <item itemvalue="Maven.comment-service[spring-boot:run]" />
-      <item itemvalue="Maven.eureka-server [spring-boot:run]" />
       <item itemvalue="Maven.api-gateway[spring-boot:run]" />
-      <item itemvalue="Maven.oauth-service[spring-boot:run]" />
+      <item itemvalue="Maven.comment-service[spring-boot:run]" />
       <item itemvalue="Maven.dan-service[spring-boot]" />
+      <item itemvalue="Maven.eureka-server [spring-boot:run]" />
       <item itemvalue="Maven.favlist-server[spring-boot:run]" />
       <item itemvalue="Maven.history-service[spring-boot:run]" />
       <item itemvalue="Maven.notification-service[spring-boot:run]" />
+      <item itemvalue="Maven.oauth-service[spring-boot:run]" />
       <item itemvalue="Maven.tag-service[spring-boot:run]" />
       <item itemvalue="Maven.user-service[spring-boot:run]" />
+      <item itemvalue="Maven.video-service[spring-boot:run]" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -436,7 +433,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="944" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18559219" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -447,7 +443,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" visible="true" weight="0.5422535" />
+      <window_info anchor="bottom" x="-1899" y="354" width="1878" height="395" id="Run" order="2" weight="0.5422535" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
