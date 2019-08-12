@@ -17,6 +17,7 @@ public enum OperationEnum {
     UNLIKE_A_VIDEO,
     CANCEL_UNLIKE_A_VIDEO,
     FAV_A_VIDEO,
+    CANCEL_FAV_A_VIDEO,
     TAG_A_VIDEO,
     VIEW_A_VIDEO,
     SEND_A_MESSAGE,

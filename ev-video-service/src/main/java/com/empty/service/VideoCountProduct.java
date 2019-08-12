@@ -28,6 +28,13 @@ public class VideoCountProduct {
         });
     }
 
+    public Mono<Video> handleCancelCount(Map<String, Object> countMap) {
+        String videoId = String.valueOf(countMap.get("videoId"));
+        return videoRepository.findById(videoId).doOnSuccess(video -> {
+            video.setFavCount(video.getFavCount() - 1);
+        });
+    }
+
     public Mono<Video> handleDanCount(Map<String, Object> countMap) {
         Map danMap = (Map) countMap.get("object");
         String videoId = String.valueOf(danMap.get("videoId"));
