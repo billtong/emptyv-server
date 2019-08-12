@@ -42,4 +42,12 @@ public class VideoCountProduct {
             video.setDanCount(video.getDanCount() + 1);
         });
     }
+
+    public Mono<Video> handleDeleteCommentCount(Map<String, Object> countMap) {
+        Map commentMap = (Map) countMap.get("object");
+        String videoId = String.valueOf(commentMap.get("videoId"));
+        return videoRepository.findById(videoId).doOnSuccess(video -> {
+            video.setCommentCount(video.getCommentCount() - 1);
+        });
+    }
 }

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1462b5c2-8d27-4c13-9ce9-2c2e9a728791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-comment-service/src/main/java/com/empty/web/HandleFilterFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-comment-service/src/main/java/com/empty/web/HandleFilterFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ev-video-service/src/main/java/com/empty/service/VideoCountProduct.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
