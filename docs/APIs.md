@@ -1,9 +1,11 @@
-# EVAG (Empty Video API Gateway)[8000]
+# EVAG (Empty Video API Gateway)
+## api-gatway [8000]
+- proxy includes: all
 ## user-service [8001]
 - GET(/user-service/user/{id})
 - GET(/user-service/user/email/{email})
 - GET(/user-service/users)
-    - queryparam: ids(id1,id2,id3)
+    - queryparam: ids (逗号分隔)
 - POST(/user-service/user)
     - body: user(json)
 - PATCH(/user-service/user)
@@ -26,7 +28,7 @@
 ## video-service [8004]
 - GET(/video-service/video/{id})
 - GET(/video-service/videos)
-    - queryparam: ids(,)
+    - queryparam: ids (逗号分隔)
 - GET(/video-service/videos/random)
 - GET(/video-service/videos/search) `(future)`
 - PATCH(/video-service/video/{id}/{operation})
@@ -47,15 +49,14 @@
 - GET(/tag-service/tag/{name})
 - GET(/tag-servic/tags/all)
 ## message-service [8007]
-- ...
+- 未开发
 ## notification-service [8008]
 - GET(/notification-service/notification/{userId})
 ## history-serivce [8009]
 - GET(/notification-service/history)
 ## point-service [8010]
-- ...
-
-# Outside of the EVAG
+- 未开发
+# EVOA (Empty Video OAuth2)
 ## oauth2-service [8011] 
 - GET(/) OAuth主页
     - queryparams: clientId=1&secret=1&error=

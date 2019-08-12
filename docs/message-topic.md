@@ -76,3 +76,10 @@ danmu count++
 ### topic:"tag", subscriber: tag service
 - tag a video （post video，patch video)
 - post a video
+
+## about history topic()
+对比operation值，资源id和userid三者，来进行重复history文档的删减
+- like a video vs cancel like a video
+- unlike a video vs cancel unlike a video
+- fav a video vs cancel fav a video
+- like a comment vs cancel like a comment
