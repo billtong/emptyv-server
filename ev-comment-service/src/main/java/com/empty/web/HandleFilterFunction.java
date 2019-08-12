@@ -78,7 +78,7 @@ public class HandleFilterFunction {
                 Map<String, Object> map = new HashMap<>();
                 map.put("userId", authId);
                 map.put("object", comment);
-                if (Objects.requireNonNull(req2.method()).equals(POST) && req2.path().equals("/api/comment")) {
+                if (Objects.requireNonNull(req2.method()).equals(POST) && req2.path().equals("/comment")) {
                     map.put("operation", OperationEnum.WRITE_A_COMMENT);
                     ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("notification", map);
                     ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
@@ -86,14 +86,14 @@ public class HandleFilterFunction {
                     ListenableFuture<SendResult<String, Map<String, Object>>> videoCountFuture = this.kafkaTemplate.send("video-count", map);
                     return Mono.zip(Mono.fromFuture(notificationFuture.completable()), Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()), Mono.fromFuture(videoCountFuture.completable()))
                             .then(Mono.just(serverResponse));
-                } else if (Objects.requireNonNull(req2.method()).equals(PATCH) && req2.path().equals("/api/comment/".concat(comment.getId()).concat("/like"))) {
+                } else if (Objects.requireNonNull(req2.method()).equals(PATCH) && req2.path().equals("/comment/".concat(comment.getId()).concat("/like"))) {
                     map.put("operation", OperationEnum.LIKE_A_COMMENT);
                     ListenableFuture<SendResult<String, Map<String, Object>>> notificationFuture = this.kafkaTemplate.send("notification", map);
                     ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
                     ListenableFuture<SendResult<String, Map<String, Object>>> pointFuture = this.kafkaTemplate.send("point", map);
                     return Mono.zip(Mono.fromFuture(notificationFuture.completable()), Mono.fromFuture(historyFuture.completable()), Mono.fromFuture(pointFuture.completable()))
                             .then(Mono.just(serverResponse));
-                } else if (Objects.requireNonNull(req2.method()).equals(DELETE) && req2.path().equals("/api/comment/".concat(comment.getId()))) {
+                } else if (Objects.requireNonNull(req2.method()).equals(DELETE) && req2.path().equals("/comment/".concat(comment.getId()))) {
                     map.put("operation", OperationEnum.DELETE_A_COMMENT);
                     ListenableFuture<SendResult<String, Map<String, Object>>> historyFuture = this.kafkaTemplate.send("history", map);
                     return Mono.fromFuture(historyFuture.completable()).then(Mono.just(serverResponse));

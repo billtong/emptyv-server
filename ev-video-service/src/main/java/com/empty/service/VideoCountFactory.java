@@ -18,8 +18,12 @@ public class VideoCountFactory {
         switch (OperationEnum.valueOf(operation)) {
             case WRITE_A_COMMENT:
                 return videoCountProduct.handleCommentCount(countMap);
+            case DELETE_A_COMMENT:
+                return videoCountProduct.handleDeleteCommentCount(countMap);
             case FAV_A_VIDEO:
                 return videoCountProduct.handleFavCount(countMap);
+            case CANCEL_FAV_A_VIDEO:
+                return videoCountProduct.handleCancelCount(countMap);
             case WRITE_A_DAN:
                 return videoCountProduct.handleDanCount(countMap);
         }
