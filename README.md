@@ -1,6 +1,6 @@
 # EmptyVideo MicroServices
 > This Project is Still Under Construction!
-## how to start this service
+## how to run this service
 ### 1. install java 8, docker, maven, IntelliJ
 ### 2. run docker containers (includes mongodb & admin-mongo & zookeeper & kafka)   
 If your are using docker toolbox (old docker version) and you want to use `localhost` instead of the `$(your docker-machine ip)`, you also need to do the port mapping. click the link below to learn    
@@ -19,6 +19,10 @@ docker-compose up -d
 ```
 mvn spring-boot:run
 ```
+## how to deploy this service
+- git pull
+- maven build
+- docker compose
 ## Some helpful dashboard 4 U
 ### Admin-Mongo, a mongoDB dashboard
 - for WinOS(old version docker only), if you have already forward the port in virtual box, then just enter `http://localhost:8082` or check the default machine IP address, open browser enter `http://your-docker-machine-ip:8082/`. 
