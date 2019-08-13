@@ -53,7 +53,7 @@
 ## notification-service [8008]
 - GET(/notification-service/notification/{userId})
 ## history-serivce [8009]
-- GET(/notification-service/history)
+- GET(/history-service/history)
 ## point-service [8010]
 - 未开发
 # EVOA (Empty Video OAuth2)
