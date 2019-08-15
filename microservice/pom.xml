@@ -47,7 +47,7 @@
     <module>ev-tag-service</module>
     <module>ev-oauth2-service</module>
     <module>ev-notification-service</module>
-    <module>ev-historyr-service</module>
+    <module>ev-history-service</module>
     <module>ev-fav-list-service</module>
     <module>ev-dan-service</module>
     <module>ev-comment-service</module>
