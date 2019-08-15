@@ -14,11 +14,10 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-# save the config
-#.idea
-#*.iws
-#*.iml
-#*.ipr
+.idea
+*.iws
+*.iml
+*.ipr
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,3 +29,4 @@ build/
 
 ### VS Code ###
 .vscode/
+bin/
