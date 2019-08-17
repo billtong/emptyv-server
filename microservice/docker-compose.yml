@@ -50,8 +50,14 @@ services:
     ports:
       - "8761:8761"
     networks:
-    - mongo-network
-    - kafka-network
+    - gateway-network
+
+  ev-api-gateway:
+    build: ./ev-api-gateway
+    container_name: ev-api-gateway
+    ports:
+    - "8000:8000"
+    networks:
     - gateway-network
 
   ev-user-service:
@@ -123,16 +129,6 @@ services:
     container_name: ev-oauth2-service
     ports:
     - "8011:8011"
-    networks:
-    - mongo-network
-    - kafka-network
-    - gateway-network
-
-  ev-api-gateway:
-    build: ./ev-api-gateway
-    container_name: ev-api-gateway
-    ports:
-    - "8000:8000"
     networks:
     - mongo-network
     - kafka-network
