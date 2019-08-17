@@ -2,6 +2,7 @@ package com.empty;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -22,7 +23,7 @@ public class HistoryServiceApplicationTests {
     @Autowired
     RouterFunctionConfg routerFunctionConfig;
 
-    @Test
+    @Test@Ignore
     public void test1getUserHistory() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getHistoryRouterConfig()).build();
         client.get().uri("/api/history")

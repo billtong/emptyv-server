@@ -2,6 +2,7 @@ package com.empty.web;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,14 +15,20 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Component
+@Slf4j
 public class UserWebClient {
 
     private final WebClient webClient;
 
     @Autowired
     public UserWebClient(EurekaClient eurekaClient) {
-        InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("user-service", false);
-        String userClientBaseUrl = instanceInfo.getHomePageUrl();
+        InstanceInfo instanceInfo = null;
+        try {
+            instanceInfo = eurekaClient.getNextServerFromEureka("user-service", false);
+        } catch (RuntimeException e) {
+            log.error(e.getMessage());
+        }
+        String userClientBaseUrl = instanceInfo != null ? instanceInfo.getHomePageUrl() : "";
         this.webClient = WebClient.builder().baseUrl(userClientBaseUrl)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)

@@ -65,3 +65,5 @@
     - bearer token
 - POST(/oauth/client)
     - queryparam: redirectURL
+## eureka-server [8761]
+- GET(/) dashboard

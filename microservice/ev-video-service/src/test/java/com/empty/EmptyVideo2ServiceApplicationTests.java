@@ -4,6 +4,7 @@ import com.empty.domain.OperationEnum;
 import com.empty.domain.Video;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -27,7 +28,7 @@ public class EmptyVideo2ServiceApplicationTests {
     @Autowired
     RouterFunctionConfig routerFunctionConfig;
 
-    @Test
+    @Test@Ignore
     public void test1postVideo() {
         Video video = new Video();
         video.setTags(Arrays.asList("test1", "test2", "test3"));
@@ -45,21 +46,21 @@ public class EmptyVideo2ServiceApplicationTests {
                 .expectStatus().isCreated();
     }
 
-    @Test
+    @Test@Ignore
     public void test2GetVideoById() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getVideoRouterFunction()).build();
         client.get().uri("/video/".concat(testId))
                 .exchange().expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test2GetRandomVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getVideoRouterFunction()).build();
         client.get().uri("/videos/random")
                 .exchange().expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test3likeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
         client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.LIKE_A_VIDEO.toString()))
@@ -69,7 +70,7 @@ public class EmptyVideo2ServiceApplicationTests {
                 .expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test4unlikeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
         client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.UNLIKE_A_VIDEO.toString()))
@@ -79,7 +80,7 @@ public class EmptyVideo2ServiceApplicationTests {
                 .expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test5CancelLikeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
         client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.CANCEL_LIKE_A_VIDEO.toString()))
@@ -89,7 +90,7 @@ public class EmptyVideo2ServiceApplicationTests {
                 .expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test6CancelUnlikeVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();
         client.patch().uri("/video/".concat(testId).concat("/?operation=").concat(OperationEnum.CANCEL_UNLIKE_A_VIDEO.toString()))
@@ -99,7 +100,7 @@ public class EmptyVideo2ServiceApplicationTests {
                 .expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test7PatchTagVideo() {
         String param = "&tag=aaa";
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.patchAndPostVideoRouterFunction()).build();

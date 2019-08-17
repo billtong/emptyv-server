@@ -3,6 +3,7 @@ package com.empty;
 import com.empty.domain.Comment;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -24,7 +25,7 @@ public class CommentServiceApplicationTests {
     @Autowired
     RouterFunctionConfig routerFunctionConfig;
 
-    @Test
+    @Test@Ignore
     public void test1PostRouterWithAtFunction() {
         Comment comment = new Comment();
         comment.setId(testId);
@@ -38,7 +39,7 @@ public class CommentServiceApplicationTests {
                 .expectStatus().isCreated();
     }
 
-    @Test
+    @Test@Ignore
     public void test1PostRouterWithoutAtFunction() {
         Comment comment = new Comment();
         comment.setId(testId + "1");
@@ -51,7 +52,7 @@ public class CommentServiceApplicationTests {
                 .expectStatus().isCreated();
     }
 
-    @Test
+    @Test@Ignore
     public void test2PatchRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.commentWithAuthRouterFunction()).build();
         client.patch().uri("/comment/".concat(testId).concat("/like"))
@@ -60,7 +61,7 @@ public class CommentServiceApplicationTests {
                 .expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test3DeleteRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.commentWithAuthRouterFunction()).build();
         client.delete().uri("/comment/".concat(testId))

@@ -28,6 +28,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     networks:
       - kafka-network
+
   kafka:
     image: confluentinc/cp-kafka:latest
     networks:
@@ -43,7 +44,101 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  ev-eureka-server:
+    build: ./ev-eureka-server
+    container_name: ev-eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-user-service:
+    build: ./ev-user-service
+    container_name: ev-user-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-comment-service:
+    build: ./ev-comment-service
+    container_name: ev-comment-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-dan-service:
+    build: ./ev-dan-service
+    container_name: ev-dan-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-fav-list-service:
+    build: ./ev-fav-list-service
+    container_name: ev-fav-list-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-history-service:
+    build: ./ev-history-service
+    container_name: ev-history-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-notification-service:
+    build: ./ev-notification-service
+    container_name: ev-notification-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-tag-service:
+    build: ./ev-tag-service
+    container_name: ev-tag-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-video-service:
+    build: ./ev-video-service
+    container_name: ev-video-service
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-oauth2-service:
+    build: ./ev-oauth2-service
+    container_name: ev-oauth2-service
+    ports:
+    - "8011:8011"
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
+  ev-api-gateway:
+    build: ./ev-api-gateway
+    container_name: ev-api-gateway
+    ports:
+    - "8000:8000"
+    networks:
+    - mongo-network
+    - kafka-network
+    - gateway-network
+
 networks:
-  proxy-network:
+  gateway-network:
   mongo-network:
   kafka-network:

@@ -2,6 +2,7 @@ package com.empty;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -20,14 +21,14 @@ public class EmptyVideoTagServiceApplicationTests {
     @Autowired
     private RouterFunctionConfig routerFunctionConfig;
 
-    @Test
+    @Test@Ignore
     public void test2GetByName() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getTagRouterFunction()).build();
         client.get().uri("/api/tag/".concat(name))
                 .exchange().expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test2GetRandomVideo() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getTagRouterFunction()).build();
         client.get().uri("/api/tags/all")

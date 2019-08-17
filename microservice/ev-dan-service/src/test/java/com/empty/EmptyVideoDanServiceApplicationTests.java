@@ -42,7 +42,7 @@ public class EmptyVideoDanServiceApplicationTests {
                 .expectStatus().isCreated();
     }
 
-    @Test
+    @Test@Ignore
     public void test1writeDanRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.postDanRouterFunction()).build();
         for (int i = 0; i < 100; i++) {
@@ -59,7 +59,7 @@ public class EmptyVideoDanServiceApplicationTests {
         }
     }
 
-    @Test
+    @Test@Ignore
     public void test2writeAuthErrorRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.postDanRouterFunction()).build();
         Dan dan = new Dan();
@@ -74,7 +74,7 @@ public class EmptyVideoDanServiceApplicationTests {
                 .expectStatus().isForbidden();
     }
 
-    @Test
+    @Test@Ignore
     public void test3getDanByVideoIdRouterFunction() {
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.getDanRouterFunction()).build();
         client.get().uri("/dan/test").exchange().returnResult(Dan.class).getResponseBody().subscribe(dan -> {

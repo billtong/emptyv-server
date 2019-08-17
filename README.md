@@ -1,15 +1,19 @@
 # EmptyVideo MicroServices
 ## how to run
-### 1. install java 8, docker, maven
+### 1. pre-install
+- maven, java 8, docker, docker compose
 ### 2. maven compile spring boot
 run the script below under path `/microservice`
 ```bash
 mvn install
 ```
 ### 3. docker compose (includes mongodb & admin-mongo & zookeeper & kafka & ev-microservices)   
-If your are using docker toolbox (old docker version) and you want to use `localhost` instead of the `$(your docker-machine ip)`, you also need to do the port mapping. click the link below to learn    
+- If your are using docker toolbox (old docker version) and you want to use `localhost` instead of the `$(your docker-machine ip)`, you also need to do the port mapping. click the link below to learn    
 [How to Forward Ports to a Virtual Machine](https://www.howtogeek.com/122641/how-to-forward-ports-to-a-virtual-machine-and-use-it-as-a-server/)  
-If you don't understand the method above your can also change all application.yml files from `localhost` to `$(your docker-machine ip)`
+- after port mapping(old version only), run the script below under path `/microservice` to boost containers up
+```bash
+docker-compose up -d --build
+```
 ## Jenkins Pipeline
 > Under Construction
 ## Some helpful dashboard 4 U

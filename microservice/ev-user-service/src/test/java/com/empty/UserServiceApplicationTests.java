@@ -63,7 +63,7 @@ public class UserServiceApplicationTests {
                 .expectStatus().isOk();
     }
 
-    @Test
+    @Test@Ignore
     public void test3AuthTokenRouterFunction() {
         //login -> check token
         WebTestClient client = WebTestClient.bindToRouterFunction(routerFunctionConfig.authMiddlewareRouterFunction()).build();
@@ -72,6 +72,7 @@ public class UserServiceApplicationTests {
                 .exchange().expectStatus().isOk();
     }
 
+    @Ignore
     public void test4UserPatchRouterFunction() {
         //login -> check token
         User u = new User();
